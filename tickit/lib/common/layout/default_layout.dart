@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tickit/common/const/app_colors.dart';
 
 class DefaultLayout extends StatelessWidget {
-  final Widget body;
+  final Widget child;
 
   const DefaultLayout({
     super.key,
-    required this.body,
+    required this.child,
   });
 
   @override
@@ -18,7 +18,7 @@ class DefaultLayout extends StatelessWidget {
           padding: const EdgeInsets.all(
             20.0,
           ),
-          child: body,
+          child: child,
         ),
       ),
     );
