@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   persistent_bottom_nav_bar_v2: ^5.3.1
   flutter_svg: ^2.0.10+1
+  vertical_card_pager: ^1.6.2
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +28,7 @@ flutter:
 
   assets:
     - assets/icon/
+    - assets/image/
 
   fonts:
     - family: Pretendard
