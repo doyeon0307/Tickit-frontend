@@ -8,7 +8,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const DefaultLayout(
       child: Center(
-        child: Text("홈"),
+        child: Text(
+          "홈",
+          style: TextStyle(
+            fontSize: 60.0,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
       ),
     );
   }
