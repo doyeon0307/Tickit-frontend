@@ -18,6 +18,7 @@ dependencies:
   vertical_card_pager: ^1.6.2
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
@@ -56,3 +57,7 @@ flutter:
           weight: 800
         - asset: assets/fonts/Pretendard-Black.ttf
           weight: 900
+
+    - family: Gangwon
+      fonts:
+        - asset: assets/fonts/Gangwon-Edu-All.ttf
