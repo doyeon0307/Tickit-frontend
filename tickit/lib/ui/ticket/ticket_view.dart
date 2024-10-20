@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/common/layout/default_layout.dart';
+import 'package:tickit/ui/common/layout/default_layout.dart';
 
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});

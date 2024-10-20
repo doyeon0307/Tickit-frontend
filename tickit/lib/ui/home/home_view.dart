@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tickit/common/const/app_colors.dart';
-import 'package:tickit/common/layout/default_layout.dart';
-import 'package:tickit/home/model/ticket_preview.dart';
+import 'package:tickit/ui/common/layout/default_layout.dart';
+import 'package:tickit/domain/ticket/model/ticket_preview_model.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 class HomeScreen extends StatelessWidget {

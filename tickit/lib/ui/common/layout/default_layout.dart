@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/common/const/app_colors.dart';
+import 'package:tickit/ui/common/const/app_colors.dart';
 
 class DefaultLayout extends StatelessWidget {
   final Widget child;

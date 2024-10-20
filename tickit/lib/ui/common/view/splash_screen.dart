@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/common/component/custom_loading.dart';
-import 'package:tickit/common/const/app_colors.dart';
-import 'package:tickit/common/layout/default_layout.dart';
-import 'package:tickit/common/view/nav_bar.dart';
+import 'package:tickit/ui/common/component/custom_loading.dart';
+import 'package:tickit/ui/common/const/app_colors.dart';
+import 'package:tickit/ui/common/layout/default_layout.dart';
+import 'package:tickit/ui/common/view/nav_bar.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
