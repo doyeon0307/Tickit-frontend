@@ -68,6 +68,7 @@ class _TicketScreenState extends State<TicketScreen> {
                 children: [
                   SvgPicture.asset(
                     "assets/deco/left_title_deco.svg",
+                    width: MediaQuery.of(context).size.width / 4,
                   ),
                   const Expanded(
                     child: Padding(
@@ -83,6 +84,7 @@ class _TicketScreenState extends State<TicketScreen> {
                   ),
                   SvgPicture.asset(
                     "assets/deco/right_title_deco.svg",
+                    width: MediaQuery.of(context).size.width / 4,
                   ),
                 ],
               ),
@@ -139,7 +141,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         textStyle: ticketStyle,
                       ),
                       CustomTextButton(
-                        label: "배경색 변경",
+                        label: "배경색",
                         onPressed: () {
                           showDialog(
                             context: context,
@@ -179,7 +181,7 @@ class _TicketScreenState extends State<TicketScreen> {
                         textStyle: ticketStyle,
                       ),
                       CustomTextButton(
-                        label: "글자색 변경",
+                        label: "글자색",
                         onPressed: () {},
                         textStyle: ticketStyle,
                       ),
