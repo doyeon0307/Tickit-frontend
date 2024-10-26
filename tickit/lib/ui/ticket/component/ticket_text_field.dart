@@ -6,12 +6,14 @@ class TicketTextField extends StatelessWidget {
   final double fontSize;
   final String hintText;
   final TextInputType keyboardType;
+  final TextAlign textAlign;
 
   const TicketTextField({
     super.key,
-    required this.fontSize,
+    this.fontSize = 16.0,
     required this.hintText,
     this.keyboardType = TextInputType.text,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -22,7 +24,7 @@ class TicketTextField extends StatelessWidget {
       style: ticketStyle.copyWith(
         fontSize: fontSize,
       ),
-      textAlign: hintText == "제목을 입력하세요" ? TextAlign.center : TextAlign.start,
+      textAlign: textAlign,
       cursorColor: AppColors.textColor.withOpacity(0.6),
       cursorWidth: 1.5,
       cursorRadius: const Radius.circular(4.0),
