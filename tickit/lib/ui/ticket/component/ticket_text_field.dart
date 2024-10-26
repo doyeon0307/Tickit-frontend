@@ -22,7 +22,7 @@ class TicketTextField extends StatelessWidget {
       style: ticketStyle.copyWith(
         fontSize: fontSize,
       ),
-      textAlign: TextAlign.center,
+      textAlign: hintText == "제목을 입력하세요" ? TextAlign.center : TextAlign.start,
       cursorColor: AppColors.textColor.withOpacity(0.6),
       cursorWidth: 1.5,
       cursorRadius: const Radius.circular(4.0),
