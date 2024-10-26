@@ -11,14 +11,14 @@ import 'package:tickit/ui/ticket/component/am_number_picker.dart';
 import 'package:tickit/ui/ticket/component/am_text_button.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
 
-class TicketScreen extends StatefulWidget {
-  const TicketScreen({super.key});
+class TicketView extends StatefulWidget {
+  const TicketView({super.key});
 
   @override
-  State<TicketScreen> createState() => _TicketScreenState();
+  State<TicketView> createState() => _TicketViewState();
 }
 
-class _TicketScreenState extends State<TicketScreen> {
+class _TicketViewState extends State<TicketView> {
   ImagePicker imagePicker = ImagePicker();
   XFile? image;
 

@@ -4,8 +4,8 @@ import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/domain/ticket/model/ticket_preview_model.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {

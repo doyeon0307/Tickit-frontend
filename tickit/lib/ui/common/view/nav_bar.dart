@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tickit/ui/calendar/calendar_view.dart';
 import 'package:tickit/ui/home/home_view.dart';
+import 'package:tickit/ui/login/login_view.dart';
 import 'package:tickit/ui/setting/setting_view.dart';
 import 'package:tickit/ui/ticket/ticket_view.dart';
 
@@ -16,20 +17,20 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   List<PersistentTabConfig> _tabs() => [
         PersistentTabConfig(
-          screen: const HomeScreen(),
+          screen: const HomeView(),
           item: itemConfig(iconPath: "assets/icon/home.svg"),
         ),
         PersistentTabConfig(
-          screen: const TicketScreen(),
+          screen: const TicketView(),
           item: itemConfig(iconPath: "assets/icon/plus-square.svg"),
         ),
         PersistentTabConfig(
-          screen: const CalendarScreen(),
+          screen: const LoginView(),
           item: itemConfig(iconPath: "assets/icon/calendar.svg"),
 
         ),
         PersistentTabConfig(
-          screen: const SettingScreen(),
+          screen: const SettingView(),
           item: itemConfig(iconPath: "assets/icon/settings.svg"),
 
         ),

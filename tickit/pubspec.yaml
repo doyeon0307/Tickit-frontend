@@ -23,6 +23,10 @@ dependencies:
   calendar_date_picker2: ^1.1.7
   numberpicker: ^2.1.2
 
+  dio: ^5.7.0
+  kakao_flutter_sdk_user: ^1.9.6
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
