@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginState {
   LoadingStatus get loginLoading => throw _privateConstructorUsedError;
+  bool get isLoggedIn => throw _privateConstructorUsedError;
   String get loginErrMsg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $LoginStateCopyWith<$Res> {
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({LoadingStatus loginLoading, String loginErrMsg});
+  $Res call({LoadingStatus loginLoading, bool isLoggedIn, String loginErrMsg});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @override
   $Res call({
     Object? loginLoading = null,
+    Object? isLoggedIn = null,
     Object? loginErrMsg = null,
   }) {
     return _then(_value.copyWith(
@@ -54,6 +56,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
           ? _value.loginLoading
           : loginLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
+      isLoggedIn: null == isLoggedIn
+          ? _value.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
       loginErrMsg: null == loginErrMsg
           ? _value.loginErrMsg
           : loginErrMsg // ignore: cast_nullable_to_non_nullable
@@ -70,7 +76,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
       __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoadingStatus loginLoading, String loginErrMsg});
+  $Res call({LoadingStatus loginLoading, bool isLoggedIn, String loginErrMsg});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? loginLoading = null,
+    Object? isLoggedIn = null,
     Object? loginErrMsg = null,
   }) {
     return _then(_$LoginStateImpl(
@@ -92,6 +99,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
           ? _value.loginLoading
           : loginLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
+      isLoggedIn: null == isLoggedIn
+          ? _value.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
       loginErrMsg: null == loginErrMsg
           ? _value.loginErrMsg
           : loginErrMsg // ignore: cast_nullable_to_non_nullable
@@ -104,18 +115,23 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl implements _LoginState {
   const _$LoginStateImpl(
-      {this.loginLoading = LoadingStatus.none, this.loginErrMsg = ""});
+      {this.loginLoading = LoadingStatus.none,
+      this.isLoggedIn = false,
+      this.loginErrMsg = ""});
 
   @override
   @JsonKey()
   final LoadingStatus loginLoading;
   @override
   @JsonKey()
+  final bool isLoggedIn;
+  @override
+  @JsonKey()
   final String loginErrMsg;
 
   @override
   String toString() {
-    return 'LoginState(loginLoading: $loginLoading, loginErrMsg: $loginErrMsg)';
+    return 'LoginState(loginLoading: $loginLoading, isLoggedIn: $isLoggedIn, loginErrMsg: $loginErrMsg)';
   }
 
   @override
@@ -125,12 +141,15 @@ class _$LoginStateImpl implements _LoginState {
             other is _$LoginStateImpl &&
             (identical(other.loginLoading, loginLoading) ||
                 other.loginLoading == loginLoading) &&
+            (identical(other.isLoggedIn, isLoggedIn) ||
+                other.isLoggedIn == isLoggedIn) &&
             (identical(other.loginErrMsg, loginErrMsg) ||
                 other.loginErrMsg == loginErrMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loginLoading, loginErrMsg);
+  int get hashCode =>
+      Object.hash(runtimeType, loginLoading, isLoggedIn, loginErrMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -142,10 +161,13 @@ class _$LoginStateImpl implements _LoginState {
 abstract class _LoginState implements LoginState {
   const factory _LoginState(
       {final LoadingStatus loginLoading,
+      final bool isLoggedIn,
       final String loginErrMsg}) = _$LoginStateImpl;
 
   @override
   LoadingStatus get loginLoading;
+  @override
+  bool get isLoggedIn;
   @override
   String get loginErrMsg;
   @override

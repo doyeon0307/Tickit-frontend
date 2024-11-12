@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/theme/typegraphies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
+import 'package:tickit/ui/common/view/nav_bar.dart';
+import 'package:tickit/ui/login/login/login_state.dart';
 import 'package:tickit/ui/login/login/login_view_model.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends ConsumerWidget {
   const LoginView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<LoginState>(
+      loginViewModelProvider,
+      (previous, next) {
+        if (next.loginLoading == LoadingStatus.success && next.isLoggedIn) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const NavBar(),
+            ),
+          );
+        }
+      },
+    );
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(

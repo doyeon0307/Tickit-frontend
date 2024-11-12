@@ -1,36 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/common/view/nav_bar.dart';
+import 'package:tickit/ui/login/login/login_view.dart';
+import 'package:tickit/ui/login/splash/splash_state.dart';
+import 'package:tickit/ui/login/splash/splash_view_model.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashView extends ConsumerStatefulWidget {
+  const SplashView({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashView> createState() => _SplashViewState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashViewState extends ConsumerState<SplashView> {
   @override
   void initState() {
     super.initState();
 
-    delayed();
-  }
-
-  Future<void> delayed() async {
-    await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return;
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(
-        builder: (context) => const NavBar(),
-      ),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(splashViewModelProvider.notifier).checkLogin();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<SplashState>(
+      splashViewModelProvider,
+      (previous, next) {
+        if (next.loginCheckLoading == LoadingStatus.success) {
+          if (next.isLoggedIn) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const NavBar(),
+              ),
+            );
+          } else {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const LoginView(),
+              ),
+            );
+          }
+        }
+      },
+    );
+
     return DefaultLayout(
       child: Center(
         child: Column(

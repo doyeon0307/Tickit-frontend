@@ -30,9 +30,15 @@ class AuthRepository extends Repository {
         idToken: idToken,
         refreshToken: refreshToken,
       );
-      return SuccessRepositoryResult(
-        data: await _authRemoteDataSource.kakaoLogin(body: body),
-      );
+      final resp = await _authRemoteDataSource.kakaoLogin(tokens: body);
+      if (resp.data != null) {
+        return SuccessRepositoryResult(data: resp.data!);
+      } else {
+        return FailureRepositoryResult(
+          statusCode: resp.code,
+          messages: [resp.message],
+        );
+      }
     } on DioException catch (e) {
       final String errorMessage =
           e.response?.data['message'] as String? ?? '알 수 없는 오류가 발생했습니다';
@@ -56,9 +62,15 @@ class AuthRepository extends Repository {
         idToken: idToken,
         refreshToken: refreshToken,
       );
-      return SuccessRepositoryResult(
-        data: await _authRemoteDataSource.kakaoRegister(body: body),
-      );
+      final resp = await _authRemoteDataSource.kakaoRegister(tokens: body);
+      if (resp.data != null) {
+        return SuccessRepositoryResult(data: resp.data!);
+      } else {
+        return FailureRepositoryResult(
+          statusCode: resp.code,
+          messages: [resp.message],
+        );
+      }
     } on DioException catch (e) {
       final String errorMessage =
           e.response?.data['message'] as String? ?? '알 수 없는 오류가 발생했습니다';

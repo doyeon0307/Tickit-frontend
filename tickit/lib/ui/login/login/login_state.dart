@@ -7,6 +7,7 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const factory LoginState({
     @Default(LoadingStatus.none) LoadingStatus loginLoading,
+    @Default(false) bool isLoggedIn,
     @Default("") String loginErrMsg,
   }) = _LoginState;
 }

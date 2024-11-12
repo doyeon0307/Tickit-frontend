@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tickit/config/key.dart';
 
@@ -12,6 +13,8 @@ class CustomInterceptor extends Interceptor {
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     super.onRequest(options, handler);
+    debugPrint("[REQ] ${options.uri}");
+    debugPrint("\tbody: ${options.data}");
 
     if (options.headers['accessToken'] == 'true') {
       options.headers.remove('accessToken');
@@ -30,6 +33,13 @@ class CustomInterceptor extends Interceptor {
         'authorization': 'Bearer $token',
       });
     }
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    super.onResponse(response, handler);
+
+    debugPrint("[RES] ${response.data.toString()}");
   }
 
   @override

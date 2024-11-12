@@ -11,11 +11,11 @@ import 'package:tickit/domain/auth/kakao_register_use_case.dart';
 import 'package:tickit/service/app/app_service.dart';
 import 'package:tickit/ui/login/login/login_state.dart';
 
-final loginViewModelProvider = StateNotifierProvider.autoDispose(
+final loginViewModelProvider = StateNotifierProvider.autoDispose<LoginViewModel, LoginState>(
   (ref) => LoginViewModel(
     appService: ref.read(appServiceProvider.notifier),
     kakaoLoginUseCase: ref.read(kakaoLoginUseCaseProvider),
-    kakaoRegisterUseCase: ref.refresh(kakaoRegisterUseCaseProvider),
+    kakaoRegisterUseCase: ref.read(kakaoRegisterUseCaseProvider),
   ),
 );
 
@@ -36,13 +36,14 @@ class LoginViewModel extends StateNotifier<LoginState> {
   Future<void> onTapKakao() async {
     bool isInstalled = await isKakaoTalkInstalled();
     if (isInstalled) {
+      debugPrint("카카오톡 앱으로 로그인합니다");
       try {
         OAuthToken resp = await UserApi.instance.loginWithKakaoTalk();
         debugPrint(
-            '카카오톡으로 로그인 성공 : access: ${resp.accessToken}, refresh: ${resp.refreshToken}, id: ${resp.idToken}');
+            '카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
         kakaoLogin(
           accessToken: resp.accessToken,
-          idToken: resp.accessToken,
+          idToken: resp.idToken ?? "",
           refreshToken: resp.refreshToken ?? "",
         );
       } catch (error) {
@@ -51,20 +52,33 @@ class LoginViewModel extends StateNotifier<LoginState> {
         if (error is PlatformException && error.code == 'CANCELED') {
           return;
         }
-        // try {
-        //   await UserApi.instance.loginWithKakaoAccount();
-        //   debugPrint('카카오톡 계정으로 로그인 성공');
-        // } catch (error) {
-        //   debugPrint('카카오계정으로 로그인 실패');
-        // }
+        try {
+          final resp = await UserApi.instance.loginWithKakaoAccount();
+          debugPrint(
+              '카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+          kakaoLogin(
+            accessToken: resp.accessToken,
+            idToken: resp.idToken ?? "",
+            refreshToken: resp.refreshToken ?? "",
+          );
+        } catch (error) {
+          debugPrint('카카오계정으로 로그인 실패');
+        }
       }
     } else {
-      // try {
-      //   OAuthToken token = await UserApi.instance.loginWithKakaoAccount();
-      //   debugPrint('카카오계정으로 로그인 성공: ${token.accessToken}');
-      // } catch (error) {
-      //   debugPrint('카카오계정으로 로그인 실패 $error');
-      // }
+      debugPrint("카카오 계정으로 로그인합니다");
+      try {
+        final resp = await UserApi.instance.loginWithKakaoAccount();
+        debugPrint(
+            '카카오 계정으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+        kakaoLogin(
+          accessToken: resp.accessToken,
+          idToken: resp.accessToken,
+          refreshToken: resp.refreshToken ?? "",
+        );
+      } catch (error) {
+        debugPrint('카카오 계정으로 로그인 실패');
+      }
     }
   }
 
@@ -73,8 +87,10 @@ class LoginViewModel extends StateNotifier<LoginState> {
     required String idToken,
     required String refreshToken,
   }) async {
+    if (!mounted) return;
     state = state.copyWith(loginLoading: LoadingStatus.loading);
 
+    debugPrint("카카오 토큰으로 앱 로그인을 시도합니다");
     final UseCaseResult<AuthTokensEntity> loginResult =
         await _kakaoLoginUseCase(
       accessToken: accessToken,
@@ -82,14 +98,24 @@ class LoginViewModel extends StateNotifier<LoginState> {
       refreshToken: refreshToken,
     );
 
+    if (!mounted) return;
+
     switch (loginResult) {
       case SuccessUseCaseResult<AuthTokensEntity>():
         if (mounted) {
-          state = state.copyWith(loginLoading: LoadingStatus.success);
+          debugPrint("앱 로그인에 성공했습니다");
           await _appService.login(tokens: loginResult.data);
+          state = state.copyWith(
+            loginLoading: LoadingStatus.success,
+            isLoggedIn: _appService.isLoggedIn,
+          );
         }
       case FailureUseCaseResult<AuthTokensEntity>():
         if (loginResult.statusCode == 404) {
+          debugPrint("존재하지 않는 회원이므로 회원가입을 시도합니다");
+
+          if (!mounted) return;
+
           final UseCaseResult<AuthTokensEntity> registerResult =
               await _kakaoRegisterUseCase(
             accessToken: accessToken,
@@ -100,16 +126,28 @@ class LoginViewModel extends StateNotifier<LoginState> {
           switch (registerResult) {
             case SuccessUseCaseResult<AuthTokensEntity>():
               if (mounted) {
-                state = state.copyWith(loginLoading: LoadingStatus.success);
+                await _appService.login(tokens: registerResult.data);
+                state = state.copyWith(
+                  loginLoading: LoadingStatus.success,
+                  isLoggedIn: _appService.isLoggedIn,
+                );
               }
-              await _appService.login(tokens: registerResult.data);
             case FailureUseCaseResult<AuthTokensEntity>():
+              if (mounted) {
+                state = state.copyWith(
+                  loginLoading: LoadingStatus.error,
+                  loginErrMsg: loginResult.message ?? "unknownError".tr(),
+                );
+              }
+          }
+        } else {
+          if (mounted) {
+            state = state.copyWith(
+              loginLoading: LoadingStatus.error,
+              loginErrMsg: loginResult.message ?? "unknownError".tr(),
+            );
           }
         }
-        state = state.copyWith(
-          loginLoading: LoadingStatus.error,
-          loginErrMsg: loginResult.message ?? "unknownError".tr(),
-        );
     }
   }
 }

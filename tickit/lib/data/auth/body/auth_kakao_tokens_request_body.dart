@@ -1,17 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
-
-part 'auth_kakao_tokens_request_body.freezed.dart';
+import 'package:json_annotation/json_annotation.dart';
 part 'auth_kakao_tokens_request_body.g.dart';
 
-@freezed
-class AuthKakaoTokensRequestBody with _$AuthKakaoTokensRequestBody {
-  const factory AuthKakaoTokensRequestBody({
-    String? accessToken,
-    String? idToken,
-    String? refreshToken,
-  }) = _AuthTokensRequestBody;
+@JsonSerializable()
+class AuthKakaoTokensRequestBody {
+  final String accessToken;
+  final String idToken;
+  final String refreshToken;
 
-  factory AuthKakaoTokensRequestBody.fromJson(Map<String, Object?> json) =>
+  AuthKakaoTokensRequestBody({
+    required this.accessToken,
+    required this.idToken,
+    required this.refreshToken,
+  });
+
+  factory AuthKakaoTokensRequestBody.fromJson(Map<String, dynamic> json) =>
       _$AuthKakaoTokensRequestBodyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AuthKakaoTokensRequestBodyToJson(this);
 }

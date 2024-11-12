@@ -1,16 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
-part 'auth_tokens_entity.freezed.dart';
 part 'auth_tokens_entity.g.dart';
 
-@freezed
-class AuthTokensEntity with _$AuthTokensEntity {
-  const factory AuthTokensEntity({
-    required String accessToken,
-    required String refreshToken,
-  }) = _AuthTokensEntity;
+@JsonSerializable()
+class AuthTokensEntity {
+  final String accessToken;
+  final String refreshToken;
 
-  factory AuthTokensEntity.fromJson(Map<String, Object?> json) =>
-      _$AuthTokensEntityFromJson(json);
+  const AuthTokensEntity({
+    required this.accessToken,
+    required this.refreshToken,
+  });
+  
+  factory AuthTokensEntity.fromJson(Map<String, dynamic> json)
+  => _$AuthTokensEntityFromJson(json);
 }

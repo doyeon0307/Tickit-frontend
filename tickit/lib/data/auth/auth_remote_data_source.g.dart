@@ -22,13 +22,13 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<ProfileEntity> getProfile() async {
+  Future<ApiResponse<ProfileEntity>> getProfile() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'accessToken': 'true'};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<ProfileEntity>(Options(
+    final _options = _setStreamType<ApiResponse<ProfileEntity>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -45,9 +45,12 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late ProfileEntity _value;
+    late ApiResponse<ProfileEntity> _value;
     try {
-      _value = ProfileEntity.fromJson(_result.data!);
+      _value = ApiResponse<ProfileEntity>.fromJson(
+        _result.data!,
+        (json) => ProfileEntity.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -56,20 +59,21 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthTokensEntity> kakaoLogin(
-      {required AuthKakaoTokensRequestBody body}) async {
+  Future<ApiResponse<AuthTokensEntity>> kakaoLogin(
+      {required AuthKakaoTokensRequestBody tokens}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
-    final _options = _setStreamType<AuthTokensEntity>(Options(
+    final _data = <String, dynamic>{};
+    _data.addAll(tokens.toJson());
+    final _options = _setStreamType<ApiResponse<AuthTokensEntity>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/login',
+          '/kakao/login',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -79,9 +83,12 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AuthTokensEntity _value;
+    late ApiResponse<AuthTokensEntity> _value;
     try {
-      _value = AuthTokensEntity.fromJson(_result.data!);
+      _value = ApiResponse<AuthTokensEntity>.fromJson(
+        _result.data!,
+        (json) => AuthTokensEntity.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -90,20 +97,21 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<AuthTokensEntity> kakaoRegister(
-      {required AuthKakaoTokensRequestBody body}) async {
+  Future<ApiResponse<AuthTokensEntity>> kakaoRegister(
+      {required AuthKakaoTokensRequestBody tokens}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = body;
-    final _options = _setStreamType<AuthTokensEntity>(Options(
+    final _data = <String, dynamic>{};
+    _data.addAll(tokens.toJson());
+    final _options = _setStreamType<ApiResponse<AuthTokensEntity>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/register',
+          '/kakao/register',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -113,9 +121,12 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AuthTokensEntity _value;
+    late ApiResponse<AuthTokensEntity> _value;
     try {
-      _value = AuthTokensEntity.fromJson(_result.data!);
+      _value = ApiResponse<AuthTokensEntity>.fromJson(
+        _result.data!,
+        (json) => AuthTokensEntity.fromJson(json as Map<String, dynamic>),
+      );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
