@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tickit/ui/calendar/calendar_view.dart';
 import 'package:tickit/ui/home/home_view.dart';
-import 'package:tickit/ui/login/login_view.dart';
+import 'package:tickit/ui/login/login/login_view.dart';
 import 'package:tickit/ui/setting/setting_view.dart';
 import 'package:tickit/ui/ticket/ticket_view.dart';
 

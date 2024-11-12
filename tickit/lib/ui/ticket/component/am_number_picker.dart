@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:tickit/theme/text_style.dart';
+import 'package:tickit/theme/ticket_typegraphies.dart';
 
 class AmNumberPicker extends StatelessWidget {
   final bool am;

@@ -25,6 +25,11 @@ dependencies:
 
   dio: ^5.7.0
   kakao_flutter_sdk_user: ^1.9.6
+  flutter_secure_storage: ^4.2.1
+  flutter_riverpod: ^2.6.1
+  retrofit: ^4.4.1
+  retrofit_generator: ^8.2.1
+  easy_localization: ^3.0.7
 
 
 dev_dependencies:

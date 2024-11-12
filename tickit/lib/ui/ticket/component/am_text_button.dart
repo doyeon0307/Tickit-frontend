@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/theme/text_style.dart';
+import 'package:tickit/theme/ticket_typegraphies.dart';
 
 class AmTextButton extends StatelessWidget {
   final Color backgroundColor;
