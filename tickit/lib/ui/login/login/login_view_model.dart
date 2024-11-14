@@ -73,7 +73,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
             '카카오 계정으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
         kakaoLogin(
           accessToken: resp.accessToken,
-          idToken: resp.accessToken,
+          idToken: resp.idToken ?? "",
           refreshToken: resp.refreshToken ?? "",
         );
       } catch (error) {
