@@ -1,29 +1,34 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/theme/ticket_typegraphies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
-import 'package:tickit/ui/ticket/component/am_number_picker.dart';
-import 'package:tickit/ui/ticket/component/am_text_button.dart';
+import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
+import 'package:tickit/ui/ticket/component/custom_date_picker_dialog.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
+import 'package:tickit/ui/ticket/ticket_state.dart';
+import 'package:tickit/ui/ticket/ticket_view_model.dart';
 
-class TicketView extends StatefulWidget {
+class TicketView extends ConsumerStatefulWidget {
   const TicketView({super.key});
 
   @override
-  State<TicketView> createState() => _TicketViewState();
+  ConsumerState<TicketView> createState() => _TicketViewState();
 }
 
-class _TicketViewState extends State<TicketView> {
+class _TicketViewState extends ConsumerState<TicketView> {
   ImagePicker imagePicker = ImagePicker();
-  XFile? image;
 
   @override
   Widget build(BuildContext context) {
+    final TicketViewModel viewModel =
+        ref.watch(ticketViewModelProvider.notifier);
+    final TicketState state = ref.watch(ticketViewModelProvider);
+
     return SafeArea(
       child: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -33,18 +38,14 @@ class _TicketViewState extends State<TicketView> {
               onTap: () async {
                 XFile? newImage =
                     await imagePicker.pickImage(source: ImageSource.gallery);
-                if (newImage != null) {
-                  setState(() {
-                    image = newImage;
-                  });
-                }
+                viewModel.onTapImageBox(newImage: newImage);
               },
               child: Container(
                 width: double.infinity,
                 height: MediaQuery.of(context).size.width * 1.25,
                 color: AppColors.fillColor,
                 alignment: Alignment.center,
-                child: image == null
+                child: state.image == null
                     ? Text(
                         "클릭해서 사진 추가하기",
                         style: ticketStyle,
@@ -52,7 +53,7 @@ class _TicketViewState extends State<TicketView> {
                     : DecoratedBox(
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: FileImage(File(image!.path)),
+                            image: FileImage(File(state.image!.path)),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -72,12 +73,14 @@ class _TicketViewState extends State<TicketView> {
                     "assets/deco/left_title_deco.svg",
                     width: MediaQuery.of(context).size.width / 4,
                   ),
-                  const Expanded(
+                  Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 4.0,
                       ),
                       child: TicketTextField(
+                        onChanged: (value) =>
+                            viewModel.onChangedTitle(newTitle: value),
                         fontSize: 20.0,
                         hintText: "제목을 입력하세요",
                         keyboardType: TextInputType.multiline,
@@ -113,8 +116,10 @@ class _TicketViewState extends State<TicketView> {
                                 maxWidth:
                                     MediaQuery.of(context).size.width * 5 / 12,
                               ),
-                              child: const TicketTextField(
-                                fontSize: 16.0,
+                              child: TicketTextField(
+                                onChanged: (value) => viewModel
+                                    .onChangedLocation(newLocation: value),
+                                fontSize: 18.0,
                                 hintText: "장소를 입력하세요",
                               ),
                             ),
@@ -135,18 +140,29 @@ class _TicketViewState extends State<TicketView> {
                               showDialog(
                                 context: context,
                                 builder: (context) {
-                                  return const CustomDatePickerDialog();
+                                  return CustomDatePickerDialog(
+                                    onDateChanged: (value) => viewModel.onChangedDate(newDate: value),
+                                    onPressedAmButton: () => viewModel.onTapAmButton(),
+                                    onChangedHour: (value) => viewModel.onChangedHour(newHour: value),
+                                    onChangedMinute: (value) => viewModel.onChangedMinute(newMinute: value),
+                                    onPressedCheckButton: () => viewModel.onPressedDateTimeCheck(),
+                                  );
                                 },
                               );
                             },
                             style: TextButton.styleFrom(
-                              textStyle: ticketStyle,
+                              textStyle: ticketStyle.copyWith(
+                                fontSize: Text(state.dateTime) == "날짜를 선택하세요"
+                                    ? 16.0
+                                    : 18.0,
+                              ),
                               padding: const EdgeInsets.all(0.0),
-                              foregroundColor: Theme.of(context).hintColor,
+                              foregroundColor:
+                                  Text(state.dateTime) == "날짜를 선택하세요"
+                                      ? Theme.of(context).hintColor
+                                      : AppColors.textColor,
                             ),
-                            child: const Text(
-                              "날짜를 선택하세요",
-                            ),
+                            child: Text(state.dateTime),
                           ),
                         ],
                       ),
@@ -173,6 +189,7 @@ class _TicketViewState extends State<TicketView> {
                         onPressed: () => showDialog(
                           context: context,
                           builder: (context) => const CustomColorPickerDialog(
+                            isBackground: true,
                             title: "배경색을 선택하세요",
                           ),
                         ),
@@ -183,6 +200,7 @@ class _TicketViewState extends State<TicketView> {
                         onPressed: () => showDialog(
                           context: context,
                           builder: (context) => const CustomColorPickerDialog(
+                            isBackground: false,
                             title: "글자색을 선택하세요",
                           ),
                         ),
@@ -297,7 +315,7 @@ class _TicketViewState extends State<TicketView> {
                     children: [
                       CustomTextButton(
                         label: "취소하기",
-                        onPressed: () {},
+                        onPressed: () => viewModel.onPressedCancel(),
                         textStyle: ticketStyle,
                         backgroundColor: AppColors.secondaryColor,
                         foregroundColor: AppColors.backgroundColor,
@@ -306,7 +324,7 @@ class _TicketViewState extends State<TicketView> {
                       ),
                       CustomTextButton(
                         label: "저장하기",
-                        onPressed: () {},
+                        onPressed: () => viewModel.onPressedSave(),
                         textStyle: ticketStyle,
                         backgroundColor: AppColors.primaryColor,
                         width: 150.0,
@@ -327,139 +345,6 @@ class _TicketViewState extends State<TicketView> {
   }
 }
 
-class CustomDatePickerDialog extends StatelessWidget {
-  const CustomDatePickerDialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 16.0,
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: SizedBox(
-        height: 500,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "날짜를 선택하세요",
-              style: ticketStyle.copyWith(
-                fontSize: 24.0,
-              ),
-            ),
-            const SizedBox(
-              height: 8.0,
-            ),
-            CalendarDatePicker(
-              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
-              lastDate: DateTime(2500),
-              onDateChanged: (value) {},
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: 40.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                      color: AppColors.fillColor,
-                    ),
-                    width: MediaQuery.of(context).size.width / 4,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: AmTextButton(
-                            backgroundColor: AppColors.fillColor,
-                            onPressed: () {},
-                            label: "오전",
-                          ),
-                        ),
-                        Expanded(
-                          child: AmTextButton(
-                            backgroundColor: AppColors.primaryColor,
-                            onPressed: () {},
-                            label: "오후",
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  const AmNumberPicker(am: true),
-                  Text(
-                    ":",
-                    style: ticketStyle.copyWith(
-                      fontSize: 28.0,
-                    ),
-                  ),
-                  const AmNumberPicker(am: false),
-                  const SizedBox(
-                    width: 16.0,
-                  ),
-                  CustomTextButton(
-                    label: "선택",
-                    textStyle: ticketStyle,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CustomColorPickerDialog extends StatelessWidget {
-  final String title;
-
-  const CustomColorPickerDialog({super.key, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          16.0,
-        ),
-      ),
-      titleTextStyle: ticketStyle.copyWith(
-        fontSize: 24.0,
-      ),
-      insetPadding: const EdgeInsets.symmetric(
-        horizontal: 8.0,
-        vertical: 16.0,
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      title: Text(title),
-      content: BlockPicker(
-        pickerColor: Colors.white,
-        onColorChanged: (value) {},
-      ),
-      actions: [
-        CustomTextButton(
-          label: "선택",
-          textStyle: ticketStyle,
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-}
-
 class TicketFieldRow extends StatelessWidget {
   const TicketFieldRow({super.key});
 
@@ -473,7 +358,7 @@ class TicketFieldRow extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width / 3,
           ),
-          child: const IntrinsicWidth(
+          child: IntrinsicWidth(
             child: TicketTextField(
               hintText: "소제목",
             ),
@@ -486,7 +371,7 @@ class TicketFieldRow extends StatelessWidget {
             style: ticketStyle,
           ),
         ),
-        const Expanded(
+        Expanded(
           child: TicketTextField(
             hintText: "내용을 입력하세요",
           ),

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/repository/repository.dart';
 import 'package:tickit/core/repository/repository_result.dart';
@@ -41,7 +42,7 @@ class AuthRepository extends Repository {
       }
     } on DioException catch (e) {
       final String errorMessage =
-          e.response?.data['message'] as String? ?? '알 수 없는 오류가 발생했습니다';
+          e.response?.data['message'] as String? ?? "unknownError".tr();
 
       return FailureRepositoryResult<AuthTokensEntity>(
         error: e,
@@ -73,7 +74,7 @@ class AuthRepository extends Repository {
       }
     } on DioException catch (e) {
       final String errorMessage =
-          e.response?.data['message'] as String? ?? '알 수 없는 오류가 발생했습니다';
+          e.response?.data['message'] as String? ?? "unknownError".tr();
 
       return FailureRepositoryResult<AuthTokensEntity>(
         error: e,

@@ -43,5 +43,3 @@ app.*.map.json
 /android/app/release
 
 /lib/config
-/lib/config/key.dart
-/lib/config/ip.dart
