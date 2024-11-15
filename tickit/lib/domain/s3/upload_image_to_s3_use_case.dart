@@ -13,9 +13,11 @@ final uploadImageToS3UseCaseProvider = Provider.autoDispose(
 class UploadImageToS3UseCase {
   final Dio _dio;
 
-  const UploadImageToS3UseCase({
+  UploadImageToS3UseCase({
     required Dio dio,
   }) : _dio = dio;
+
+  final Dio myDio = Dio();
 
   String _getContentType(String path) {
     final ext = path.split('.').last.toLowerCase();
@@ -45,7 +47,7 @@ class UploadImageToS3UseCase {
       final bytes = await image.readAsBytes();
       final contentType = _getContentType(image.path);
 
-      final resp = await _dio.put(
+      final resp = await myDio.put(
         uploadUrl,
         data: bytes,
         options: Options(

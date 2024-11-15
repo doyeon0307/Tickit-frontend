@@ -8,4 +8,6 @@ abstract class AppColors {
   static Color fillColor = const Color(0xffEEF0F2);
   static Color textColor = const Color(0xff141414);
   static Color secondaryColor = const Color(0xff585757);
+  static Color errorColor = const Color(0xffCB444A);
+  static Color successColor = const Color(0xff537F4B);
 }

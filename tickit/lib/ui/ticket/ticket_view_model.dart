@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -48,13 +47,10 @@ class TicketViewModel extends StateNotifier<TicketState> {
   }) {
     if (mounted) {
       if (newImage != null) {
-        state = state.copyWith(
-          image: newImage,
-          imageErrMsg: "",
-        );
+        state = state.copyWith(image: newImage);
         debugPrint("image: ${state.image?.path}");
       } else {
-        state = state.copyWith(imageErrMsg: "imageError".tr());
+        state = state.copyWith(errorMsg: "이미지를 불러올 수 없어요.");
       }
     }
   }
@@ -147,7 +143,7 @@ class TicketViewModel extends StateNotifier<TicketState> {
 
   void onPressedCancel() {
     if (mounted) {
-      state = TicketState();
+      initState();
     }
   }
 
@@ -159,7 +155,8 @@ class TicketViewModel extends StateNotifier<TicketState> {
     try {
       state = state.copyWith(
         makeTicketLoading: LoadingStatus.loading,
-        uploadImageLoading: LoadingStatus.loading,
+        errorMsg: "",
+        successMsg: "",
       );
 
       // get url
@@ -172,9 +169,10 @@ class TicketViewModel extends StateNotifier<TicketState> {
         case FailureUseCaseResult<S3UrlModel>():
           if (mounted) {
             state = state.copyWith(
-                uploadImageLoading: LoadingStatus.error,
-                makeTicketLoading: LoadingStatus.error,
-                imageErrMsg: "이미지 업로드에 실패했습니다.");
+              makeTicketLoading: LoadingStatus.error,
+              errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+            );
+            debugPrint("url 요청 오류: ${getUrlResult.message}");
             return;
           }
       }
@@ -190,17 +188,14 @@ class TicketViewModel extends StateNotifier<TicketState> {
         case SuccessUseCaseResult<void>():
           imageUrl = urlData.imageUrl;
           if (mounted) {
-            state = state.copyWith(
-              uploadImageLoading: LoadingStatus.success,
-            );
+            state = state.copyWith();
           }
         case FailureUseCaseResult<void>():
           if (mounted) {
             state = state.copyWith(
-              uploadImageLoading: LoadingStatus.error,
-              makeTicketLoading: LoadingStatus.error,
-              imageErrMsg: "이미지 업로드에 실패했습니다.",
-            );
+                makeTicketLoading: LoadingStatus.error,
+                errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+            debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
             return;
           }
       }
@@ -220,21 +215,21 @@ class TicketViewModel extends StateNotifier<TicketState> {
           if (mounted) {
             state = state.copyWith(
               makeTicketLoading: LoadingStatus.success,
+              successMsg: "티켓이 만들어졌어요! 만들어진 티켓은 홈 화면에서 확인할 수 있어요.",
             );
           }
         case FailureUseCaseResult<String>():
           if (mounted) {
             state = state.copyWith(
-              makeTicketLoading: LoadingStatus.error,
-              saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
-            );
+                makeTicketLoading: LoadingStatus.error,
+                errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+            debugPrint("티켓 생성 오류: ${makeTicketResult.message}");
             return;
           } else {
             if (mounted) {
               state = state.copyWith(
-                makeTicketLoading: LoadingStatus.error,
-                saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
-              );
+                  makeTicketLoading: LoadingStatus.error,
+                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
             }
             return;
           }
@@ -242,14 +237,21 @@ class TicketViewModel extends StateNotifier<TicketState> {
     } catch (e) {
       if (mounted) {
         state = state.copyWith(
-          makeTicketLoading: LoadingStatus.error,
-          saveErrMsg: "unknownError".tr(),
-        );
+            makeTicketLoading: LoadingStatus.error,
+            errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
         return;
       }
     }
 
     initState();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    locationController.dispose();
+
+    super.dispose();
   }
 }
 

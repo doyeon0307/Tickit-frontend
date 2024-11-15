@@ -10,7 +10,6 @@ part 'ticket_state.freezed.dart';
 class TicketState with _$TicketState {
   factory TicketState({
     @Default(LoadingStatus.none) LoadingStatus initLoading,
-    @Default(LoadingStatus.none) LoadingStatus uploadImageLoading,
     @Default(LoadingStatus.none) LoadingStatus makeTicketLoading,
     @Default(null) XFile? image,
     @Default("") String title,
@@ -25,9 +24,7 @@ class TicketState with _$TicketState {
     @Default([]) List<Field> fields,
     @Default(10) int maxCount,
     @Default(0) int fieldCount,
-    @Default("") String setDatetimeErrMsg,
-    @Default("") String saveErrMsg,
-    @Default("") String unfilledTextFieldErrMsg,
-    @Default("") String imageErrMsg,
+    @Default("") String errorMsg,
+    @Default("") String successMsg,
   }) = _TicketState;
 }

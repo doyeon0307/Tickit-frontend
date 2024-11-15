@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TicketState {
   LoadingStatus get initLoading => throw _privateConstructorUsedError;
-  LoadingStatus get uploadImageLoading => throw _privateConstructorUsedError;
   LoadingStatus get makeTicketLoading => throw _privateConstructorUsedError;
   XFile? get image => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -32,10 +31,8 @@ mixin _$TicketState {
   List<Field> get fields => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   int get fieldCount => throw _privateConstructorUsedError;
-  String get setDatetimeErrMsg => throw _privateConstructorUsedError;
-  String get saveErrMsg => throw _privateConstructorUsedError;
-  String get unfilledTextFieldErrMsg => throw _privateConstructorUsedError;
-  String get imageErrMsg => throw _privateConstructorUsedError;
+  String get errorMsg => throw _privateConstructorUsedError;
+  String get successMsg => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TicketStateCopyWith<TicketState> get copyWith =>
@@ -50,7 +47,6 @@ abstract class $TicketStateCopyWith<$Res> {
   @useResult
   $Res call(
       {LoadingStatus initLoading,
-      LoadingStatus uploadImageLoading,
       LoadingStatus makeTicketLoading,
       XFile? image,
       String title,
@@ -65,10 +61,8 @@ abstract class $TicketStateCopyWith<$Res> {
       List<Field> fields,
       int maxCount,
       int fieldCount,
-      String setDatetimeErrMsg,
-      String saveErrMsg,
-      String unfilledTextFieldErrMsg,
-      String imageErrMsg});
+      String errorMsg,
+      String successMsg});
 }
 
 /// @nodoc
@@ -85,7 +79,6 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
   @override
   $Res call({
     Object? initLoading = null,
-    Object? uploadImageLoading = null,
     Object? makeTicketLoading = null,
     Object? image = freezed,
     Object? title = null,
@@ -100,19 +93,13 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
     Object? fields = null,
     Object? maxCount = null,
     Object? fieldCount = null,
-    Object? setDatetimeErrMsg = null,
-    Object? saveErrMsg = null,
-    Object? unfilledTextFieldErrMsg = null,
-    Object? imageErrMsg = null,
+    Object? errorMsg = null,
+    Object? successMsg = null,
   }) {
     return _then(_value.copyWith(
       initLoading: null == initLoading
           ? _value.initLoading
           : initLoading // ignore: cast_nullable_to_non_nullable
-              as LoadingStatus,
-      uploadImageLoading: null == uploadImageLoading
-          ? _value.uploadImageLoading
-          : uploadImageLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
       makeTicketLoading: null == makeTicketLoading
           ? _value.makeTicketLoading
@@ -170,21 +157,13 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.fieldCount
           : fieldCount // ignore: cast_nullable_to_non_nullable
               as int,
-      setDatetimeErrMsg: null == setDatetimeErrMsg
-          ? _value.setDatetimeErrMsg
-          : setDatetimeErrMsg // ignore: cast_nullable_to_non_nullable
+      errorMsg: null == errorMsg
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
-      saveErrMsg: null == saveErrMsg
-          ? _value.saveErrMsg
-          : saveErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      unfilledTextFieldErrMsg: null == unfilledTextFieldErrMsg
-          ? _value.unfilledTextFieldErrMsg
-          : unfilledTextFieldErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageErrMsg: null == imageErrMsg
-          ? _value.imageErrMsg
-          : imageErrMsg // ignore: cast_nullable_to_non_nullable
+      successMsg: null == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -200,7 +179,6 @@ abstract class _$$TicketStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {LoadingStatus initLoading,
-      LoadingStatus uploadImageLoading,
       LoadingStatus makeTicketLoading,
       XFile? image,
       String title,
@@ -215,10 +193,8 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       List<Field> fields,
       int maxCount,
       int fieldCount,
-      String setDatetimeErrMsg,
-      String saveErrMsg,
-      String unfilledTextFieldErrMsg,
-      String imageErrMsg});
+      String errorMsg,
+      String successMsg});
 }
 
 /// @nodoc
@@ -233,7 +209,6 @@ class __$$TicketStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? initLoading = null,
-    Object? uploadImageLoading = null,
     Object? makeTicketLoading = null,
     Object? image = freezed,
     Object? title = null,
@@ -248,19 +223,13 @@ class __$$TicketStateImplCopyWithImpl<$Res>
     Object? fields = null,
     Object? maxCount = null,
     Object? fieldCount = null,
-    Object? setDatetimeErrMsg = null,
-    Object? saveErrMsg = null,
-    Object? unfilledTextFieldErrMsg = null,
-    Object? imageErrMsg = null,
+    Object? errorMsg = null,
+    Object? successMsg = null,
   }) {
     return _then(_$TicketStateImpl(
       initLoading: null == initLoading
           ? _value.initLoading
           : initLoading // ignore: cast_nullable_to_non_nullable
-              as LoadingStatus,
-      uploadImageLoading: null == uploadImageLoading
-          ? _value.uploadImageLoading
-          : uploadImageLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
       makeTicketLoading: null == makeTicketLoading
           ? _value.makeTicketLoading
@@ -318,21 +287,13 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value.fieldCount
           : fieldCount // ignore: cast_nullable_to_non_nullable
               as int,
-      setDatetimeErrMsg: null == setDatetimeErrMsg
-          ? _value.setDatetimeErrMsg
-          : setDatetimeErrMsg // ignore: cast_nullable_to_non_nullable
+      errorMsg: null == errorMsg
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
               as String,
-      saveErrMsg: null == saveErrMsg
-          ? _value.saveErrMsg
-          : saveErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      unfilledTextFieldErrMsg: null == unfilledTextFieldErrMsg
-          ? _value.unfilledTextFieldErrMsg
-          : unfilledTextFieldErrMsg // ignore: cast_nullable_to_non_nullable
-              as String,
-      imageErrMsg: null == imageErrMsg
-          ? _value.imageErrMsg
-          : imageErrMsg // ignore: cast_nullable_to_non_nullable
+      successMsg: null == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -343,7 +304,6 @@ class __$$TicketStateImplCopyWithImpl<$Res>
 class _$TicketStateImpl implements _TicketState {
   _$TicketStateImpl(
       {this.initLoading = LoadingStatus.none,
-      this.uploadImageLoading = LoadingStatus.none,
       this.makeTicketLoading = LoadingStatus.none,
       this.image = null,
       this.title = "",
@@ -358,18 +318,13 @@ class _$TicketStateImpl implements _TicketState {
       final List<Field> fields = const [],
       this.maxCount = 10,
       this.fieldCount = 0,
-      this.setDatetimeErrMsg = "",
-      this.saveErrMsg = "",
-      this.unfilledTextFieldErrMsg = "",
-      this.imageErrMsg = ""})
+      this.errorMsg = "",
+      this.successMsg = ""})
       : _fields = fields;
 
   @override
   @JsonKey()
   final LoadingStatus initLoading;
-  @override
-  @JsonKey()
-  final LoadingStatus uploadImageLoading;
   @override
   @JsonKey()
   final LoadingStatus makeTicketLoading;
@@ -420,20 +375,14 @@ class _$TicketStateImpl implements _TicketState {
   final int fieldCount;
   @override
   @JsonKey()
-  final String setDatetimeErrMsg;
+  final String errorMsg;
   @override
   @JsonKey()
-  final String saveErrMsg;
-  @override
-  @JsonKey()
-  final String unfilledTextFieldErrMsg;
-  @override
-  @JsonKey()
-  final String imageErrMsg;
+  final String successMsg;
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, uploadImageLoading: $uploadImageLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, maxCount: $maxCount, fieldCount: $fieldCount, setDatetimeErrMsg: $setDatetimeErrMsg, saveErrMsg: $saveErrMsg, unfilledTextFieldErrMsg: $unfilledTextFieldErrMsg, imageErrMsg: $imageErrMsg)';
+    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg)';
   }
 
   @override
@@ -443,8 +392,6 @@ class _$TicketStateImpl implements _TicketState {
             other is _$TicketStateImpl &&
             (identical(other.initLoading, initLoading) ||
                 other.initLoading == initLoading) &&
-            (identical(other.uploadImageLoading, uploadImageLoading) ||
-                other.uploadImageLoading == uploadImageLoading) &&
             (identical(other.makeTicketLoading, makeTicketLoading) ||
                 other.makeTicketLoading == makeTicketLoading) &&
             (identical(other.image, image) || other.image == image) &&
@@ -466,41 +413,32 @@ class _$TicketStateImpl implements _TicketState {
                 other.maxCount == maxCount) &&
             (identical(other.fieldCount, fieldCount) ||
                 other.fieldCount == fieldCount) &&
-            (identical(other.setDatetimeErrMsg, setDatetimeErrMsg) ||
-                other.setDatetimeErrMsg == setDatetimeErrMsg) &&
-            (identical(other.saveErrMsg, saveErrMsg) ||
-                other.saveErrMsg == saveErrMsg) &&
-            (identical(
-                    other.unfilledTextFieldErrMsg, unfilledTextFieldErrMsg) ||
-                other.unfilledTextFieldErrMsg == unfilledTextFieldErrMsg) &&
-            (identical(other.imageErrMsg, imageErrMsg) ||
-                other.imageErrMsg == imageErrMsg));
+            (identical(other.errorMsg, errorMsg) ||
+                other.errorMsg == errorMsg) &&
+            (identical(other.successMsg, successMsg) ||
+                other.successMsg == successMsg));
   }
 
   @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        initLoading,
-        uploadImageLoading,
-        makeTicketLoading,
-        image,
-        title,
-        location,
-        dateTime,
-        date,
-        isAm,
-        hour,
-        minute,
-        backgroundColor,
-        foregroundColor,
-        const DeepCollectionEquality().hash(_fields),
-        maxCount,
-        fieldCount,
-        setDatetimeErrMsg,
-        saveErrMsg,
-        unfilledTextFieldErrMsg,
-        imageErrMsg
-      ]);
+  int get hashCode => Object.hash(
+      runtimeType,
+      initLoading,
+      makeTicketLoading,
+      image,
+      title,
+      location,
+      dateTime,
+      date,
+      isAm,
+      hour,
+      minute,
+      backgroundColor,
+      foregroundColor,
+      const DeepCollectionEquality().hash(_fields),
+      maxCount,
+      fieldCount,
+      errorMsg,
+      successMsg);
 
   @JsonKey(ignore: true)
   @override
@@ -512,7 +450,6 @@ class _$TicketStateImpl implements _TicketState {
 abstract class _TicketState implements TicketState {
   factory _TicketState(
       {final LoadingStatus initLoading,
-      final LoadingStatus uploadImageLoading,
       final LoadingStatus makeTicketLoading,
       final XFile? image,
       final String title,
@@ -527,15 +464,11 @@ abstract class _TicketState implements TicketState {
       final List<Field> fields,
       final int maxCount,
       final int fieldCount,
-      final String setDatetimeErrMsg,
-      final String saveErrMsg,
-      final String unfilledTextFieldErrMsg,
-      final String imageErrMsg}) = _$TicketStateImpl;
+      final String errorMsg,
+      final String successMsg}) = _$TicketStateImpl;
 
   @override
   LoadingStatus get initLoading;
-  @override
-  LoadingStatus get uploadImageLoading;
   @override
   LoadingStatus get makeTicketLoading;
   @override
@@ -565,13 +498,9 @@ abstract class _TicketState implements TicketState {
   @override
   int get fieldCount;
   @override
-  String get setDatetimeErrMsg;
+  String get errorMsg;
   @override
-  String get saveErrMsg;
-  @override
-  String get unfilledTextFieldErrMsg;
-  @override
-  String get imageErrMsg;
+  String get successMsg;
   @override
   @JsonKey(ignore: true)
   _$$TicketStateImplCopyWith<_$TicketStateImpl> get copyWith =>

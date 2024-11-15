@@ -21,7 +21,7 @@ class _NavBarState extends State<NavBar> {
           item: itemConfig(iconPath: "assets/icon/home.svg"),
         ),
         PersistentTabConfig(
-          screen: const TicketView(),
+          screen: TicketView(),
           item: itemConfig(iconPath: "assets/icon/plus-square.svg"),
         ),
         PersistentTabConfig(
