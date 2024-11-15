@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tickit/theme/ticket_typegraphies.dart';
+import 'package:tickit/theme/ticket_typographies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/am_number_picker.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
-import 'package:tickit/theme/typegraphies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/view/nav_bar.dart';
 import 'package:tickit/ui/login/login/login_state.dart';

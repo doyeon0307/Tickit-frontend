@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/theme/ticket_typegraphies.dart';
+import 'package:tickit/theme/ticket_typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class TicketTextField extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:tickit/theme/ticket_typegraphies.dart';
+import 'package:tickit/theme/ticket_typographies.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 import 'package:tickit/ui/ticket/ticket_view_model.dart';
 

@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/core/loading_status.dart';
-import 'package:tickit/theme/ticket_typegraphies.dart';
+import 'package:tickit/theme/ticket_typographies.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
