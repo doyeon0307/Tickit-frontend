@@ -51,6 +51,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
               initialDate: DateTime.now(),
               firstDate: DateTime(2000),
               lastDate: DateTime(2500),
+              currentDate: DateTime.now(),
               onDateChanged: onDateChanged,
             ),
             Padding(

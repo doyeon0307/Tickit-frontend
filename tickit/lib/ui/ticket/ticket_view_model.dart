@@ -102,8 +102,9 @@ class TicketViewModel extends StateNotifier<TicketState> {
   }
 
   void onPressedDateTimeCheck() {
+    final date = state.date ?? DateTime.now();
     final dateTime =
-        "${state.date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
+        "${date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
     if (mounted) {
       state = state.copyWith(dateTime: dateTime);
       debugPrint("dateTime: ${state.dateTime}");
