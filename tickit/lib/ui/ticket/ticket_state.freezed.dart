@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TicketState {
   LoadingStatus get initLoading => throw _privateConstructorUsedError;
-  LoadingStatus get makingLoading => throw _privateConstructorUsedError;
+  LoadingStatus get uploadImageLoading => throw _privateConstructorUsedError;
+  LoadingStatus get makeTicketLoading => throw _privateConstructorUsedError;
   XFile? get image => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
@@ -49,7 +50,8 @@ abstract class $TicketStateCopyWith<$Res> {
   @useResult
   $Res call(
       {LoadingStatus initLoading,
-      LoadingStatus makingLoading,
+      LoadingStatus uploadImageLoading,
+      LoadingStatus makeTicketLoading,
       XFile? image,
       String title,
       String location,
@@ -83,7 +85,8 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
   @override
   $Res call({
     Object? initLoading = null,
-    Object? makingLoading = null,
+    Object? uploadImageLoading = null,
+    Object? makeTicketLoading = null,
     Object? image = freezed,
     Object? title = null,
     Object? location = null,
@@ -107,9 +110,13 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.initLoading
           : initLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
-      makingLoading: null == makingLoading
-          ? _value.makingLoading
-          : makingLoading // ignore: cast_nullable_to_non_nullable
+      uploadImageLoading: null == uploadImageLoading
+          ? _value.uploadImageLoading
+          : uploadImageLoading // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      makeTicketLoading: null == makeTicketLoading
+          ? _value.makeTicketLoading
+          : makeTicketLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
       image: freezed == image
           ? _value.image
@@ -193,7 +200,8 @@ abstract class _$$TicketStateImplCopyWith<$Res>
   @useResult
   $Res call(
       {LoadingStatus initLoading,
-      LoadingStatus makingLoading,
+      LoadingStatus uploadImageLoading,
+      LoadingStatus makeTicketLoading,
       XFile? image,
       String title,
       String location,
@@ -225,7 +233,8 @@ class __$$TicketStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? initLoading = null,
-    Object? makingLoading = null,
+    Object? uploadImageLoading = null,
+    Object? makeTicketLoading = null,
     Object? image = freezed,
     Object? title = null,
     Object? location = null,
@@ -249,9 +258,13 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value.initLoading
           : initLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
-      makingLoading: null == makingLoading
-          ? _value.makingLoading
-          : makingLoading // ignore: cast_nullable_to_non_nullable
+      uploadImageLoading: null == uploadImageLoading
+          ? _value.uploadImageLoading
+          : uploadImageLoading // ignore: cast_nullable_to_non_nullable
+              as LoadingStatus,
+      makeTicketLoading: null == makeTicketLoading
+          ? _value.makeTicketLoading
+          : makeTicketLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
       image: freezed == image
           ? _value.image
@@ -330,7 +343,8 @@ class __$$TicketStateImplCopyWithImpl<$Res>
 class _$TicketStateImpl implements _TicketState {
   _$TicketStateImpl(
       {this.initLoading = LoadingStatus.none,
-      this.makingLoading = LoadingStatus.none,
+      this.uploadImageLoading = LoadingStatus.none,
+      this.makeTicketLoading = LoadingStatus.none,
       this.image = null,
       this.title = "",
       this.location = "",
@@ -355,7 +369,10 @@ class _$TicketStateImpl implements _TicketState {
   final LoadingStatus initLoading;
   @override
   @JsonKey()
-  final LoadingStatus makingLoading;
+  final LoadingStatus uploadImageLoading;
+  @override
+  @JsonKey()
+  final LoadingStatus makeTicketLoading;
   @override
   @JsonKey()
   final XFile? image;
@@ -416,7 +433,7 @@ class _$TicketStateImpl implements _TicketState {
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, makingLoading: $makingLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, maxCount: $maxCount, fieldCount: $fieldCount, setDatetimeErrMsg: $setDatetimeErrMsg, saveErrMsg: $saveErrMsg, unfilledTextFieldErrMsg: $unfilledTextFieldErrMsg, imageErrMsg: $imageErrMsg)';
+    return 'TicketState(initLoading: $initLoading, uploadImageLoading: $uploadImageLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, maxCount: $maxCount, fieldCount: $fieldCount, setDatetimeErrMsg: $setDatetimeErrMsg, saveErrMsg: $saveErrMsg, unfilledTextFieldErrMsg: $unfilledTextFieldErrMsg, imageErrMsg: $imageErrMsg)';
   }
 
   @override
@@ -426,8 +443,10 @@ class _$TicketStateImpl implements _TicketState {
             other is _$TicketStateImpl &&
             (identical(other.initLoading, initLoading) ||
                 other.initLoading == initLoading) &&
-            (identical(other.makingLoading, makingLoading) ||
-                other.makingLoading == makingLoading) &&
+            (identical(other.uploadImageLoading, uploadImageLoading) ||
+                other.uploadImageLoading == uploadImageLoading) &&
+            (identical(other.makeTicketLoading, makeTicketLoading) ||
+                other.makeTicketLoading == makeTicketLoading) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.location, location) ||
@@ -462,7 +481,8 @@ class _$TicketStateImpl implements _TicketState {
   int get hashCode => Object.hashAll([
         runtimeType,
         initLoading,
-        makingLoading,
+        uploadImageLoading,
+        makeTicketLoading,
         image,
         title,
         location,
@@ -492,7 +512,8 @@ class _$TicketStateImpl implements _TicketState {
 abstract class _TicketState implements TicketState {
   factory _TicketState(
       {final LoadingStatus initLoading,
-      final LoadingStatus makingLoading,
+      final LoadingStatus uploadImageLoading,
+      final LoadingStatus makeTicketLoading,
       final XFile? image,
       final String title,
       final String location,
@@ -514,7 +535,9 @@ abstract class _TicketState implements TicketState {
   @override
   LoadingStatus get initLoading;
   @override
-  LoadingStatus get makingLoading;
+  LoadingStatus get uploadImageLoading;
+  @override
+  LoadingStatus get makeTicketLoading;
   @override
   XFile? get image;
   @override

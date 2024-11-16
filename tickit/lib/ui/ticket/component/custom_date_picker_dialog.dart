@@ -110,7 +110,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                     label: "선택",
                     textStyle: ticketStyle,
                     onPressed: () {
-                      onPressedCheckButton;
+                      onPressedCheckButton();
                       Navigator.of(context).pop();
                     },
                   ),

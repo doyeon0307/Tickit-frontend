@@ -21,7 +21,7 @@ abstract class AuthRemoteDataSource {
       _AuthRemoteDataSource;
 
   @GET("")
-  @Headers({'accessToken': 'true'})
+  @Headers({"accessToken": "true"})
   Future<ApiResponse<ProfileEntity>> getProfile();
 
   // @DELETE("")

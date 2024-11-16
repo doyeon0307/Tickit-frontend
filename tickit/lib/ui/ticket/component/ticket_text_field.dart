@@ -7,6 +7,7 @@ class TicketTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final TextAlign textAlign;
+  Color? color;
   Function(String)? onChanged;
 
   TicketTextField({
@@ -16,6 +17,7 @@ class TicketTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.textAlign = TextAlign.start,
     this.onChanged,
+    this.color,
   });
 
   @override
@@ -25,6 +27,7 @@ class TicketTextField extends StatelessWidget {
       keyboardType: keyboardType,
       style: ticketStyle.copyWith(
         fontSize: fontSize,
+        color: color ?? AppColors.textColor,
       ),
       onChanged: onChanged,
       textAlign: textAlign,

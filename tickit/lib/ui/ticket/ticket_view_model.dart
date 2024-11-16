@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
+import 'package:tickit/domain/s3/get_presigned_url_use_case.dart';
+import 'package:tickit/domain/s3/model/s3_url_model.dart';
+import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
@@ -11,15 +14,23 @@ final ticketViewModelProvider =
     StateNotifierProvider.autoDispose<TicketViewModel, TicketState>(
   (ref) => TicketViewModel(
     createTicketUseCase: ref.read(createTicketUseCaseProvider),
+    getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
+    uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
   ),
 );
 
 class TicketViewModel extends StateNotifier<TicketState> {
   final CreateTicketUseCase _createTicketUseCase;
+  final GetPresignedUrlUseCase _getPresignedUrlUseCase;
+  final UploadImageToS3UseCase _uploadImageToS3UseCase;
 
   TicketViewModel({
     required CreateTicketUseCase createTicketUseCase,
+    required GetPresignedUrlUseCase getPresignedUrlUseCase,
+    required UploadImageToS3UseCase uploadImageToS3UseCase,
   })  : _createTicketUseCase = createTicketUseCase,
+        _getPresignedUrlUseCase = getPresignedUrlUseCase,
+        _uploadImageToS3UseCase = uploadImageToS3UseCase,
         super(TicketState());
 
   void onTapImageBox({
@@ -92,10 +103,10 @@ class TicketViewModel extends StateNotifier<TicketState> {
 
   void onPressedDateTimeCheck() {
     final dateTime =
-        "${state.date.toString().split(" ")[0]} ${state.hour}:${state.minute}";
+        "${state.date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
     if (mounted) {
       state = state.copyWith(dateTime: dateTime);
-      debugPrint("minute: ${state.dateTime}");
+      debugPrint("dateTime: ${state.dateTime}");
     }
   }
 
@@ -124,38 +135,100 @@ class TicketViewModel extends StateNotifier<TicketState> {
   }
 
   Future<void> onPressedSave() async {
-    if (state.saveErrMsg != "" ||
-        state.setDatetimeErrMsg != "" ||
-        state.unfilledTextFieldErrMsg != "") return;
+    if (state.image == null ||
+        state.dateTime == "날짜를 선택하세요" ||
+        state.date == null) return;
 
-    final result = await _createTicketUseCase(
-      image: state.image!.path,
-      title: state.title,
-      datetime: state.date.toString(),
-      location: state.location,
-      fields: state.fields,
-      foregroundColor: state.foregroundColor.toString(),
-      backgroundColor: state.backgroundColor.toString(),
-    );
-    switch (result) {
-      case SuccessUseCaseResult<String>():
-        if (mounted) {
-          state = state.copyWith(makingLoading: LoadingStatus.success);
-        }
-      case FailureUseCaseResult<String>():
-        if (mounted) {
-          state = state.copyWith(
-            makingLoading: LoadingStatus.error,
-            saveErrMsg: result.message ?? "unknownError".tr(),
-          );
-        } else {
+    try {
+      state = state.copyWith(
+        makeTicketLoading: LoadingStatus.loading,
+        uploadImageLoading: LoadingStatus.loading,
+      );
+
+      // get url
+      final getUrlResult = await _getPresignedUrlUseCase();
+      late final S3UrlModel urlData;
+
+      switch (getUrlResult) {
+        case SuccessUseCaseResult<S3UrlModel>():
+          urlData = getUrlResult.data;
+        case FailureUseCaseResult<S3UrlModel>():
           if (mounted) {
             state = state.copyWith(
-              makingLoading: LoadingStatus.error,
-              saveErrMsg: result.message ?? "unknownError".tr(),
+                uploadImageLoading: LoadingStatus.error,
+                makeTicketLoading: LoadingStatus.error,
+                imageErrMsg: "이미지 업로드에 실패했습니다.");
+            return;
+          }
+      }
+
+      // upload image
+      final imageUploadResult = await _uploadImageToS3UseCase(
+        uploadUrl: urlData.uploadUrl,
+        image: state.image!,
+      );
+      late final String imageUrl;
+
+      switch (imageUploadResult) {
+        case SuccessUseCaseResult<void>():
+          imageUrl = urlData.imageUrl;
+          if (mounted) {
+            state = state.copyWith(
+              uploadImageLoading: LoadingStatus.success,
             );
           }
-        }
+        case FailureUseCaseResult<void>():
+          if (mounted) {
+            state = state.copyWith(
+              uploadImageLoading: LoadingStatus.error,
+              makeTicketLoading: LoadingStatus.error,
+              imageErrMsg: "이미지 업로드에 실패했습니다.",
+            );
+            return;
+          }
+      }
+
+      // make ticket
+      final makeTicketResult = await _createTicketUseCase(
+        image: imageUrl,
+        title: state.title,
+        datetime: state.dateTime,
+        location: state.location,
+        fields: state.fields,
+        foregroundColor: state.foregroundColor.toString(),
+        backgroundColor: state.backgroundColor.toString(),
+      );
+      switch (makeTicketResult) {
+        case SuccessUseCaseResult<String>():
+          if (mounted) {
+            state = state.copyWith(
+              makeTicketLoading: LoadingStatus.success,
+            );
+          }
+        case FailureUseCaseResult<String>():
+          if (mounted) {
+            state = state.copyWith(
+              makeTicketLoading: LoadingStatus.error,
+              saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
+            );
+            debugPrint("실패..${state.saveErrMsg}");
+          } else {
+            if (mounted) {
+              state = state.copyWith(
+                makeTicketLoading: LoadingStatus.error,
+                saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
+              );
+              debugPrint("실패..${state.saveErrMsg}");
+            }
+          }
+      }
+    } catch (e) {
+      if (mounted) {
+        state = state.copyWith(
+          makeTicketLoading: LoadingStatus.error,
+          saveErrMsg: "unknownError".tr(),
+        );
+      }
     }
   }
 }

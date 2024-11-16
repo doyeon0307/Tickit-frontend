@@ -30,7 +30,7 @@ class GetTicketDetailUseCase {
           ),
       FailureRepositoryResult<TicketEntity>() =>
           FailureUseCaseResult(
-            message: repositoryResult.messages?.first ?? '',
+            message: repositoryResult.messages?.first ?? "",
             statusCode: repositoryResult.statusCode,
           )
     };

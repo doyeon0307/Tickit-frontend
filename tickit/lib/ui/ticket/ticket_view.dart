@@ -29,8 +29,9 @@ class _TicketViewState extends ConsumerState<TicketView> {
         ref.watch(ticketViewModelProvider.notifier);
     final TicketState state = ref.watch(ticketViewModelProvider);
 
-    return SafeArea(
-      child: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: state.backgroundColor,
+      body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         child: Column(
           children: [
@@ -83,8 +84,9 @@ class _TicketViewState extends ConsumerState<TicketView> {
                             viewModel.onChangedTitle(newTitle: value),
                         fontSize: 20.0,
                         hintText: "제목을 입력하세요",
-                        keyboardType: TextInputType.multiline,
+                        keyboardType: TextInputType.text,
                         textAlign: TextAlign.center,
+                        color: state.foregroundColor,
                       ),
                     ),
                   ),
@@ -121,6 +123,7 @@ class _TicketViewState extends ConsumerState<TicketView> {
                                     .onChangedLocation(newLocation: value),
                                 fontSize: 18.0,
                                 hintText: "장소를 입력하세요",
+                                color: state.foregroundColor,
                               ),
                             ),
                           ),
@@ -141,26 +144,29 @@ class _TicketViewState extends ConsumerState<TicketView> {
                                 context: context,
                                 builder: (context) {
                                   return CustomDatePickerDialog(
-                                    onDateChanged: (value) => viewModel.onChangedDate(newDate: value),
-                                    onPressedAmButton: () => viewModel.onTapAmButton(),
-                                    onChangedHour: (value) => viewModel.onChangedHour(newHour: value),
-                                    onChangedMinute: (value) => viewModel.onChangedMinute(newMinute: value),
-                                    onPressedCheckButton: () => viewModel.onPressedDateTimeCheck(),
+                                    onDateChanged: (value) =>
+                                        viewModel.onChangedDate(newDate: value),
+                                    onPressedAmButton: () =>
+                                        viewModel.onTapAmButton(),
+                                    onChangedHour: (value) =>
+                                        viewModel.onChangedHour(newHour: value),
+                                    onChangedMinute: (value) => viewModel
+                                        .onChangedMinute(newMinute: value),
+                                    onPressedCheckButton: () =>
+                                        viewModel.onPressedDateTimeCheck(),
                                   );
                                 },
                               );
                             },
                             style: TextButton.styleFrom(
                               textStyle: ticketStyle.copyWith(
-                                fontSize: Text(state.dateTime) == "날짜를 선택하세요"
-                                    ? 16.0
-                                    : 18.0,
+                                fontSize:
+                                    state.dateTime == "날짜를 선택하세요" ? 16.0 : 18.0,
                               ),
                               padding: const EdgeInsets.all(0.0),
-                              foregroundColor:
-                                  Text(state.dateTime) == "날짜를 선택하세요"
-                                      ? Theme.of(context).hintColor
-                                      : AppColors.textColor,
+                              foregroundColor: state.dateTime == "날짜를 선택하세요"
+                                  ? Theme.of(context).hintColor
+                                  : state.foregroundColor,
                             ),
                             child: Text(state.dateTime),
                           ),
@@ -333,7 +339,7 @@ class _TicketViewState extends ConsumerState<TicketView> {
                     ],
                   ),
                   const SizedBox(
-                    height: 16.0,
+                    height: 100.0,
                   ),
                 ],
               ),

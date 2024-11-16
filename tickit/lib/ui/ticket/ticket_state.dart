@@ -10,7 +10,8 @@ part 'ticket_state.freezed.dart';
 class TicketState with _$TicketState {
   factory TicketState({
     @Default(LoadingStatus.none) LoadingStatus initLoading,
-    @Default(LoadingStatus.none) LoadingStatus makingLoading,
+    @Default(LoadingStatus.none) LoadingStatus uploadImageLoading,
+    @Default(LoadingStatus.none) LoadingStatus makeTicketLoading,
     @Default(null) XFile? image,
     @Default("") String title,
     @Default("") String location,

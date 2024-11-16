@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tickit/config/key.dart';
@@ -32,6 +33,7 @@ class AppService extends StateNotifier<AppState> {
       if (accessToken != null && refreshToken != null) {
         state = state.copyWith(isLoggedIn: true);
       }
+      debugPrint("accessToken: $accessToken");
     } catch (e) {
       await logout();
     }

@@ -12,27 +12,25 @@ class CustomInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    super.onRequest(options, handler);
     debugPrint("[REQ] ${options.uri}");
-    debugPrint("\tbody: ${options.data}");
+    debugPrint("\t\tbody: ${options.data}");
+    debugPrint("\t\theader: ${options.headers}");
 
-    if (options.headers['accessToken'] == 'true') {
+    if (options.headers.containsKey('accessToken')) {
       options.headers.remove('accessToken');
 
       final token = await storage.read(key: ACCESS_TOKEN_KEY);
-      options.headers.addAll({
-        'Authorization': 'Bearer $token',
-      });
+      options.headers['Authorization'] = 'Bearer $token';
     }
 
-    if (options.headers['refreshToken'] == 'true') {
+    if (options.headers.containsKey('refreshToken')) {
       options.headers.remove('refreshToken');
 
       final token = await storage.read(key: REFRESH_TOKEN_KEY);
-      options.headers.addAll({
-        'authorization': 'Bearer $token',
-      });
+      options.headers['Authorization'] = 'Bearer $token';
     }
+
+    handler.next(options);
   }
 
   @override
