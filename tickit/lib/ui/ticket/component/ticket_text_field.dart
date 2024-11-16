@@ -9,6 +9,7 @@ class TicketTextField extends StatelessWidget {
   final TextAlign textAlign;
   Color? color;
   Function(String)? onChanged;
+  TextEditingController? controller;
 
   TicketTextField({
     super.key,
@@ -18,11 +19,13 @@ class TicketTextField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.onChanged,
     this.color,
+    this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       maxLines: null,
       keyboardType: keyboardType,
       style: ticketStyle.copyWith(

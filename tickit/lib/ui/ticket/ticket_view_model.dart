@@ -24,6 +24,9 @@ class TicketViewModel extends StateNotifier<TicketState> {
   final GetPresignedUrlUseCase _getPresignedUrlUseCase;
   final UploadImageToS3UseCase _uploadImageToS3UseCase;
 
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
+
   TicketViewModel({
     required CreateTicketUseCase createTicketUseCase,
     required GetPresignedUrlUseCase getPresignedUrlUseCase,
@@ -32,6 +35,13 @@ class TicketViewModel extends StateNotifier<TicketState> {
         _getPresignedUrlUseCase = getPresignedUrlUseCase,
         _uploadImageToS3UseCase = uploadImageToS3UseCase,
         super(TicketState());
+
+  void initState() {
+    state = TicketState();
+    titleController.clear();
+    locationController.clear();
+    debugPrint("티켓 UI 초기화 완료");
+  }
 
   void onTapImageBox({
     required XFile? newImage,
@@ -102,11 +112,17 @@ class TicketViewModel extends StateNotifier<TicketState> {
   }
 
   void onPressedDateTimeCheck() {
-    final date = state.date ?? DateTime.now();
-    final dateTime =
-        "${date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
     if (mounted) {
-      state = state.copyWith(dateTime: dateTime);
+      state = state.copyWith(
+        date: state.date ?? DateTime.now(),
+      );
+    }
+    final dateTime =
+        "${state.date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
+    if (mounted) {
+      state = state.copyWith(
+        dateTime: dateTime,
+      );
       debugPrint("dateTime: ${state.dateTime}");
     }
   }
@@ -212,15 +228,15 @@ class TicketViewModel extends StateNotifier<TicketState> {
               makeTicketLoading: LoadingStatus.error,
               saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
             );
-            debugPrint("실패..${state.saveErrMsg}");
+            return;
           } else {
             if (mounted) {
               state = state.copyWith(
                 makeTicketLoading: LoadingStatus.error,
                 saveErrMsg: makeTicketResult.message ?? "unknownError".tr(),
               );
-              debugPrint("실패..${state.saveErrMsg}");
             }
+            return;
           }
       }
     } catch (e) {
@@ -229,8 +245,11 @@ class TicketViewModel extends StateNotifier<TicketState> {
           makeTicketLoading: LoadingStatus.error,
           saveErrMsg: "unknownError".tr(),
         );
+        return;
       }
     }
+
+    initState();
   }
 }
 
