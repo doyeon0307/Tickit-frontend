@@ -4,22 +4,26 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/theme/ticket_typographies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
-import 'package:tickit/ui/ticket/ticket_view_model.dart';
+import 'package:tickit/ui/ticket/base_ticket_view_model.dart';
+import 'package:tickit/ui/ticket/ticket_mode.dart';
+import 'package:tickit/ui/ticket/ticket_view_model_provider.dart';
 
 class CustomColorPickerDialog extends ConsumerWidget {
+  final TicketMode mode;
   final bool isBackground;
   final String title;
 
   const CustomColorPickerDialog({
     super.key,
+    required this.mode,
     required this.isBackground,
     required this.title,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TicketViewModel viewModel =
-    ref.watch(ticketViewModelProvider.notifier);
+    final BaseTicketViewModel viewModel =
+    ref.watch(ticketViewModelProvider(mode).notifier);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(

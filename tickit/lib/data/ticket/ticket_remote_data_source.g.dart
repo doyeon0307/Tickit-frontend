@@ -190,7 +190,7 @@ class _TicketRemoteDataSource implements TicketRemoteDataSource {
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApiResponse<String>>(Options(
-      method: 'GET',
+      method: 'DELETE',
       headers: _headers,
       extra: _extra,
     )

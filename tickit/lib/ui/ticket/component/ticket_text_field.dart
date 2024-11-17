@@ -10,6 +10,7 @@ class TicketTextField extends StatelessWidget {
   Color? color;
   Function(String)? onChanged;
   TextEditingController? controller;
+  bool readOnly;
 
   TicketTextField({
     super.key,
@@ -20,11 +21,13 @@ class TicketTextField extends StatelessWidget {
     this.onChanged,
     this.color,
     this.controller,
+    this.readOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: readOnly,
       controller: controller,
       maxLines: null,
       keyboardType: keyboardType,
@@ -41,11 +44,13 @@ class TicketTextField extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
         hintText: hintText,
         border: InputBorder.none,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.textColor,
-          ),
-        ),
+        focusedBorder: readOnly
+            ? InputBorder.none
+            : UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.textColor,
+                ),
+              ),
       ),
     );
   }

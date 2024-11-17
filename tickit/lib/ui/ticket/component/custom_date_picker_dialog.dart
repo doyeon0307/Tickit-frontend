@@ -5,8 +5,10 @@ import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/am_number_picker.dart';
 import 'package:tickit/ui/ticket/component/am_text_button.dart';
+import 'package:tickit/ui/ticket/ticket_mode.dart';
 
 class CustomDatePickerDialog extends ConsumerWidget {
+  final TicketMode mode;
   final Function(DateTime) onDateChanged;
   final VoidCallback onPressedAmButton;
   final Function(int) onChangedHour;
@@ -15,6 +17,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
 
   const CustomDatePickerDialog({
     super.key,
+    required this.mode,
     required this.onDateChanged,
     required this.onPressedAmButton,
     required this.onChangedHour,
@@ -72,6 +75,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                       children: [
                         Expanded(
                           child: AmTextButton(
+                            mode: mode,
                             isAmButton: true,
                             label: "오전",
                             onPressed: onPressedAmButton,
@@ -79,6 +83,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                         ),
                         Expanded(
                           child: AmTextButton(
+                            mode: mode,
                             isAmButton: false,
                             label: "오후",
                             onPressed: onPressedAmButton,
@@ -91,6 +96,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                     width: 8.0,
                   ),
                   TimeNumberPicker(
+                    mode: mode,
                     isHour: true,
                     onChanged: onChangedHour,
                   ),
@@ -101,6 +107,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                     ),
                   ),
                   TimeNumberPicker(
+                    mode: mode,
                     isHour: false,
                     onChanged: onChangedMinute,
                   ),

@@ -5,10 +5,11 @@ import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/custom_network_image.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
-import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/home/home_state.dart';
 import 'package:tickit/ui/home/home_view_model.dart';
+import 'package:tickit/ui/ticket/ticket_mode.dart';
+import 'package:tickit/ui/ticket/ticket_view.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 
 class HomeView extends HookConsumerWidget {
@@ -36,8 +37,6 @@ class HomeView extends HookConsumerWidget {
       return null;
     }, [state.errorMsg]);
 
-    Future<void> tmp() async {}
-
     return DefaultLayout(
       child: Stack(
         children: [
@@ -58,6 +57,20 @@ class HomeView extends HookConsumerWidget {
                     ),
                   )
                   .toList(),
+              onSelectedItem: (index) async {
+                final deleted = await Navigator.of(context).push<bool>(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        TicketView(
+                          mode: TicketMode.detail,
+                          id: state.previews[index].id,
+                        ),
+                  ),
+                );
+                if (deleted == true) {
+                  await viewModel.initView();
+                }
+              }
             ),
           ),
           if (state.initLoading == LoadingStatus.loading)

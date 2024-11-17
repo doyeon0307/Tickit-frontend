@@ -8,12 +8,12 @@ import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
 import 'package:tickit/ui/ticket/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
-class TicketViewModel extends BaseTicketViewModel {
+class CreateTicketViewModel extends BaseTicketViewModel {
   final CreateTicketUseCase _createTicketUseCase;
   final GetPresignedUrlUseCase _getPresignedUrlUseCase;
   final UploadImageToS3UseCase _uploadImageToS3UseCase;
 
-  TicketViewModel({
+  CreateTicketViewModel({
     required CreateTicketUseCase createTicketUseCase,
     required GetPresignedUrlUseCase getPresignedUrlUseCase,
     required UploadImageToS3UseCase uploadImageToS3UseCase,
@@ -136,6 +136,15 @@ class TicketViewModel extends BaseTicketViewModel {
     initState();
   }
 
+  @override
+  Future<void> initDetailView({required String id}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> onTapDelete({required String id}) {
+    throw UnimplementedError();
+  }
   @override
   void dispose() {
     titleController.dispose();

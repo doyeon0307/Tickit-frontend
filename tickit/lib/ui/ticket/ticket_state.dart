@@ -22,9 +22,11 @@ class TicketState with _$TicketState {
     @Default(Colors.white) Color backgroundColor,
     @Default(Color(0xff141414)) Color foregroundColor,
     @Default([]) List<Field> fields,
+    @Default("") String networkImage,
     @Default(10) int maxCount,
     @Default(0) int fieldCount,
     @Default("") String errorMsg,
     @Default("") String successMsg,
+    @Default(false) bool isDeleted,
   }) = _TicketState;
 }

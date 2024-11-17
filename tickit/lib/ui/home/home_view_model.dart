@@ -48,6 +48,4 @@ class HomeViewModel extends StateNotifier<HomeState> {
         }
     }
   }
-
-  void onTapTicket() {}
 }

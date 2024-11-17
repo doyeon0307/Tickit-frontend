@@ -29,10 +29,12 @@ mixin _$TicketState {
   Color get backgroundColor => throw _privateConstructorUsedError;
   Color get foregroundColor => throw _privateConstructorUsedError;
   List<Field> get fields => throw _privateConstructorUsedError;
+  String get networkImage => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   int get fieldCount => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
   String get successMsg => throw _privateConstructorUsedError;
+  bool get isDeleted => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TicketStateCopyWith<TicketState> get copyWith =>
@@ -59,10 +61,12 @@ abstract class $TicketStateCopyWith<$Res> {
       Color backgroundColor,
       Color foregroundColor,
       List<Field> fields,
+      String networkImage,
       int maxCount,
       int fieldCount,
       String errorMsg,
-      String successMsg});
+      String successMsg,
+      bool isDeleted});
 }
 
 /// @nodoc
@@ -91,10 +95,12 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
     Object? backgroundColor = null,
     Object? foregroundColor = null,
     Object? fields = null,
+    Object? networkImage = null,
     Object? maxCount = null,
     Object? fieldCount = null,
     Object? errorMsg = null,
     Object? successMsg = null,
+    Object? isDeleted = null,
   }) {
     return _then(_value.copyWith(
       initLoading: null == initLoading
@@ -149,6 +155,10 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.fields
           : fields // ignore: cast_nullable_to_non_nullable
               as List<Field>,
+      networkImage: null == networkImage
+          ? _value.networkImage
+          : networkImage // ignore: cast_nullable_to_non_nullable
+              as String,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -165,6 +175,10 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.successMsg
           : successMsg // ignore: cast_nullable_to_non_nullable
               as String,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -191,10 +205,12 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       Color backgroundColor,
       Color foregroundColor,
       List<Field> fields,
+      String networkImage,
       int maxCount,
       int fieldCount,
       String errorMsg,
-      String successMsg});
+      String successMsg,
+      bool isDeleted});
 }
 
 /// @nodoc
@@ -221,10 +237,12 @@ class __$$TicketStateImplCopyWithImpl<$Res>
     Object? backgroundColor = null,
     Object? foregroundColor = null,
     Object? fields = null,
+    Object? networkImage = null,
     Object? maxCount = null,
     Object? fieldCount = null,
     Object? errorMsg = null,
     Object? successMsg = null,
+    Object? isDeleted = null,
   }) {
     return _then(_$TicketStateImpl(
       initLoading: null == initLoading
@@ -279,6 +297,10 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value._fields
           : fields // ignore: cast_nullable_to_non_nullable
               as List<Field>,
+      networkImage: null == networkImage
+          ? _value.networkImage
+          : networkImage // ignore: cast_nullable_to_non_nullable
+              as String,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -295,6 +317,10 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value.successMsg
           : successMsg // ignore: cast_nullable_to_non_nullable
               as String,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -316,10 +342,12 @@ class _$TicketStateImpl implements _TicketState {
       this.backgroundColor = Colors.white,
       this.foregroundColor = const Color(0xff141414),
       final List<Field> fields = const [],
+      this.networkImage = "",
       this.maxCount = 10,
       this.fieldCount = 0,
       this.errorMsg = "",
-      this.successMsg = ""})
+      this.successMsg = "",
+      this.isDeleted = false})
       : _fields = fields;
 
   @override
@@ -369,6 +397,9 @@ class _$TicketStateImpl implements _TicketState {
 
   @override
   @JsonKey()
+  final String networkImage;
+  @override
+  @JsonKey()
   final int maxCount;
   @override
   @JsonKey()
@@ -379,10 +410,13 @@ class _$TicketStateImpl implements _TicketState {
   @override
   @JsonKey()
   final String successMsg;
+  @override
+  @JsonKey()
+  final bool isDeleted;
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg)';
+    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
   }
 
   @override
@@ -409,6 +443,8 @@ class _$TicketStateImpl implements _TicketState {
             (identical(other.foregroundColor, foregroundColor) ||
                 other.foregroundColor == foregroundColor) &&
             const DeepCollectionEquality().equals(other._fields, _fields) &&
+            (identical(other.networkImage, networkImage) ||
+                other.networkImage == networkImage) &&
             (identical(other.maxCount, maxCount) ||
                 other.maxCount == maxCount) &&
             (identical(other.fieldCount, fieldCount) ||
@@ -416,29 +452,34 @@ class _$TicketStateImpl implements _TicketState {
             (identical(other.errorMsg, errorMsg) ||
                 other.errorMsg == errorMsg) &&
             (identical(other.successMsg, successMsg) ||
-                other.successMsg == successMsg));
+                other.successMsg == successMsg) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      initLoading,
-      makeTicketLoading,
-      image,
-      title,
-      location,
-      dateTime,
-      date,
-      isAm,
-      hour,
-      minute,
-      backgroundColor,
-      foregroundColor,
-      const DeepCollectionEquality().hash(_fields),
-      maxCount,
-      fieldCount,
-      errorMsg,
-      successMsg);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        initLoading,
+        makeTicketLoading,
+        image,
+        title,
+        location,
+        dateTime,
+        date,
+        isAm,
+        hour,
+        minute,
+        backgroundColor,
+        foregroundColor,
+        const DeepCollectionEquality().hash(_fields),
+        networkImage,
+        maxCount,
+        fieldCount,
+        errorMsg,
+        successMsg,
+        isDeleted
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -462,10 +503,12 @@ abstract class _TicketState implements TicketState {
       final Color backgroundColor,
       final Color foregroundColor,
       final List<Field> fields,
+      final String networkImage,
       final int maxCount,
       final int fieldCount,
       final String errorMsg,
-      final String successMsg}) = _$TicketStateImpl;
+      final String successMsg,
+      final bool isDeleted}) = _$TicketStateImpl;
 
   @override
   LoadingStatus get initLoading;
@@ -494,6 +537,8 @@ abstract class _TicketState implements TicketState {
   @override
   List<Field> get fields;
   @override
+  String get networkImage;
+  @override
   int get maxCount;
   @override
   int get fieldCount;
@@ -501,6 +546,8 @@ abstract class _TicketState implements TicketState {
   String get errorMsg;
   @override
   String get successMsg;
+  @override
+  bool get isDeleted;
   @override
   @JsonKey(ignore: true)
   _$$TicketStateImplCopyWith<_$TicketStateImpl> get copyWith =>

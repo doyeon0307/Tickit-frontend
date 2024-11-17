@@ -43,7 +43,7 @@ abstract class TicketRemoteDataSource {
     @Body() required TicketRequestBody ticketDTO,
   });
 
-  @GET("/{id}")
+  @DELETE("/{id}")
   @Headers({"accessToken": "true"})
   Future<ApiResponse<String>> deleteTicket({
     @Path() required String id,
