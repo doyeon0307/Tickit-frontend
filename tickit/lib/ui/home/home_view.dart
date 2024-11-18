@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/custom_network_image.dart';
@@ -58,7 +59,8 @@ class HomeView extends HookConsumerWidget {
                   )
                   .toList(),
               onSelectedItem: (index) async {
-                final deleted = await Navigator.of(context).push<bool>(
+                final deleted = await pushWithoutNavBar<bool>(
+                  context,
                   MaterialPageRoute(
                     builder: (context) =>
                         TicketView(

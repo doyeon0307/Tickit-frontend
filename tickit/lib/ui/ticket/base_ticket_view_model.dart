@@ -15,9 +15,8 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
 
   // detail
   Future<void> initDetailView({required String id});
-  Future<void> onTapDelete({
-    required String id
-  });
+
+  Future<void> onTapDelete({required String id});
 
   // base
   final TextEditingController titleController = TextEditingController();

@@ -76,6 +76,17 @@ class TicketView extends HookConsumerWidget {
 
     return Stack(
       children: [
+        if (isDetail)
+          Positioned(
+            top: 8.0,
+            left: 8.0,
+            child: IconButton(
+              color: Colors.white,
+              onPressed: () => Navigator.of(context).pop(false),
+              icon: const Icon(Icons.arrow_back_ios),
+            ),
+          ),
+        //TODO Scaffold의 body를 Stack으로
         Scaffold(
           backgroundColor: state.backgroundColor,
           body: SingleChildScrollView(
@@ -94,7 +105,7 @@ class TicketView extends HookConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          _buildLoacation(context, isDetail, viewModel, state),
+                          _buildLocation(context, isDetail, viewModel, state),
                           const SizedBox(
                             width: 8.0,
                           ),
@@ -402,7 +413,7 @@ class TicketView extends HookConsumerWidget {
     );
   }
 
-  Row _buildLoacation(BuildContext context, bool isDetail,
+  Row _buildLocation(BuildContext context, bool isDetail,
       BaseTicketViewModel viewModel, TicketState state) {
     return Row(
       children: [
