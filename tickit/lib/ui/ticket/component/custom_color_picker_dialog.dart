@@ -31,7 +31,9 @@ class CustomColorPickerDialog extends ConsumerWidget {
           16.0,
         ),
       ),
-      titleTextStyle: Typo.gangwonR24,
+      titleTextStyle: Typo.gangwonR24.copyWith(
+        color: AppColors.textColor,
+      ),
       insetPadding: const EdgeInsets.symmetric(
         horizontal: 8.0,
         vertical: 16.0,
@@ -47,7 +49,9 @@ class CustomColorPickerDialog extends ConsumerWidget {
       actions: [
         CustomTextButton(
           label: "선택",
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],

@@ -21,7 +21,9 @@ class SaveButtonsWidget extends StatelessWidget {
         CustomTextButton(
           label: "취소하기",
           onPressed: onPressedCancel,
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
           backgroundColor: AppColors.secondaryColor,
           foregroundColor: AppColors.backgroundColor,
           width: 100.0,
@@ -30,7 +32,9 @@ class SaveButtonsWidget extends StatelessWidget {
         CustomTextButton(
           label: "저장하기",
           onPressed: onPressedSave,
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
           backgroundColor: AppColors.primaryColor,
           width: 150.0,
           height: 28.0,

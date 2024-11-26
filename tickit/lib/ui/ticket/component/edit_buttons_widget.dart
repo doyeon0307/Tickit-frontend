@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/const/app_colors.dart';
 
 class EditButtonsWidget extends StatelessWidget {
   final VoidCallback onTapDelete;
@@ -22,7 +23,9 @@ class EditButtonsWidget extends StatelessWidget {
           onPressed: () => onTapDelete,
           child: Text(
             "삭제하기",
-            style: Typo.gangwonR16,
+            style: Typo.gangwonR16.copyWith(
+              color: AppColors.textColor,
+            ),
           ),
         ),
         TextButton(
@@ -30,7 +33,9 @@ class EditButtonsWidget extends StatelessWidget {
           onPressed: onTapSaveAsImage,
           child: Text(
             "사진으로 저장하기",
-            style: Typo.gangwonR16,
+            style: Typo.gangwonR16.copyWith(
+              color: AppColors.textColor,
+            ),
           ),
         ),
         TextButton(
@@ -38,7 +43,9 @@ class EditButtonsWidget extends StatelessWidget {
           onPressed: onTapEdit,
           child: Text(
             "수정하기",
-            style: Typo.gangwonR16,
+            style: Typo.gangwonR16.copyWith(
+              color: AppColors.textColor,
+            ),
           ),
         )
       ],

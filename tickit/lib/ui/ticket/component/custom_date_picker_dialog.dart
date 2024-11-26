@@ -43,7 +43,9 @@ class CustomDatePickerDialog extends ConsumerWidget {
           children: [
             Text(
               "날짜를 선택해주세요",
-              style: Typo.gangwonR24,
+              style: Typo.gangwonR24.copyWith(
+                color: AppColors.textColor,
+              ),
             ),
             const SizedBox(
               height: 8.0,
@@ -100,7 +102,9 @@ class CustomDatePickerDialog extends ConsumerWidget {
                   ),
                   Text(
                     ":",
-                    style: Typo.gangwonR28,
+                    style: Typo.gangwonR28.copyWith(
+                      color: AppColors.textColor,
+                    ),
                   ),
                   TimeNumberPicker(
                     mode: mode,
@@ -112,7 +116,9 @@ class CustomDatePickerDialog extends ConsumerWidget {
                   ),
                   CustomTextButton(
                     label: "선택",
-                    textStyle: Typo.gangwonR16,
+                    textStyle: Typo.gangwonR16.copyWith(
+                      color: AppColors.textColor,
+                    ),
                     onPressed: () {
                       onPressedCheckButton();
                       Navigator.of(context).pop();

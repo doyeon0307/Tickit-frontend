@@ -33,7 +33,9 @@ class AmTextButton extends ConsumerWidget {
       onPressed: onPressed,
       child: Text(
         label,
-        style: Typo.gangwonR16,
+        style: Typo.gangwonR16.copyWith(
+          color: AppColors.textColor,
+        ),
       ),
     );
   }

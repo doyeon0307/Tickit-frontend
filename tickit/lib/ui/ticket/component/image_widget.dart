@@ -63,7 +63,9 @@ Widget _buildImageContent({
   if (image == null && (isCreate || isEdit)) {
     return Text(
       "클릭해서 사진 추가하기",
-      style: Typo.gangwonR16,
+      style: Typo.gangwonR16.copyWith(
+        color: AppColors.textColor,
+      ),
     );
   }
 

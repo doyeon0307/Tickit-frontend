@@ -18,7 +18,7 @@ class TicketFieldRowWidget extends StatelessWidget {
           constraints: BoxConstraints(
             maxWidth: MediaQuery.of(context).size.width / 3,
           ),
-          child: IntrinsicWidth(
+          child: const IntrinsicWidth(
             child: TicketTextField(
               hintText: "소제목",
             ),
@@ -28,10 +28,12 @@ class TicketFieldRowWidget extends StatelessWidget {
           padding: const EdgeInsets.only(top: 14.0),
           child: Text(
             " :  ",
-            style: Typo.gangwonR16,
+            style: Typo.gangwonR16.copyWith(
+              color: AppColors.textColor,
+            ),
           ),
         ),
-        Expanded(
+        const Expanded(
           child: TicketTextField(
             hintText: "내용을 입력하세요",
           ),

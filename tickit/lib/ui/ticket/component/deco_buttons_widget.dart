@@ -21,7 +21,9 @@ class DecoButtonsWidget extends StatelessWidget {
         CustomTextButton(
           label: "필드 추가",
           onPressed: () {},
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
         ),
         CustomTextButton(
           label: "배경색",
@@ -33,7 +35,9 @@ class DecoButtonsWidget extends StatelessWidget {
               title: "배경색을 선택하세요",
             ),
           ),
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
         ),
         CustomTextButton(
           label: "글자색",
@@ -45,7 +49,9 @@ class DecoButtonsWidget extends StatelessWidget {
               title: "글자색을 선택하세요",
             ),
           ),
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
         ),
         CustomTextButton(
           label: "일정 불러오기",
@@ -74,7 +80,9 @@ class DecoButtonsWidget extends StatelessWidget {
                             children: [
                               Text(
                                 "티켓으로 만들 일정을 선택하세요",
-                                style: Typo.gangwonR20,
+                                style: Typo.gangwonR20.copyWith(
+                                  color: AppColors.textColor,
+                                ),
                               ),
                               const Divider(
                                 color: Colors.grey,
@@ -85,14 +93,18 @@ class DecoButtonsWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       "2024\n0829",
-                                      style: Typo.gangwonR16,
+                                      style: Typo.gangwonR16.copyWith(
+                                        color: AppColors.textColor,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 16.0,
                                     ),
                                     Text(
                                       "하데스타운",
-                                      style: Typo.gangwonR16,
+                                      style: Typo.gangwonR16.copyWith(
+                                        color: AppColors.textColor,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -107,14 +119,18 @@ class DecoButtonsWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       "2024\n0829",
-                                      style: Typo.gangwonR16,
+                                      style: Typo.gangwonR16.copyWith(
+                                        color: AppColors.textColor,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 16.0,
                                     ),
                                     Text(
                                       "하데스타운",
-                                      style: Typo.gangwonR16,
+                                      style: Typo.gangwonR16.copyWith(
+                                        color: AppColors.textColor,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -130,7 +146,9 @@ class DecoButtonsWidget extends StatelessWidget {
                     CustomTextButton(
                       label: "선택",
                       onPressed: () {},
-                      textStyle: Typo.gangwonR16,
+                      textStyle: Typo.gangwonR16.copyWith(
+                        color: AppColors.textColor,
+                      ),
                     ),
                     const SizedBox(
                       height: 16.0,
@@ -140,7 +158,9 @@ class DecoButtonsWidget extends StatelessWidget {
               ),
             ),
           ),
-          textStyle: Typo.gangwonR16,
+          textStyle: Typo.gangwonR16.copyWith(
+            color: AppColors.textColor,
+          ),
         ),
       ],
     );

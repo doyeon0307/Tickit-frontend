@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/ticket/component/custom_date_picker_dialog.dart';
 import 'package:tickit/ui/ticket/const/ticket_mode.dart';
@@ -52,7 +53,9 @@ class CalendarWidget extends StatelessWidget {
             );
           },
           style: TextButton.styleFrom(
-            textStyle: Typo.gangwonR18,
+            textStyle: Typo.gangwonR18.copyWith(
+              color: AppColors.textColor,
+            ),
             padding: const EdgeInsets.all(0.0),
             foregroundColor:
                 dateTime == "날짜를 선택하세요" ? Theme.of(context).hintColor : color,
