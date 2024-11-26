@@ -12,6 +12,7 @@ import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/component/success_snack_bar.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
+import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/ticket/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
 import 'package:tickit/ui/ticket/component/custom_date_picker_dialog.dart';
@@ -182,7 +183,7 @@ class TicketView extends HookConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SvgPicture.asset(
-            "assets/deco/left_title_deco.svg",
+            Assets.leftTitleDeco,
             width: MediaQuery.of(context).size.width / 4,
           ),
           Expanded(
@@ -203,7 +204,7 @@ class TicketView extends HookConsumerWidget {
             ),
           ),
           SvgPicture.asset(
-            "assets/deco/right_title_deco.svg",
+            Assets.rightTitleDeco,
             width: MediaQuery.of(context).size.width / 4,
           ),
         ],
@@ -374,7 +375,7 @@ class TicketView extends HookConsumerWidget {
       BuildContext context, BaseTicketViewModel viewModel, TicketState state) {
     return Row(
       children: [
-        SvgPicture.asset("assets/icon/mini_calendar.svg"),
+        SvgPicture.asset(Assets.miniCalendar),
         const SizedBox(
           width: 4.0,
         ),
@@ -417,7 +418,7 @@ class TicketView extends HookConsumerWidget {
       BaseTicketViewModel viewModel, TicketState state) {
     return Row(
       children: [
-        SvgPicture.asset("assets/icon/location.svg"),
+        SvgPicture.asset(Assets.location),
         const SizedBox(
           width: 4.0,
         ),
@@ -539,7 +540,7 @@ class TicketFieldRow extends StatelessWidget {
             left: 4.0,
           ),
           child: SvgPicture.asset(
-            "assets/icon/x-circle.svg",
+            Assets.xCircle,
             color: AppColors.textColor.withOpacity(0.8),
           ),
         )
