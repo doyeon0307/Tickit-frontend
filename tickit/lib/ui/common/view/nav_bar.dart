@@ -5,7 +5,7 @@ import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/home/home_view.dart';
 import 'package:tickit/ui/login/login/login_view.dart';
 import 'package:tickit/ui/setting/setting_view.dart';
-import 'package:tickit/ui/ticket/ticket_mode.dart';
+import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_view.dart';
 
 class NavBar extends StatefulWidget {
@@ -41,11 +41,17 @@ class _NavBarState extends State<NavBar> {
     return ItemConfig(
       icon: SvgPicture.asset(
         iconPath,
-        color: Colors.black.withOpacity(0.8),
+        colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.8),
+          BlendMode.srcIn,
+        ),
       ),
       inactiveIcon: SvgPicture.asset(
         iconPath,
-        color: Colors.black.withOpacity(0.6),
+        colorFilter: ColorFilter.mode(
+          Colors.black.withOpacity(0.6),
+          BlendMode.srcIn,
+        ),
       ),
     );
   }

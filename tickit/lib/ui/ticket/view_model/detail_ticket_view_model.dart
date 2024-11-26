@@ -4,7 +4,7 @@ import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/ticket/entity/ticket_entity.dart';
 import 'package:tickit/domain/ticket/delete_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_detail_use_case.dart';
-import 'package:tickit/ui/ticket/base_ticket_view_model.dart';
+import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 
 class DetailTicketViewModel extends BaseTicketViewModel {
   final GetTicketDetailUseCase _getTicketDetailUseCase;

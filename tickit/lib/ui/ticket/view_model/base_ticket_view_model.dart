@@ -22,9 +22,7 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
 
-  void onTapImageBox({
-    required XFile? newImage,
-  }) {
+  void onTapImageBox(XFile? newImage) {
     if (mounted) {
       if (newImage != null) {
         state = state.copyWith(image: newImage);

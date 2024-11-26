@@ -9,7 +9,7 @@ import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/home/home_state.dart';
 import 'package:tickit/ui/home/home_view_model.dart';
-import 'package:tickit/ui/ticket/ticket_mode.dart';
+import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_view.dart';
 import 'package:vertical_card_pager/vertical_card_pager.dart';
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:tickit/theme/ticket_typographies.dart';
-import 'package:tickit/ui/ticket/ticket_mode.dart';
+import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
-import 'package:tickit/ui/ticket/ticket_view_model_provider.dart';
+import 'package:tickit/ui/ticket/view_model/ticket_view_model_provider.dart';
 
 class TimeNumberPicker extends ConsumerWidget {
   final TicketMode mode;

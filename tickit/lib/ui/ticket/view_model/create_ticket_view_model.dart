@@ -5,7 +5,7 @@ import 'package:tickit/domain/s3/get_presigned_url_use_case.dart';
 import 'package:tickit/domain/s3/model/s3_url_model.dart';
 import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
-import 'package:tickit/ui/ticket/base_ticket_view_model.dart';
+import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
 class CreateTicketViewModel extends BaseTicketViewModel {
@@ -20,6 +20,9 @@ class CreateTicketViewModel extends BaseTicketViewModel {
   })  : _createTicketUseCase = createTicketUseCase,
         _getPresignedUrlUseCase = getPresignedUrlUseCase,
         _uploadImageToS3UseCase = uploadImageToS3UseCase;
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController locationController = TextEditingController();
 
   @override
   void initState() {
