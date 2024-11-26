@@ -1,23 +1,43 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tickit/ui/common/const/app_colors.dart';
 
 @immutable
 class Typo {
   const Typo._();
 
-  //  예시
-  //  static const TextStyle hBold24 = TextStyle(
-  //    fontSize: 24,
-  //    fontWeight: FontWeight.w700,
-  //    height: 1.4,
-  //    leadingDistribution: TextLeadingDistribution.even,
-  //    fontFamily: 'Pretendard',
-  //  );
-
-  static TextStyle hBold40 = TextStyle(
-    color: AppColors.primaryColor,
+  static TextStyle pretendardBold40 = const TextStyle(
+    fontFamily: "Pretendard",
     fontWeight: FontWeight.w800,
     fontSize: 40.0,
+  );
+
+  static TextStyle gangwonR16 = const TextStyle(
+    fontFamily: "Gangwon",
+    fontWeight: FontWeight.w400,
+    fontSize: 16.0,
+  );
+
+  static TextStyle gangwonR18 = const TextStyle(
+    fontFamily: "Gangwon",
+    fontWeight: FontWeight.w400,
+    fontSize: 18.0,
+  );
+
+  static TextStyle gangwonR20 = const TextStyle(
+    fontFamily: "Gangwon",
+    fontWeight: FontWeight.w400,
+    fontSize: 20.0,
+  );
+
+  static TextStyle gangwonR24 = const TextStyle(
+    fontFamily: "Gangwon",
+    fontWeight: FontWeight.w400,
+    fontSize: 24.0,
+  );
+
+  static TextStyle gangwonR28 = const TextStyle(
+    fontFamily: "Gangwon",
+    fontWeight: FontWeight.w400,
+    fontSize: 28.0,
   );
 }

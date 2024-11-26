@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
@@ -31,9 +31,7 @@ class CustomColorPickerDialog extends ConsumerWidget {
           16.0,
         ),
       ),
-      titleTextStyle: ticketStyle.copyWith(
-        fontSize: 24.0,
-      ),
+      titleTextStyle: Typo.gangwonR24,
       insetPadding: const EdgeInsets.symmetric(
         horizontal: 8.0,
         vertical: 16.0,
@@ -49,7 +47,7 @@ class CustomColorPickerDialog extends ConsumerWidget {
       actions: [
         CustomTextButton(
           label: "선택",
-          textStyle: ticketStyle,
+          textStyle: Typo.gangwonR16,
           onPressed: () => Navigator.of(context).pop(),
         ),
       ],

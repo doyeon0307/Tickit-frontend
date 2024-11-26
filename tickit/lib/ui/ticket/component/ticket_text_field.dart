@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class TicketTextField extends StatelessWidget {
@@ -7,12 +7,12 @@ class TicketTextField extends StatelessWidget {
   final String hintText;
   final TextInputType keyboardType;
   final TextAlign textAlign;
-  Color? color;
-  Function(String)? onChanged;
-  TextEditingController? controller;
-  bool readOnly;
+  final Color? color;
+  final Function(String)? onChanged;
+  final TextEditingController? controller;
+  final bool readOnly;
 
-  TicketTextField({
+  const TicketTextField({
     super.key,
     this.fontSize = 16.0,
     required this.hintText,
@@ -31,7 +31,7 @@ class TicketTextField extends StatelessWidget {
       controller: controller,
       maxLines: null,
       keyboardType: keyboardType,
-      style: ticketStyle.copyWith(
+      style: Typo.gangwonR16.copyWith(
         fontSize: fontSize,
         color: color ?? AppColors.textColor,
       ),

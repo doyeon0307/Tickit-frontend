@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
@@ -33,7 +33,7 @@ class AmTextButton extends ConsumerWidget {
       onPressed: onPressed,
       child: Text(
         label,
-        style: ticketStyle,
+        style: Typo.gangwonR16,
       ),
     );
   }

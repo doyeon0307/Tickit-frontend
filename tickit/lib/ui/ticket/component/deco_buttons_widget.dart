@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
@@ -21,7 +21,7 @@ class DecoButtonsWidget extends StatelessWidget {
         CustomTextButton(
           label: "필드 추가",
           onPressed: () {},
-          textStyle: ticketStyle,
+          textStyle: Typo.gangwonR16,
         ),
         CustomTextButton(
           label: "배경색",
@@ -33,7 +33,7 @@ class DecoButtonsWidget extends StatelessWidget {
               title: "배경색을 선택하세요",
             ),
           ),
-          textStyle: ticketStyle,
+          textStyle: Typo.gangwonR16,
         ),
         CustomTextButton(
           label: "글자색",
@@ -45,7 +45,7 @@ class DecoButtonsWidget extends StatelessWidget {
               title: "글자색을 선택하세요",
             ),
           ),
-          textStyle: ticketStyle,
+          textStyle: Typo.gangwonR16,
         ),
         CustomTextButton(
           label: "일정 불러오기",
@@ -74,9 +74,7 @@ class DecoButtonsWidget extends StatelessWidget {
                             children: [
                               Text(
                                 "티켓으로 만들 일정을 선택하세요",
-                                style: ticketStyle.copyWith(
-                                  fontSize: 20.0,
-                                ),
+                                style: Typo.gangwonR20,
                               ),
                               const Divider(
                                 color: Colors.grey,
@@ -87,14 +85,14 @@ class DecoButtonsWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       "2024\n0829",
-                                      style: ticketStyle,
+                                      style: Typo.gangwonR16,
                                     ),
                                     const SizedBox(
                                       width: 16.0,
                                     ),
                                     Text(
                                       "하데스타운",
-                                      style: ticketStyle,
+                                      style: Typo.gangwonR16,
                                     ),
                                   ],
                                 ),
@@ -109,14 +107,14 @@ class DecoButtonsWidget extends StatelessWidget {
                                   children: [
                                     Text(
                                       "2024\n0829",
-                                      style: ticketStyle,
+                                      style: Typo.gangwonR16,
                                     ),
                                     const SizedBox(
                                       width: 16.0,
                                     ),
                                     Text(
                                       "하데스타운",
-                                      style: ticketStyle,
+                                      style: Typo.gangwonR16,
                                     ),
                                   ],
                                 ),
@@ -132,7 +130,7 @@ class DecoButtonsWidget extends StatelessWidget {
                     CustomTextButton(
                       label: "선택",
                       onPressed: () {},
-                      textStyle: ticketStyle,
+                      textStyle: Typo.gangwonR16,
                     ),
                     const SizedBox(
                       height: 16.0,
@@ -142,7 +140,7 @@ class DecoButtonsWidget extends StatelessWidget {
               ),
             ),
           ),
-          textStyle: ticketStyle,
+          textStyle: Typo.gangwonR16,
         ),
       ],
     );

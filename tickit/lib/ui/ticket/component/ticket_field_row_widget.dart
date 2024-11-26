@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
@@ -28,7 +28,7 @@ class TicketFieldRowWidget extends StatelessWidget {
           padding: const EdgeInsets.only(top: 14.0),
           child: Text(
             " :  ",
-            style: ticketStyle,
+            style: Typo.gangwonR16,
           ),
         ),
         Expanded(

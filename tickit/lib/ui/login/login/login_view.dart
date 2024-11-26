@@ -36,7 +36,9 @@ class LoginView extends ConsumerWidget {
                 children: [
                   Text(
                     "Tickit!",
-                    style: Typo.hBold40,
+                    style: Typo.pretendardBold40.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
                   ),
                   const SizedBox(
                     height: 8.0,

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class ImageWidget extends StatelessWidget {
@@ -63,7 +63,7 @@ Widget _buildImageContent({
   if (image == null && (isCreate || isEdit)) {
     return Text(
       "클릭해서 사진 추가하기",
-      style: ticketStyle,
+      style: Typo.gangwonR16,
     );
   }
 

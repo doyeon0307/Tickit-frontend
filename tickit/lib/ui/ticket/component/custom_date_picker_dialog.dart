@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/custom_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/am_number_picker.dart';
@@ -43,9 +43,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
           children: [
             Text(
               "날짜를 선택해주세요",
-              style: ticketStyle.copyWith(
-                fontSize: 24.0,
-              ),
+              style: Typo.gangwonR24,
             ),
             const SizedBox(
               height: 8.0,
@@ -102,9 +100,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                   ),
                   Text(
                     ":",
-                    style: ticketStyle.copyWith(
-                      fontSize: 28.0,
-                    ),
+                    style: Typo.gangwonR28,
                   ),
                   TimeNumberPicker(
                     mode: mode,
@@ -116,7 +112,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                   ),
                   CustomTextButton(
                     label: "선택",
-                    textStyle: ticketStyle,
+                    textStyle: Typo.gangwonR16,
                     onPressed: () {
                       onPressedCheckButton();
                       Navigator.of(context).pop();

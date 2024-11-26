@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tickit/theme/ticket_typographies.dart';
+import 'package:tickit/theme/typographies.dart';
 
 class EditButtonsWidget extends StatelessWidget {
   final VoidCallback onTapDelete;
@@ -18,23 +18,29 @@ class EditButtonsWidget extends StatelessWidget {
     return Wrap(
       children: [
         TextButton(
-            onPressed: () => onTapDelete,
-            child: Text(
-              "삭제하기",
-              style: ticketStyle,
-            )),
+          style: TextButton.styleFrom(overlayColor: Colors.grey),
+          onPressed: () => onTapDelete,
+          child: Text(
+            "삭제하기",
+            style: Typo.gangwonR16,
+          ),
+        ),
         TextButton(
-            onPressed: onTapSaveAsImage,
-            child: Text(
-              "사진으로 저장하기",
-              style: ticketStyle,
-            )),
+          style: TextButton.styleFrom(overlayColor: Colors.grey),
+          onPressed: onTapSaveAsImage,
+          child: Text(
+            "사진으로 저장하기",
+            style: Typo.gangwonR16,
+          ),
+        ),
         TextButton(
-            onPressed: onTapEdit,
-            child: Text(
-              "수정하기",
-              style: ticketStyle,
-            ))
+          style: TextButton.styleFrom(overlayColor: Colors.grey),
+          onPressed: onTapEdit,
+          child: Text(
+            "수정하기",
+            style: Typo.gangwonR16,
+          ),
+        )
       ],
     );
   }
