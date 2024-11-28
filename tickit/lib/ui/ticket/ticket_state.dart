@@ -3,6 +3,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/data/ticket/body/ticket_request_body.dart';
+import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
+
+import 'const/ticket_mode.dart';
 
 part 'ticket_state.freezed.dart';
 
@@ -11,6 +14,7 @@ class TicketState with _$TicketState {
   factory TicketState({
     @Default(LoadingStatus.none) LoadingStatus initLoading,
     @Default(LoadingStatus.none) LoadingStatus makeTicketLoading,
+    @Default(TicketMode.none) TicketMode mode,
     @Default(null) XFile? image,
     @Default("") String title,
     @Default("") String location,
@@ -21,7 +25,7 @@ class TicketState with _$TicketState {
     @Default(0) int minute,
     @Default(Colors.white) Color backgroundColor,
     @Default(Color(0xff141414)) Color foregroundColor,
-    @Default([]) List<Field> fields,
+    @Default([]) List<TicketFieldModel> fields,
     @Default("") String networkImage,
     @Default(10) int maxCount,
     @Default(0) int fieldCount,

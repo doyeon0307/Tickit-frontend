@@ -7,6 +7,7 @@ class Assets {
   static const String plusSquare = 'assets/icon/plus-square.svg';
   static const String settings = 'assets/icon/settings.svg';
   static const String xCircle = 'assets/icon/x-circle.svg';
+  static const String droplet = 'assets/icon/droplet.svg';
 
   // deco
   static const String leftTitleDeco = 'assets/deco/left_title_deco.svg';

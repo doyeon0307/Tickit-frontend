@@ -9,8 +9,8 @@ class TicketTextField extends StatelessWidget {
   final TextAlign textAlign;
   final Color? color;
   final Function(String)? onChanged;
-  final TextEditingController? controller;
   final bool readOnly;
+  final String? initialValue;
 
   const TicketTextField({
     super.key,
@@ -20,15 +20,15 @@ class TicketTextField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.onChanged,
     this.color,
-    this.controller,
     this.readOnly = false,
+    this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      initialValue: initialValue,
       readOnly: readOnly,
-      controller: controller,
       maxLines: null,
       keyboardType: keyboardType,
       style: Typo.gangwonR16.copyWith(

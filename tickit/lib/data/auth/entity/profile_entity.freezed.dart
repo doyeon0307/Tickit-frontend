@@ -22,8 +22,12 @@ ProfileEntity _$ProfileEntityFromJson(Map<String, dynamic> json) {
 mixin _$ProfileEntity {
   String? get nickName => throw _privateConstructorUsedError;
 
+  /// Serializes this ProfileEntity to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ProfileEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileEntityCopyWith<ProfileEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$ProfileEntityCopyWithImpl<$Res, $Val extends ProfileEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ProfileEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$ProfileEntityImplCopyWithImpl<$Res>
       _$ProfileEntityImpl _value, $Res Function(_$ProfileEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ProfileEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,11 +137,13 @@ class _$ProfileEntityImpl
                 other.nickName == nickName));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, nickName);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ProfileEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileEntityImplCopyWith<_$ProfileEntityImpl> get copyWith =>
@@ -155,8 +165,11 @@ abstract class _ProfileEntity implements ProfileEntity {
 
   @override
   String? get nickName;
+
+  /// Create a copy of ProfileEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileEntityImplCopyWith<_$ProfileEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,10 +12,10 @@ TicketEntity _$TicketEntityFromJson(Map<String, dynamic> json) => TicketEntity(
       location: json['location'] as String,
       image: json['image'] as String,
       datetime: json['datetime'] as String,
-      backgroundColor: json['backgroundColor'] as String?,
-      foregroundColor: json['foregroundColor'] as String?,
-      fields: (json['fields'] as List<dynamic>?)
-          ?.map((e) => Fields.fromJson(e as Map<String, dynamic>))
+      backgroundColor: json['backgroundColor'] as String,
+      foregroundColor: json['foregroundColor'] as String,
+      fields: (json['fields'] as List<dynamic>)
+          .map((e) => Fields.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

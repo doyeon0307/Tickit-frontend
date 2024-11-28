@@ -5,23 +5,29 @@ import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
 
 class LocationWidget extends StatelessWidget {
   final bool isDetail;
-  final TextEditingController controller;
   final Function(String) onChanged;
   final Color color;
+  final String? initialValue;
 
   const LocationWidget({
     super.key,
     required this.isDetail,
-    required this.controller,
     required this.onChanged,
     required this.color,
+    this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(Assets.location),
+        SvgPicture.asset(
+          Assets.location,
+          colorFilter: ColorFilter.mode(
+            color,
+            BlendMode.srcIn,
+          ),
+        ),
         const SizedBox(
           width: 4.0,
         ),
@@ -32,7 +38,7 @@ class LocationWidget extends StatelessWidget {
             ),
             child: TicketTextField(
               readOnly: isDetail,
-              controller: controller,
+              initialValue:initialValue,
               onChanged: onChanged,
               fontSize: 18.0,
               hintText: "장소를 입력하세요",

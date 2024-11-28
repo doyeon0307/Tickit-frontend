@@ -6,7 +6,6 @@ import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/component/success_snack_bar.dart';
-import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/component/calendar_widget.dart';
 import 'package:tickit/ui/ticket/component/deco_buttons_widget.dart';
 import 'package:tickit/ui/ticket/component/edit_buttons_widget.dart';
@@ -33,18 +32,18 @@ class TicketView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final BaseTicketViewModel viewModel =
-        ref.watch(ticketViewModelProvider(mode).notifier);
-    final TicketState state = ref.watch(ticketViewModelProvider(mode));
-
-    final bool isDetail = mode == TicketMode.detail;
-    final bool isEdit = mode == TicketMode.edit;
-    final bool isCreate = mode == TicketMode.create;
+    // final viewModel = mode == TicketMode.detail
+    //     ? ref.read(detailTicketViewModelProvider(mode).notifier)
+    //     : ref.read(ticketViewModelProvider(mode).notifier);
+    // final TicketState state = mode == TicketMode.detail
+    //     ? ref.watch(detailTicketViewModelProvider(mode))
+    //     : ref.watch(ticketViewModelProvider(mode));
+    final viewModel = ref.read(ticketViewModelProvider(mode).notifier);
+    final state = ref.watch(ticketViewModelProvider(mode));
 
     useEffect(() {
-      if (isDetail) {
-        Future(() => viewModel.initDetailView(id: id!));
-      }
+      Future.microtask(() => viewModel.initTicketView(mode: mode, id: id));
+
       return null;
     }, []);
 
@@ -77,106 +76,145 @@ class TicketView extends HookConsumerWidget {
       backgroundColor: state.backgroundColor,
       body: Stack(
         children: [
-          SingleChildScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            child: Column(
-              children: [
-                ImageWidget(
-                  isDetail: isDetail,
-                  isCreate: isCreate,
-                  isEdit: isEdit,
-                  imagePicker: imagePicker,
-                  onTapImageBox: (value) => viewModel.onTapImageBox(value),
-                  networkImage: state.networkImage,
-                  image: state.image,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12.0,
-                    vertical: 16.0,
+          if (state.initLoading != LoadingStatus.loading)
+            SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Column(
+                children: [
+                  ImageWidget(
+                    isDetail: state.mode == TicketMode.detail,
+                    isCreate: state.mode == TicketMode.create,
+                    isEdit: state.mode == TicketMode.edit,
+                    imagePicker: imagePicker,
+                    onTapImageBox: (value) => viewModel.onTapImageBox(value),
+                    networkImage: state.networkImage,
+                    image: state.image,
                   ),
-                  child: TitleWidget(
-                    isDetail: isDetail,
-                    controller: viewModel.titleController,
-                    onChanged: (value) =>
-                        viewModel.onChangedTitle(newTitle: value),
-                    color: state.foregroundColor,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12.0,
+                      vertical: 16.0,
+                    ),
+                    child: TitleWidget(
+                      isDetail: state.mode == TicketMode.detail,
+                      onChanged: (value) =>
+                          viewModel.onChangedTitle(newTitle: value),
+                      color: state.foregroundColor,
+                      initialValue: state.mode == TicketMode.create
+                          ? null
+                          : state.title.isEmpty
+                              ? null
+                              : state.title,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          LocationWidget(
-                            isDetail: isDetail,
-                            controller: viewModel.locationController,
-                            onChanged: (value) => viewModel.onChangedLocation(
-                              newLocation: value,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20.0,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            LocationWidget(
+                              isDetail: state.mode == TicketMode.detail,
+                              onChanged: (value) => viewModel.onChangedLocation(
+                                newLocation: value,
+                              ),
+                              color: state.foregroundColor,
+                              initialValue: state.mode == TicketMode.create
+                                  ? null
+                                  : state.location.isEmpty
+                                      ? null
+                                      : state.location,
                             ),
-                            color: state.foregroundColor,
+                            const SizedBox(
+                              width: 8.0,
+                            ),
+                            AbsorbPointer(
+                              absorbing: state.mode == TicketMode.detail,
+                              child: CalendarWidget(
+                                mode: state.mode,
+                                onDateChanged: (value) =>
+                                    viewModel.onChangedDate(newDate: value),
+                                onPressedAmButton: () =>
+                                    viewModel.onTapAmButton(),
+                                onChangedMinute: (value) =>
+                                    viewModel.onChangedMinute(newMinute: value),
+                                onPressedCheckButton: () =>
+                                    viewModel.onPressedDateTimeCheck(),
+                                onChangedHour: (value) =>
+                                    viewModel.onChangedHour(newHour: value),
+                                dateTime: state.dateTime,
+                                color: state.foregroundColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 16.0,
+                        ),
+                        Column(
+                          children: List.generate(
+                            state.fieldCount,
+                            (index) => TicketFieldRowWidget(
+                              mode: state.mode,
+                              index: index,
+                              color: state.foregroundColor,
+                              subTitleInitialValue:
+                                  state.mode == TicketMode.create
+                                      ? null
+                                      : state.fields[index].subtitle,
+                              contentInitialValue:
+                                  state.mode == TicketMode.create
+                                      ? null
+                                      : state.fields[index].content,
+                            ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 100.0,
+                        ),
+                        if (!(state.mode == TicketMode.detail))
+                          DecoButtonsWidget(
+                            mode: state.mode,
+                            onTapAddField: () => viewModel.addField(),
+                          ),
+                        if (!(state.mode == TicketMode.detail))
+                          const SizedBox(height: 16.0),
+                        if (!(state.mode == TicketMode.detail))
+                          SaveButtonsWidget(
+                            onPressedCancel: () => viewModel.onPressedCancel(),
+                            onPressedSave: () => viewModel.onPressedSave(),
+                          ),
+                        if (state.mode == TicketMode.create)
                           const SizedBox(
-                            width: 8.0,
+                            height: 100.0,
                           ),
-                          CalendarWidget(
-                            mode: mode,
-                            onDateChanged: (value) =>
-                                viewModel.onChangedDate(newDate: value),
-                            onPressedAmButton: () => viewModel.onTapAmButton(),
-                            onChangedMinute: (value) =>
-                                viewModel.onChangedMinute(newMinute: value),
-                            onPressedCheckButton: () =>
-                                viewModel.onPressedDateTimeCheck(),
-                            onChangedHour: (value) =>
-                                viewModel.onChangedHour(newHour: value),
-                            dateTime: state.dateTime,
-                            color: state.foregroundColor,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16.0,
-                      ),
-                      const TicketFieldRowWidget(),
-                      const TicketFieldRowWidget(),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      if (!isDetail)
-                        DecoButtonsWidget(
-                          mode: mode,
-                        ),
-                      if (!isDetail) const SizedBox(height: 16.0),
-                      if (!isDetail)
-                        SaveButtonsWidget(
-                          onPressedCancel: () => viewModel.onPressedCancel(),
-                          onPressedSave: () => viewModel.onPressedSave(),
-                        ),
-                      if (isDetail)
-                        EditButtonsWidget(
-                          onTapDelete: () {
-                            if (id != null) {
-                              viewModel.onTapDelete(id: id!);
-                            }
-                          },
-                          onTapSaveAsImage: () {},
-                          onTapEdit: () {},
-                        ),
-                      const SizedBox(
-                        height: 100.0,
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          if (isDetail)
+          if (state.mode == TicketMode.detail)
+            Positioned(
+              bottom: 0.0,
+              left: 0.0,
+              right: 0.0,
+              child: Center(
+                child: EditButtonsWidget(
+                  onTapDelete: () {
+                    if (id != null) {
+                      viewModel.onTapDelete(id: id!);
+                    }
+                  },
+                  onTapSaveAsImage: () {},
+                  onTapEdit: () => viewModel.onTapEditButton(),
+                ),
+              ),
+            ),
+          if (state.mode == TicketMode.detail)
             Positioned(
               top: 24.0,
               left: 8.0,
@@ -188,11 +226,8 @@ class TicketView extends HookConsumerWidget {
             ),
           if (state.makeTicketLoading == LoadingStatus.loading ||
               state.initLoading == LoadingStatus.loading)
-            Container(
-              color: Colors.black.withOpacity(0.5),
-              child: const Center(
-                child: CustomLoading(),
-              ),
+            const Center(
+              child: CustomLoading(),
             ),
         ],
       ),

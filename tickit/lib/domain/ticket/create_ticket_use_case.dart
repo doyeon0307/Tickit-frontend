@@ -3,6 +3,7 @@ import 'package:tickit/core/repository/repository_result.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/ticket/body/ticket_request_body.dart';
 import 'package:tickit/data/ticket/ticket_repository.dart';
+import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
 
 final createTicketUseCaseProvider = Provider.autoDispose(
   (ref) => CreateTicketUseCase(
@@ -24,8 +25,18 @@ class CreateTicketUseCase {
     required String datetime,
     String? backgroundColor,
     String? foregroundColor,
-    List<Field>? fields,
+    List<TicketFieldModel>? fields,
   }) async {
+    List<Field>? requestFields = fields == null
+        ? null
+        : List.generate(
+            fields.length,
+            (index) => Field(
+              content: fields[index].content,
+              subtitle: fields[index].subtitle,
+            ),
+          );
+
     final RepositoryResult<String> repositoryResult =
         await _ticketRepository.makeTicket(
       image: image,
@@ -34,16 +45,14 @@ class CreateTicketUseCase {
       datetime: datetime,
       backgroundColor: backgroundColor,
       foregroundColor: foregroundColor,
-      fields: fields,
+      fields: requestFields,
     );
 
     return switch (repositoryResult) {
-      SuccessRepositoryResult<String>() =>
-        SuccessUseCaseResult(
+      SuccessRepositoryResult<String>() => SuccessUseCaseResult(
           data: repositoryResult.data,
         ),
-      FailureRepositoryResult<String>() =>
-        FailureUseCaseResult(
+      FailureRepositoryResult<String>() => FailureUseCaseResult(
           message: repositoryResult.messages?.first ?? '',
           statusCode: repositoryResult.statusCode,
         )

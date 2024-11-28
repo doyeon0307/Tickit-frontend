@@ -5,6 +5,7 @@ import 'package:tickit/domain/s3/get_presigned_url_use_case.dart';
 import 'package:tickit/domain/s3/model/s3_url_model.dart';
 import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
+import 'package:tickit/domain/ticket/get_ticket_previews_use_case.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
@@ -12,23 +13,21 @@ class CreateTicketViewModel extends BaseTicketViewModel {
   final CreateTicketUseCase _createTicketUseCase;
   final GetPresignedUrlUseCase _getPresignedUrlUseCase;
   final UploadImageToS3UseCase _uploadImageToS3UseCase;
+  final GetTicketPreviewsUseCase _getTicketPreviewsUseCase;
 
   CreateTicketViewModel({
     required CreateTicketUseCase createTicketUseCase,
     required GetPresignedUrlUseCase getPresignedUrlUseCase,
     required UploadImageToS3UseCase uploadImageToS3UseCase,
+    required GetTicketPreviewsUseCase getTicketPreviewsUseCase,
   })  : _createTicketUseCase = createTicketUseCase,
         _getPresignedUrlUseCase = getPresignedUrlUseCase,
-        _uploadImageToS3UseCase = uploadImageToS3UseCase;
-
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
+        _uploadImageToS3UseCase = uploadImageToS3UseCase,
+        _getTicketPreviewsUseCase = getTicketPreviewsUseCase;
 
   @override
   void initState() {
     state = TicketState();
-    titleController.clear();
-    locationController.clear();
     debugPrint("티켓 UI 초기화 완료");
   }
 
@@ -137,6 +136,11 @@ class CreateTicketViewModel extends BaseTicketViewModel {
     }
 
     initState();
+    try {
+      _getTicketPreviewsUseCase;
+    } catch (e) {
+      debugPrint("티켓 목록 업데이트 실패: $e");
+    }
   }
 
   @override
@@ -148,12 +152,10 @@ class CreateTicketViewModel extends BaseTicketViewModel {
   Future<void> onTapDelete({required String id}) {
     throw UnimplementedError();
   }
-  @override
-  void dispose() {
-    titleController.dispose();
-    locationController.dispose();
 
-    super.dispose();
+  @override
+  void onTapEditButton() {
+    throw UnimplementedError();
   }
 }
 

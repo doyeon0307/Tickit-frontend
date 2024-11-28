@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
+import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
 abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
@@ -18,9 +20,78 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
 
   Future<void> onTapDelete({required String id});
 
+  void onTapEditButton();
+
   // base
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController locationController = TextEditingController();
+  Future<void> initTicketView({
+    required TicketMode mode,
+    required String? id,
+  }) async {
+    state = state.copyWith(mode: mode);
+    if (mode == TicketMode.detail && id != null) {
+      await initDetailView(id: id);
+    }
+  }
+
+  void addField() {
+    if (!mounted) return;
+    if (state.fields.length >= state.maxCount) return;
+
+    final newFields = [...state.fields];
+    newFields.add(
+      const TicketFieldModel(
+        subtitle: "",
+        content: "",
+      ),
+    );
+
+    state = state.copyWith(
+      fields: newFields,
+      fieldCount: state.fieldCount + 1,
+    );
+  }
+
+  void removeField({
+    required int index,
+  }) {
+    if (!mounted) return;
+    if (index < 0 || index >= state.fields.length) return;
+
+    final newFields = [...state.fields];
+    newFields.removeAt(index);
+
+    state = state.copyWith(
+      fields: newFields,
+      fieldCount: state.fieldCount - 1,
+    );
+  }
+
+  void updateFieldTitle({
+    required int index,
+    required String text,
+  }) {
+    if (!mounted) return;
+    if (index < 0 || index >= state.fields.length) return;
+
+    final newFields = [...state.fields];
+    newFields[index] = newFields[index].copyWith(subtitle: text);
+
+    state = state.copyWith(fields: newFields);
+    debugPrint("필드 소제목 업데이트 $index: $text");
+  }
+
+  void updateFieldContent({
+    required int index,
+    required String text,
+  }) {
+    if (!mounted) return;
+    if (index < 0 || index >= state.fields.length) return;
+
+    final newFields = [...state.fields];
+    newFields[index] = newFields[index].copyWith(content: text);
+
+    state = state.copyWith(fields: newFields);
+  }
 
   void onTapImageBox(XFile? newImage) {
     if (mounted) {
@@ -38,7 +109,6 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
   }) {
     if (mounted) {
       state = state.copyWith(title: newTitle);
-      debugPrint("title: ${state.title}");
     }
   }
 

@@ -5,7 +5,10 @@ import 'package:flutter/rendering.dart';
 class Typo {
   const Typo._();
 
-  static TextStyle pretendardBold40 = const TextStyle(
+  /// EB W800
+  /// SB W600
+  ///  R W400
+  static TextStyle pretendardEB40 = const TextStyle(
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w800,
     fontSize: 40.0,

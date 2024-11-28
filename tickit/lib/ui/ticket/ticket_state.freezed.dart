@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TicketState {
   LoadingStatus get initLoading => throw _privateConstructorUsedError;
   LoadingStatus get makeTicketLoading => throw _privateConstructorUsedError;
+  TicketMode get mode => throw _privateConstructorUsedError;
   XFile? get image => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$TicketState {
   int get minute => throw _privateConstructorUsedError;
   Color get backgroundColor => throw _privateConstructorUsedError;
   Color get foregroundColor => throw _privateConstructorUsedError;
-  List<Field> get fields => throw _privateConstructorUsedError;
+  List<TicketFieldModel> get fields => throw _privateConstructorUsedError;
   String get networkImage => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   int get fieldCount => throw _privateConstructorUsedError;
@@ -36,7 +37,9 @@ mixin _$TicketState {
   String get successMsg => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TicketStateCopyWith<TicketState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +53,7 @@ abstract class $TicketStateCopyWith<$Res> {
   $Res call(
       {LoadingStatus initLoading,
       LoadingStatus makeTicketLoading,
+      TicketMode mode,
       XFile? image,
       String title,
       String location,
@@ -60,7 +64,7 @@ abstract class $TicketStateCopyWith<$Res> {
       int minute,
       Color backgroundColor,
       Color foregroundColor,
-      List<Field> fields,
+      List<TicketFieldModel> fields,
       String networkImage,
       int maxCount,
       int fieldCount,
@@ -79,11 +83,14 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? initLoading = null,
     Object? makeTicketLoading = null,
+    Object? mode = null,
     Object? image = freezed,
     Object? title = null,
     Object? location = null,
@@ -111,6 +118,10 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.makeTicketLoading
           : makeTicketLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
+      mode: null == mode
+          ? _value.mode
+          : mode // ignore: cast_nullable_to_non_nullable
+              as TicketMode,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -154,7 +165,7 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
       fields: null == fields
           ? _value.fields
           : fields // ignore: cast_nullable_to_non_nullable
-              as List<Field>,
+              as List<TicketFieldModel>,
       networkImage: null == networkImage
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
@@ -194,6 +205,7 @@ abstract class _$$TicketStateImplCopyWith<$Res>
   $Res call(
       {LoadingStatus initLoading,
       LoadingStatus makeTicketLoading,
+      TicketMode mode,
       XFile? image,
       String title,
       String location,
@@ -204,7 +216,7 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       int minute,
       Color backgroundColor,
       Color foregroundColor,
-      List<Field> fields,
+      List<TicketFieldModel> fields,
       String networkImage,
       int maxCount,
       int fieldCount,
@@ -221,11 +233,14 @@ class __$$TicketStateImplCopyWithImpl<$Res>
       _$TicketStateImpl _value, $Res Function(_$TicketStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? initLoading = null,
     Object? makeTicketLoading = null,
+    Object? mode = null,
     Object? image = freezed,
     Object? title = null,
     Object? location = null,
@@ -253,6 +268,10 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value.makeTicketLoading
           : makeTicketLoading // ignore: cast_nullable_to_non_nullable
               as LoadingStatus,
+      mode: null == mode
+          ? _value.mode
+          : mode // ignore: cast_nullable_to_non_nullable
+              as TicketMode,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -296,7 +315,7 @@ class __$$TicketStateImplCopyWithImpl<$Res>
       fields: null == fields
           ? _value._fields
           : fields // ignore: cast_nullable_to_non_nullable
-              as List<Field>,
+              as List<TicketFieldModel>,
       networkImage: null == networkImage
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
@@ -331,6 +350,7 @@ class _$TicketStateImpl implements _TicketState {
   _$TicketStateImpl(
       {this.initLoading = LoadingStatus.none,
       this.makeTicketLoading = LoadingStatus.none,
+      this.mode = TicketMode.none,
       this.image = null,
       this.title = "",
       this.location = "",
@@ -341,7 +361,7 @@ class _$TicketStateImpl implements _TicketState {
       this.minute = 0,
       this.backgroundColor = Colors.white,
       this.foregroundColor = const Color(0xff141414),
-      final List<Field> fields = const [],
+      final List<TicketFieldModel> fields = const [],
       this.networkImage = "",
       this.maxCount = 10,
       this.fieldCount = 0,
@@ -356,6 +376,9 @@ class _$TicketStateImpl implements _TicketState {
   @override
   @JsonKey()
   final LoadingStatus makeTicketLoading;
+  @override
+  @JsonKey()
+  final TicketMode mode;
   @override
   @JsonKey()
   final XFile? image;
@@ -386,10 +409,10 @@ class _$TicketStateImpl implements _TicketState {
   @override
   @JsonKey()
   final Color foregroundColor;
-  final List<Field> _fields;
+  final List<TicketFieldModel> _fields;
   @override
   @JsonKey()
-  List<Field> get fields {
+  List<TicketFieldModel> get fields {
     if (_fields is EqualUnmodifiableListView) return _fields;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_fields);
@@ -416,7 +439,7 @@ class _$TicketStateImpl implements _TicketState {
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
+    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, mode: $mode, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
   }
 
   @override
@@ -428,6 +451,7 @@ class _$TicketStateImpl implements _TicketState {
                 other.initLoading == initLoading) &&
             (identical(other.makeTicketLoading, makeTicketLoading) ||
                 other.makeTicketLoading == makeTicketLoading) &&
+            (identical(other.mode, mode) || other.mode == mode) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.location, location) ||
@@ -462,6 +486,7 @@ class _$TicketStateImpl implements _TicketState {
         runtimeType,
         initLoading,
         makeTicketLoading,
+        mode,
         image,
         title,
         location,
@@ -481,7 +506,9 @@ class _$TicketStateImpl implements _TicketState {
         isDeleted
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TicketStateImplCopyWith<_$TicketStateImpl> get copyWith =>
@@ -492,6 +519,7 @@ abstract class _TicketState implements TicketState {
   factory _TicketState(
       {final LoadingStatus initLoading,
       final LoadingStatus makeTicketLoading,
+      final TicketMode mode,
       final XFile? image,
       final String title,
       final String location,
@@ -502,7 +530,7 @@ abstract class _TicketState implements TicketState {
       final int minute,
       final Color backgroundColor,
       final Color foregroundColor,
-      final List<Field> fields,
+      final List<TicketFieldModel> fields,
       final String networkImage,
       final int maxCount,
       final int fieldCount,
@@ -514,6 +542,8 @@ abstract class _TicketState implements TicketState {
   LoadingStatus get initLoading;
   @override
   LoadingStatus get makeTicketLoading;
+  @override
+  TicketMode get mode;
   @override
   XFile? get image;
   @override
@@ -535,7 +565,7 @@ abstract class _TicketState implements TicketState {
   @override
   Color get foregroundColor;
   @override
-  List<Field> get fields;
+  List<TicketFieldModel> get fields;
   @override
   String get networkImage;
   @override
@@ -548,8 +578,11 @@ abstract class _TicketState implements TicketState {
   String get successMsg;
   @override
   bool get isDeleted;
+
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TicketStateImplCopyWith<_$TicketStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

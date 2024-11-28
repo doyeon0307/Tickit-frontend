@@ -9,9 +9,9 @@ class TicketEntity {
   final String location;
   final String image;
   final String datetime;
-  String? backgroundColor;
-  String? foregroundColor;
-  List<Fields>? fields;
+  final String backgroundColor;
+  final String foregroundColor;
+  final List<Fields> fields;
 
   TicketEntity({
     required this.id,
@@ -19,9 +19,9 @@ class TicketEntity {
     required this.location,
     required this.image,
     required this.datetime,
-    this.backgroundColor,
-    this.foregroundColor,
-    this.fields,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    required this.fields,
   });
 
   factory TicketEntity.fromJson(Map<String, dynamic> json)

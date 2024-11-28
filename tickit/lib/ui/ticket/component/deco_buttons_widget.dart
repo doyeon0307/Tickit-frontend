@@ -7,10 +7,12 @@ import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 
 class DecoButtonsWidget extends StatelessWidget {
   final TicketMode mode;
+  final VoidCallback onTapAddField;
 
   const DecoButtonsWidget({
     super.key,
     required this.mode,
+    required this.onTapAddField,
   });
 
   @override
@@ -20,7 +22,7 @@ class DecoButtonsWidget extends StatelessWidget {
       children: [
         CustomTextButton(
           label: "필드 추가",
-          onPressed: () {},
+          onPressed: onTapAddField,
           textStyle: Typo.gangwonR16.copyWith(
             color: AppColors.textColor,
           ),

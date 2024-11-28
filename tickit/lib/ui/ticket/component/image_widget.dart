@@ -59,30 +59,7 @@ Widget _buildImageContent({
   required String networkImage,
   required XFile? image,
 }) {
-  // 1. Create 모드에서 이미지가 없을 때
-  if (image == null && (isCreate || isEdit)) {
-    return Text(
-      "클릭해서 사진 추가하기",
-      style: Typo.gangwonR16.copyWith(
-        color: AppColors.textColor,
-      ),
-    );
-  }
-
-  // 2. Detail 모드에서 네트워크 이미지가 있을 때
-  if (isDetail && networkImage.isNotEmpty) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(networkImage),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(),
-    );
-  }
-
-  // 3. Create/Edit 모드에서 로컬 이미지가 있을 때
+  // 1. Create/Edit 모드에서 로컬 이미지가 있을 때
   if ((isCreate || isEdit) && image != null) {
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -95,6 +72,28 @@ Widget _buildImageContent({
     );
   }
 
-  // 4. 기본값 (이미지가 없는 경우)
+  // 2. Detail/Edit 모드에서 네트워크 이미지가 있을 때
+  if ((isDetail || isEdit) && networkImage.isNotEmpty) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(networkImage),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Container(),
+    );
+  }
+
+  // 3. 이미지가 없을 때 텍스트 표시
+  if (isCreate || isEdit) {
+    return Text(
+      "클릭해서 사진 추가하기",
+      style: Typo.gangwonR16.copyWith(
+        color: AppColors.textColor,
+      ),
+    );
+  }
+
   return const SizedBox.shrink();
 }

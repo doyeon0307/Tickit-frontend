@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
-import 'package:tickit/data/ticket/entity/ticket_entity.dart';
 import 'package:tickit/domain/ticket/delete_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_detail_use_case.dart';
+import 'package:tickit/domain/ticket/model/ticket_model.dart';
+import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 
 class DetailTicketViewModel extends BaseTicketViewModel {
@@ -24,26 +25,26 @@ class DetailTicketViewModel extends BaseTicketViewModel {
       state = state.copyWith(
         initLoading: LoadingStatus.loading,
         errorMsg: "",
+        mode: TicketMode.detail,
       );
     }
-    final UseCaseResult<TicketEntity> result =
+    final UseCaseResult<TicketModel> result =
         await _getTicketDetailUseCase(id: id);
 
     switch (result) {
-      case SuccessUseCaseResult<TicketEntity>():
-        final detail = result.data;
+      case SuccessUseCaseResult<TicketModel>():
+        final data = result.data;
         if (mounted) {
           state = state.copyWith(
-            initLoading: LoadingStatus.success,
-            networkImage: detail.image,
-            title: detail.title,
-            location: detail.location,
-            dateTime: detail.datetime,
-          );
-          titleController.text = detail.title;
-          locationController.text = detail.location;
+              initLoading: LoadingStatus.success,
+              networkImage: data.image,
+              title: data.title,
+              location: data.location,
+              dateTime: data.datetime,
+              fields: data.fields,
+              fieldCount: data.fields.length);
         }
-      case FailureUseCaseResult<TicketEntity>():
+      case FailureUseCaseResult<TicketModel>():
         if (mounted) {
           state = state.copyWith(
             errorMsg: "티켓 불러오기에 실패했어요. 다시 시도해주세요.",
@@ -81,12 +82,17 @@ class DetailTicketViewModel extends BaseTicketViewModel {
   }
 
   @override
-  void initState() {
-    throw UnimplementedError();
+  void onPressedCancel() {
+    state = state.copyWith(mode: TicketMode.detail);
   }
 
   @override
-  void onPressedCancel() {
+  void onTapEditButton() {
+    state = state.copyWith(mode: TicketMode.edit);
+  }
+
+  @override
+  void initState() {
     throw UnimplementedError();
   }
 

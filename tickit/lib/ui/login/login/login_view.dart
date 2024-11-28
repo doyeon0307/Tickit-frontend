@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/view/nav_bar.dart';
 import 'package:tickit/ui/login/login/login_state.dart';
@@ -12,6 +13,7 @@ class LoginView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final LoginState state = ref.watch(loginViewModelProvider);
     ref.listen<LoginState>(
       loginViewModelProvider,
       (previous, next) {
@@ -36,7 +38,7 @@ class LoginView extends ConsumerWidget {
                 children: [
                   Text(
                     "Tickit!",
-                    style: Typo.pretendardBold40.copyWith(
+                    style: Typo.pretendardEB40.copyWith(
                       color: AppColors.primaryColor,
                     ),
                   ),
@@ -55,6 +57,10 @@ class LoginView extends ConsumerWidget {
               ),
             ),
             const KakaoLoginWidget(),
+            if (state.loginLoading == LoadingStatus.loading)
+              const Center(
+                child: CustomLoading(),
+              ),
           ],
         ),
       ),

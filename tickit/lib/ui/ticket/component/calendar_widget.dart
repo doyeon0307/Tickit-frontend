@@ -32,7 +32,13 @@ class CalendarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SvgPicture.asset(Assets.miniCalendar),
+        SvgPicture.asset(
+          Assets.miniCalendar,
+          colorFilter: ColorFilter.mode(
+            color,
+            BlendMode.srcIn,
+          ),
+        ),
         const SizedBox(
           width: 4.0,
         ),
