@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,6 +56,10 @@ class SettingView extends HookConsumerWidget {
               title: "다크 모드",
               description: "다크 모드를 켜고 끌 수 있어요",
               onTap: () {},
+              widget: CupertinoSwitch(
+                value: state.darkMode,
+                onChanged: (value) => viewModel.onTapDarkMode(value: value),
+              ),
             ),
             const SettingDividerWidgtet(),
             SettingTextWidget(

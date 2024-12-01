@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingState {
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  bool get darkMode => throw _privateConstructorUsedError;
+  bool get scheduleAlarm => throw _privateConstructorUsedError;
+  bool get ticketAlarm => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
   String get successMsg => throw _privateConstructorUsedError;
 
@@ -37,6 +40,9 @@ abstract class $SettingStateCopyWith<$Res> {
   $Res call(
       {LoadingStatus loadingStatus,
       String username,
+      bool darkMode,
+      bool scheduleAlarm,
+      bool ticketAlarm,
       String errorMsg,
       String successMsg});
 }
@@ -58,6 +64,9 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
   $Res call({
     Object? loadingStatus = null,
     Object? username = null,
+    Object? darkMode = null,
+    Object? scheduleAlarm = null,
+    Object? ticketAlarm = null,
     Object? errorMsg = null,
     Object? successMsg = null,
   }) {
@@ -70,6 +79,18 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      darkMode: null == darkMode
+          ? _value.darkMode
+          : darkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      scheduleAlarm: null == scheduleAlarm
+          ? _value.scheduleAlarm
+          : scheduleAlarm // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ticketAlarm: null == ticketAlarm
+          ? _value.ticketAlarm
+          : ticketAlarm // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMsg: null == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
@@ -93,6 +114,9 @@ abstract class _$$SettingStateImplCopyWith<$Res>
   $Res call(
       {LoadingStatus loadingStatus,
       String username,
+      bool darkMode,
+      bool scheduleAlarm,
+      bool ticketAlarm,
       String errorMsg,
       String successMsg});
 }
@@ -112,6 +136,9 @@ class __$$SettingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? loadingStatus = null,
     Object? username = null,
+    Object? darkMode = null,
+    Object? scheduleAlarm = null,
+    Object? ticketAlarm = null,
     Object? errorMsg = null,
     Object? successMsg = null,
   }) {
@@ -124,6 +151,18 @@ class __$$SettingStateImplCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      darkMode: null == darkMode
+          ? _value.darkMode
+          : darkMode // ignore: cast_nullable_to_non_nullable
+              as bool,
+      scheduleAlarm: null == scheduleAlarm
+          ? _value.scheduleAlarm
+          : scheduleAlarm // ignore: cast_nullable_to_non_nullable
+              as bool,
+      ticketAlarm: null == ticketAlarm
+          ? _value.ticketAlarm
+          : ticketAlarm // ignore: cast_nullable_to_non_nullable
+              as bool,
       errorMsg: null == errorMsg
           ? _value.errorMsg
           : errorMsg // ignore: cast_nullable_to_non_nullable
@@ -142,6 +181,9 @@ class _$SettingStateImpl implements _SettingState {
   _$SettingStateImpl(
       {this.loadingStatus = LoadingStatus.none,
       this.username = "",
+      this.darkMode = false,
+      this.scheduleAlarm = false,
+      this.ticketAlarm = true,
       this.errorMsg = "",
       this.successMsg = ""});
 
@@ -153,6 +195,15 @@ class _$SettingStateImpl implements _SettingState {
   final String username;
   @override
   @JsonKey()
+  final bool darkMode;
+  @override
+  @JsonKey()
+  final bool scheduleAlarm;
+  @override
+  @JsonKey()
+  final bool ticketAlarm;
+  @override
+  @JsonKey()
   final String errorMsg;
   @override
   @JsonKey()
@@ -160,7 +211,7 @@ class _$SettingStateImpl implements _SettingState {
 
   @override
   String toString() {
-    return 'SettingState(loadingStatus: $loadingStatus, username: $username, errorMsg: $errorMsg, successMsg: $successMsg)';
+    return 'SettingState(loadingStatus: $loadingStatus, username: $username, darkMode: $darkMode, scheduleAlarm: $scheduleAlarm, ticketAlarm: $ticketAlarm, errorMsg: $errorMsg, successMsg: $successMsg)';
   }
 
   @override
@@ -172,6 +223,12 @@ class _$SettingStateImpl implements _SettingState {
                 other.loadingStatus == loadingStatus) &&
             (identical(other.username, username) ||
                 other.username == username) &&
+            (identical(other.darkMode, darkMode) ||
+                other.darkMode == darkMode) &&
+            (identical(other.scheduleAlarm, scheduleAlarm) ||
+                other.scheduleAlarm == scheduleAlarm) &&
+            (identical(other.ticketAlarm, ticketAlarm) ||
+                other.ticketAlarm == ticketAlarm) &&
             (identical(other.errorMsg, errorMsg) ||
                 other.errorMsg == errorMsg) &&
             (identical(other.successMsg, successMsg) ||
@@ -179,8 +236,8 @@ class _$SettingStateImpl implements _SettingState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, loadingStatus, username, errorMsg, successMsg);
+  int get hashCode => Object.hash(runtimeType, loadingStatus, username,
+      darkMode, scheduleAlarm, ticketAlarm, errorMsg, successMsg);
 
   /// Create a copy of SettingState
   /// with the given fields replaced by the non-null parameter values.
@@ -195,6 +252,9 @@ abstract class _SettingState implements SettingState {
   factory _SettingState(
       {final LoadingStatus loadingStatus,
       final String username,
+      final bool darkMode,
+      final bool scheduleAlarm,
+      final bool ticketAlarm,
       final String errorMsg,
       final String successMsg}) = _$SettingStateImpl;
 
@@ -202,6 +262,12 @@ abstract class _SettingState implements SettingState {
   LoadingStatus get loadingStatus;
   @override
   String get username;
+  @override
+  bool get darkMode;
+  @override
+  bool get scheduleAlarm;
+  @override
+  bool get ticketAlarm;
   @override
   String get errorMsg;
   @override

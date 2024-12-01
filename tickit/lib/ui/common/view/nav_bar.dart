@@ -33,7 +33,6 @@ class _NavBarState extends State<NavBar> {
         PersistentTabConfig(
           screen: const SettingView(),
           item: itemConfig(iconPath: Assets.settings),
-
         ),
       ];
 

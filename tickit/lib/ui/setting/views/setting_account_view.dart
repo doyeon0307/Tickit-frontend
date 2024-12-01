@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/custom_dialog.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
+import 'package:tickit/ui/login/login/login_view.dart';
 import 'package:tickit/ui/setting/component/setting_divider_widgtet.dart';
 import 'package:tickit/ui/setting/component/setting_text_widget.dart';
+import 'package:tickit/ui/setting/setting_view_model.dart';
 
-class SettingAccountView extends StatelessWidget {
+class SettingAccountView extends ConsumerWidget {
   const SettingAccountView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(settingViewModelProvider.notifier);
+
     return DefaultLayout(
       appBar: AppBar(
         title: const Text("계정관리"),
@@ -24,8 +30,8 @@ class SettingAccountView extends StatelessWidget {
             SettingTextWidget(
               title: "로그아웃",
               description: "로그아웃합니다",
-              onTap: () {
-                showDialog(
+              onTap: () async {
+                final result = await showDialog<bool>(
                   context: context,
                   builder: (context) => CustomDialog(
                     title: "정말 로그아웃 할까요?",
@@ -33,17 +39,26 @@ class SettingAccountView extends StatelessWidget {
                     leftButtonLabel: "취소하기",
                     rightButtonLabel: "로그아웃",
                     onPressedLeftButton: () => Navigator.of(context).pop(),
-                    onPressedRightButton: () {},
+                    onPressedRightButton: () {
+                      viewModel.logout();
+                      Navigator.of(context).pop(true);
+                    },
                   ),
                 );
+                if (result != null && result) {
+                  pushReplacementWithoutNavBar(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                }
               },
             ),
             const SettingDividerWidgtet(),
             SettingTextWidget(
               title: "회원 탈퇴",
               description: "소중한 기록과..추억이...모두 사라져요......",
-              onTap: () {
-                showDialog(
+              onTap: () async {
+                final result = await showDialog(
                   context: context,
                   builder: (context) => CustomDialog(
                     title: "정말 탈퇴하시겠어요?🥲",
@@ -51,10 +66,20 @@ class SettingAccountView extends StatelessWidget {
                     leftButtonLabel: "취소하기",
                     rightButtonLabel: "탈퇴하기",
                     onPressedLeftButton: () => Navigator.of(context).pop(),
-                    onPressedRightButton: () {},
+                    onPressedRightButton: () {
+                      viewModel.logout();
+                      Navigator.of(context).pop(true);
+                    },
                   ),
                 );
-              },          ),
+                if (result != null && result) {
+                  pushReplacementWithoutNavBar(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginView()),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),

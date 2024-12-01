@@ -7,7 +7,7 @@ import 'package:tickit/data/auth/entity/auth_tokens_entity.dart';
 import 'package:tickit/service/app/app_state.dart';
 import 'package:tickit/service/storage/secure_storage.dart';
 
-final appServiceProvider = StateNotifierProvider(
+final appServiceProvider = StateNotifierProvider<AppService, AppState>(
   (ref) => AppService(
     storage: ref.watch(secureStorageProvider),
     state: const AppState(),
