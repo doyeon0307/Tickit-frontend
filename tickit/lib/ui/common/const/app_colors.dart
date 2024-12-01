@@ -16,4 +16,6 @@ abstract class AppColors {
   static Color dialogButtonTextColor = const Color(0xff423B34);
   static Color dialogLeftButtonColor = const Color(0xffDEDAD5);
   static Color dialogRightButtonColor = const Color(0xff423B34);
+
+  static Color calendarDateColor = const Color(0xff969696);
 }

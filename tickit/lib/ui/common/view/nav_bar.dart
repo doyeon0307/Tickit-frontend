@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:tickit/ui/calendar/calendar/calendar_view.dart';
 import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/home/home_view.dart';
 import 'package:tickit/ui/login/login/login_view.dart';
@@ -26,7 +27,7 @@ class _NavBarState extends State<NavBar> {
           item: itemConfig(iconPath: Assets.plusSquare),
         ),
         PersistentTabConfig(
-          screen: const LoginView(),
+          screen: const CalendarView(),
           item: itemConfig(iconPath: Assets.calendar),
 
         ),

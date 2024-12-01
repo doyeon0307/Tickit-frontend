@@ -14,6 +14,12 @@ class Typo {
     fontSize: 40.0,
   );
 
+  static TextStyle pretendardSB24 = const TextStyle(
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w600,
+    fontSize: 24.0,
+  );
+
   static TextStyle pretendardSB22 = const TextStyle(
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w600,
@@ -48,6 +54,12 @@ class Typo {
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w400,
     fontSize: 12.0,
+  );
+
+  static TextStyle pretendardR8 = const TextStyle(
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w400,
+    fontSize: 8.0,
   );
 
   static TextStyle gangwonR16 = const TextStyle(
