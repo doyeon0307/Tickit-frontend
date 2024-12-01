@@ -76,11 +76,8 @@ class HomeView extends HookConsumerWidget {
             ),
           ),
           if (state.initLoading == LoadingStatus.loading)
-            Container(
-              color: Colors.black.withOpacity(0.5),
-              child: const Center(
-                child: CustomLoading(),
-              ),
+            const Center(
+              child: CustomLoading(),
             ),
         ],
       ),

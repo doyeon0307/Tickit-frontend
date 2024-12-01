@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
-class CustomTextButton extends StatelessWidget {
+class TicketTextButton extends StatelessWidget {
   final String label;
   final Color? foregroundColor;
   final Color? backgroundColor;
@@ -10,7 +10,7 @@ class CustomTextButton extends StatelessWidget {
   final double? width;
   final double? height;
 
-  const CustomTextButton({
+  const TicketTextButton({
     super.key,
     required this.label,
     this.foregroundColor,

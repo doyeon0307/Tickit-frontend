@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
-import 'package:tickit/ui/common/component/custom_text_button.dart';
+import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
 import 'package:tickit/ui/ticket/const/ticket_mode.dart';
@@ -20,14 +20,14 @@ class DecoButtonsWidget extends StatelessWidget {
     return Wrap(
       spacing: 16.0,
       children: [
-        CustomTextButton(
+        TicketTextButton(
           label: "필드 추가",
           onPressed: onTapAddField,
           textStyle: Typo.gangwonR16.copyWith(
             color: AppColors.textColor,
           ),
         ),
-        CustomTextButton(
+        TicketTextButton(
           label: "배경색",
           onPressed: () => showDialog(
             context: context,
@@ -41,7 +41,7 @@ class DecoButtonsWidget extends StatelessWidget {
             color: AppColors.textColor,
           ),
         ),
-        CustomTextButton(
+        TicketTextButton(
           label: "글자색",
           onPressed: () => showDialog(
             context: context,
@@ -55,7 +55,7 @@ class DecoButtonsWidget extends StatelessWidget {
             color: AppColors.textColor,
           ),
         ),
-        CustomTextButton(
+        TicketTextButton(
           label: "일정 불러오기",
           onPressed: () => showDialog(
             context: context,
@@ -145,7 +145,7 @@ class DecoButtonsWidget extends StatelessWidget {
                     const SizedBox(
                       height: 16.0,
                     ),
-                    CustomTextButton(
+                    TicketTextButton(
                       label: "선택",
                       onPressed: () {},
                       textStyle: Typo.gangwonR16.copyWith(

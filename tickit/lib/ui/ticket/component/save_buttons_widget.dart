@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
-import 'package:tickit/ui/common/component/custom_text_button.dart';
+import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class SaveButtonsWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class SaveButtonsWidget extends StatelessWidget {
     return Wrap(
       spacing: 16.0,
       children: [
-        CustomTextButton(
+        TicketTextButton(
           label: "취소하기",
           onPressed: onPressedCancel,
           textStyle: Typo.gangwonR16.copyWith(
@@ -29,7 +29,7 @@ class SaveButtonsWidget extends StatelessWidget {
           width: 100.0,
           height: 28.0,
         ),
-        CustomTextButton(
+        TicketTextButton(
           label: "저장하기",
           onPressed: onPressedSave,
           textStyle: Typo.gangwonR16.copyWith(

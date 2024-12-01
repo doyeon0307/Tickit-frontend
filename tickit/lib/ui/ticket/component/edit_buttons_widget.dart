@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/component/custom_dialog.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class EditButtonsWidget extends StatelessWidget {
@@ -20,7 +21,22 @@ class EditButtonsWidget extends StatelessWidget {
       children: [
         TextButton(
           style: TextButton.styleFrom(overlayColor: Colors.grey),
-          onPressed: () => onTapDelete,
+          onPressed: () async {
+            final result = await showDialog<bool>(
+              context: context,
+              builder: (context) => CustomDialog(
+                title: "정말 삭제할까요?",
+                content: "삭제한 티켓은 되돌릴 수 없습니다",
+                leftButtonLabel: "취소",
+                rightButtonLabel: "삭제",
+                onPressedLeftButton: () => Navigator.of(context).pop(false),
+                onPressedRightButton: () {
+                  onTapDelete();
+                  Navigator.of(context).pop(true);
+                },
+              ),
+            );
+          },
           child: Text(
             "삭제하기",
             style: Typo.gangwonR16.copyWith(

@@ -3,7 +3,7 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tickit/theme/typographies.dart';
-import 'package:tickit/ui/common/component/custom_text_button.dart';
+import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
@@ -98,7 +98,7 @@ class _CustomColorPickerDialogState
             ),
           ),
       actions: [
-        CustomTextButton(
+        TicketTextButton(
           label: "선택",
           textStyle: Typo.gangwonR16.copyWith(
             color: AppColors.textColor,

@@ -18,7 +18,7 @@ class LoginView extends ConsumerWidget {
       loginViewModelProvider,
       (previous, next) {
         if (next.loginLoading == LoadingStatus.success && next.isLoggedIn) {
-          Navigator.of(context).push(
+          Navigator.of(context).pushReplacement(
             MaterialPageRoute(
               builder: (context) => const NavBar(),
             ),

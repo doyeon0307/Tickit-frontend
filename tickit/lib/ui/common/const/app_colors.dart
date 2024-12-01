@@ -10,4 +10,9 @@ abstract class AppColors {
   static Color secondaryColor = const Color(0xff585757);
   static Color errorColor = const Color(0xffCB444A);
   static Color successColor = const Color(0xff537F4B);
+
+  static Color dialogContentColor = const Color(0xff666666);
+  static Color dialogButtonTextColor = const Color(0xff423B34);
+  static Color dialogLeftButtonColor = const Color(0xffDEDAD5);
+  static Color dialogRightButtonColor = const Color(0xff423B34);
 }

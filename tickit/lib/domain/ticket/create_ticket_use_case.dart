@@ -4,6 +4,7 @@ import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/ticket/body/ticket_request_body.dart';
 import 'package:tickit/data/ticket/ticket_repository.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
+import 'package:tickit/util/extract_color.dart';
 
 final createTicketUseCaseProvider = Provider.autoDispose(
   (ref) => CreateTicketUseCase(
@@ -43,8 +44,12 @@ class CreateTicketUseCase {
       location: location,
       title: title,
       datetime: datetime,
-      backgroundColor: backgroundColor,
-      foregroundColor: foregroundColor,
+      backgroundColor: backgroundColor == null
+          ? null
+          : extractColor(rawColor: backgroundColor),
+      foregroundColor: foregroundColor == null
+          ? null
+          : extractColor(rawColor: foregroundColor),
       fields: requestFields,
     );
 

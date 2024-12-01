@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/theme/typographies.dart';
-import 'package:tickit/ui/common/component/custom_text_button.dart';
+import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/am_number_picker.dart';
 import 'package:tickit/ui/ticket/component/am_text_button.dart';
@@ -114,7 +114,7 @@ class CustomDatePickerDialog extends ConsumerWidget {
                   const SizedBox(
                     width: 16.0,
                   ),
-                  CustomTextButton(
+                  TicketTextButton(
                     label: "선택",
                     textStyle: Typo.gangwonR16.copyWith(
                       color: AppColors.textColor,
