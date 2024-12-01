@@ -4,7 +4,7 @@ import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/ticket/body/ticket_request_body.dart';
 import 'package:tickit/data/ticket/ticket_repository.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
-import 'package:tickit/util/extract_color.dart';
+import 'package:tickit/util/color_utils.dart';
 
 final createTicketUseCaseProvider = Provider.autoDispose(
   (ref) => CreateTicketUseCase(

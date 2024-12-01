@@ -1,28 +1,37 @@
 import 'package:tickit/data/schedule/entity/schedule_preview_entity.dart';
 
 class SchedulePreviewModel {
-  final String id;
-  final String title;
-  final String image;
-  final String date;
-  final bool hasImage;
+  final Map<String, SchedulePreviewData> markedDates;
 
   const SchedulePreviewModel({
-    required this.id,
-    required this.title,
-    required this.image,
-    required this.date,
-    required this.hasImage,
+    required this.markedDates,
   });
 
   factory SchedulePreviewModel.fromEntity({
     required SchedulePreviewEntity entity,
   }) =>
       SchedulePreviewModel(
-        id: entity.id,
-        title: entity.title,
-        image: entity.image,
-        date: entity.date,
-        hasImage: entity.image.isNotEmpty,
+        markedDates: {
+          entity.date: SchedulePreviewData(
+            id: entity.id,
+            title: entity.title,
+            image: entity.image,
+            hasImage: entity.image.isNotEmpty,
+          )
+        },
       );
+}
+
+class SchedulePreviewData {
+  final String id;
+  final String title;
+  final String image;
+  final bool hasImage;
+
+  const SchedulePreviewData({
+    required this.id,
+    required this.title,
+    required this.image,
+    required this.hasImage,
+  });
 }
