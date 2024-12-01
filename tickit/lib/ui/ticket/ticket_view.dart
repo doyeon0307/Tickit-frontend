@@ -31,12 +31,6 @@ class TicketView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final viewModel = mode == TicketMode.detail
-    //     ? ref.read(detailTicketViewModelProvider(mode).notifier)
-    //     : ref.read(ticketViewModelProvider(mode).notifier);
-    // final TicketState state = mode == TicketMode.detail
-    //     ? ref.watch(detailTicketViewModelProvider(mode))
-    //     : ref.watch(ticketViewModelProvider(mode));
     final viewModel = ref.read(ticketViewModelProvider(mode).notifier);
     final state = ref.watch(ticketViewModelProvider(mode));
 
@@ -171,9 +165,9 @@ class TicketView extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 100.0,
-                        ),
+                        // const SizedBox(
+                        //   height: 100.0,
+                        // ),
                         if (!(state.mode == TicketMode.detail))
                           DecoButtonsWidget(
                             mode: state.mode,
@@ -190,27 +184,25 @@ class TicketView extends HookConsumerWidget {
                           const SizedBox(
                             height: 100.0,
                           ),
+                        if (state.mode == TicketMode.detail)
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 40.0),
+                              child: EditButtonsWidget(
+                                onTapDelete: () {
+                                  if (id != null) {
+                                    viewModel.onTapDelete(id: id!);
+                                  }
+                                },
+                                onTapSaveAsImage: () {},
+                                onTapEdit: () => viewModel.onTapEditButton(),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   )
                 ],
-              ),
-            ),
-          if (state.mode == TicketMode.detail)
-            Positioned(
-              bottom: 0.0,
-              left: 0.0,
-              right: 0.0,
-              child: Center(
-                child: EditButtonsWidget(
-                  onTapDelete: () {
-                    if (id != null) {
-                      viewModel.onTapDelete(id: id!);
-                    }
-                  },
-                  onTapSaveAsImage: () {},
-                  onTapEdit: () => viewModel.onTapEditButton(),
-                ),
               ),
             ),
           if (state.mode == TicketMode.detail)

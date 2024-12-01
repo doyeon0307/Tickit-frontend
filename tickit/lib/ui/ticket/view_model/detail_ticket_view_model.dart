@@ -44,7 +44,10 @@ class DetailTicketViewModel extends BaseTicketViewModel {
               location: data.location,
               dateTime: data.datetime,
               fields: data.fields,
-              fieldCount: data.fields.length);
+              fieldCount: data.fields.length,
+            backgroundColor: Color(int.parse(data.backgroundColor)),
+            foregroundColor: Color(int.parse(data.foregroundColor)),
+          );
         }
       case FailureUseCaseResult<TicketModel>():
         if (mounted) {

@@ -6,6 +6,7 @@ import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/custom_network_image.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
+import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/home/home_state.dart';
 import 'package:tickit/ui/home/home_view_model.dart';
@@ -43,42 +44,49 @@ class HomeView extends HookConsumerWidget {
         children: [
           Center(
             child: VerticalCardPager(
-              titles: List.generate(
-                state.previews.length,
-                (index) => "",
-              ),
-              images: state.previews
-                  .map(
-                    (e) => Hero(
-                      tag: e.id,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: CustomNetworkImage(url: e.image),
+                titles: List.generate(
+                  state.previews.length,
+                  (index) => "",
+                ),
+                images: state.previews
+                    .map(
+                      (e) => Hero(
+                        tag: e.id,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: CustomNetworkImage(url: e.image),
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onSelectedItem: (index) async {
+                  final deleted = await pushWithoutNavBar<bool>(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TicketView(
+                        mode: TicketMode.detail,
+                        id: state.previews[index].id,
                       ),
                     ),
-                  )
-                  .toList(),
-              onSelectedItem: (index) async {
-                final deleted = await pushWithoutNavBar<bool>(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        TicketView(
-                          mode: TicketMode.detail,
-                          id: state.previews[index].id,
-                        ),
-                  ),
-                );
-                if (deleted == true) {
-                  await viewModel.initView();
-                }
-              }
-            ),
+                  );
+                  if (deleted == true) {
+                    await viewModel.initView();
+                  }
+                }),
           ),
           if (state.initLoading == LoadingStatus.loading)
             const Center(
               child: CustomLoading(),
             ),
+          Positioned(
+            child: GestureDetector(
+              onTap: () => viewModel.initView(),
+              child: Icon(
+                Icons.refresh_rounded,
+                color: AppColors.textColor,
+              ),
+            ),
+          ),
         ],
       ),
     );
