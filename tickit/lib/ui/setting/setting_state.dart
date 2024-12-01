@@ -8,5 +8,7 @@ class SettingState with _$SettingState {
   factory SettingState({
     @Default(LoadingStatus.none) LoadingStatus loadingStatus,
     @Default("") String username,
+    @Default("") String errorMsg,
+    @Default("") String successMsg,
   })= _SettingState;
 }

@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$SettingState {
   LoadingStatus get loadingStatus => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  String get errorMsg => throw _privateConstructorUsedError;
+  String get successMsg => throw _privateConstructorUsedError;
 
   /// Create a copy of SettingState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +34,11 @@ abstract class $SettingStateCopyWith<$Res> {
           SettingState value, $Res Function(SettingState) then) =
       _$SettingStateCopyWithImpl<$Res, SettingState>;
   @useResult
-  $Res call({LoadingStatus loadingStatus, String username});
+  $Res call(
+      {LoadingStatus loadingStatus,
+      String username,
+      String errorMsg,
+      String successMsg});
 }
 
 /// @nodoc
@@ -52,6 +58,8 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
   $Res call({
     Object? loadingStatus = null,
     Object? username = null,
+    Object? errorMsg = null,
+    Object? successMsg = null,
   }) {
     return _then(_value.copyWith(
       loadingStatus: null == loadingStatus
@@ -61,6 +69,14 @@ class _$SettingStateCopyWithImpl<$Res, $Val extends SettingState>
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      errorMsg: null == errorMsg
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+      successMsg: null == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -74,7 +90,11 @@ abstract class _$$SettingStateImplCopyWith<$Res>
       __$$SettingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LoadingStatus loadingStatus, String username});
+  $Res call(
+      {LoadingStatus loadingStatus,
+      String username,
+      String errorMsg,
+      String successMsg});
 }
 
 /// @nodoc
@@ -92,6 +112,8 @@ class __$$SettingStateImplCopyWithImpl<$Res>
   $Res call({
     Object? loadingStatus = null,
     Object? username = null,
+    Object? errorMsg = null,
+    Object? successMsg = null,
   }) {
     return _then(_$SettingStateImpl(
       loadingStatus: null == loadingStatus
@@ -102,6 +124,14 @@ class __$$SettingStateImplCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      errorMsg: null == errorMsg
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+      successMsg: null == successMsg
+          ? _value.successMsg
+          : successMsg // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -110,7 +140,10 @@ class __$$SettingStateImplCopyWithImpl<$Res>
 
 class _$SettingStateImpl implements _SettingState {
   _$SettingStateImpl(
-      {this.loadingStatus = LoadingStatus.none, this.username = ""});
+      {this.loadingStatus = LoadingStatus.none,
+      this.username = "",
+      this.errorMsg = "",
+      this.successMsg = ""});
 
   @override
   @JsonKey()
@@ -118,10 +151,16 @@ class _$SettingStateImpl implements _SettingState {
   @override
   @JsonKey()
   final String username;
+  @override
+  @JsonKey()
+  final String errorMsg;
+  @override
+  @JsonKey()
+  final String successMsg;
 
   @override
   String toString() {
-    return 'SettingState(loadingStatus: $loadingStatus, username: $username)';
+    return 'SettingState(loadingStatus: $loadingStatus, username: $username, errorMsg: $errorMsg, successMsg: $successMsg)';
   }
 
   @override
@@ -132,11 +171,16 @@ class _$SettingStateImpl implements _SettingState {
             (identical(other.loadingStatus, loadingStatus) ||
                 other.loadingStatus == loadingStatus) &&
             (identical(other.username, username) ||
-                other.username == username));
+                other.username == username) &&
+            (identical(other.errorMsg, errorMsg) ||
+                other.errorMsg == errorMsg) &&
+            (identical(other.successMsg, successMsg) ||
+                other.successMsg == successMsg));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loadingStatus, username);
+  int get hashCode =>
+      Object.hash(runtimeType, loadingStatus, username, errorMsg, successMsg);
 
   /// Create a copy of SettingState
   /// with the given fields replaced by the non-null parameter values.
@@ -150,12 +194,18 @@ class _$SettingStateImpl implements _SettingState {
 abstract class _SettingState implements SettingState {
   factory _SettingState(
       {final LoadingStatus loadingStatus,
-      final String username}) = _$SettingStateImpl;
+      final String username,
+      final String errorMsg,
+      final String successMsg}) = _$SettingStateImpl;
 
   @override
   LoadingStatus get loadingStatus;
   @override
   String get username;
+  @override
+  String get errorMsg;
+  @override
+  String get successMsg;
 
   /// Create a copy of SettingState
   /// with the given fields replaced by the non-null parameter values.

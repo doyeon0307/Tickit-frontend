@@ -6,8 +6,8 @@ import 'package:tickit/data/ticket/ticket_repository.dart';
 import 'package:tickit/domain/ticket/model/ticket_model.dart';
 
 final getTicketDetailUseCaseProvider = Provider.autoDispose(
-      (ref) => GetTicketDetailUseCase(
-    ticketRepository: ref.watch(ticketRepositoryProvider),
+  (ref) => GetTicketDetailUseCase(
+    ticketRepository: ref.read(ticketRepositoryProvider),
   ),
 );
 
@@ -22,18 +22,18 @@ class GetTicketDetailUseCase {
     required String id,
   }) async {
     final RepositoryResult<TicketEntity> repositoryResult =
-    await _ticketRepository.getTicketDetail(id: id);
+        await _ticketRepository.getTicketDetail(id: id);
 
     return switch (repositoryResult) {
-      SuccessRepositoryResult<TicketEntity>() =>
-          SuccessUseCaseResult(
-            data: TicketModel.fromEntity(entity: repositoryResult.data),
+      SuccessRepositoryResult<TicketEntity>() => SuccessUseCaseResult(
+          data: TicketModel.fromEntity(
+            entity: repositoryResult.data,
           ),
-      FailureRepositoryResult<TicketEntity>() =>
-          FailureUseCaseResult(
-            message: repositoryResult.messages?.first ?? "",
-            statusCode: repositoryResult.statusCode,
-          )
+        ),
+      FailureRepositoryResult<TicketEntity>() => FailureUseCaseResult(
+          message: repositoryResult.messages?.first ?? "",
+          statusCode: repositoryResult.statusCode,
+        )
     };
   }
 }

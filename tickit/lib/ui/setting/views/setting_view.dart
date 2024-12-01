@@ -1,18 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/setting/component/setting_divider_widgtet.dart';
 import 'package:tickit/ui/setting/component/setting_text_widget.dart';
+import 'package:tickit/ui/setting/setting_state.dart';
+import 'package:tickit/ui/setting/setting_view_model.dart';
 import 'package:tickit/ui/setting/views/setting_account_view.dart';
 import 'package:tickit/ui/setting/views/setting_alarm_view.dart';
 import 'package:tickit/ui/setting/views/setting_csr_view.dart';
 
-class SettingView extends StatelessWidget {
+class SettingView extends HookConsumerWidget {
   const SettingView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final SettingViewModel viewModel =
+        ref.read(settingViewModelProvider.notifier);
+    final SettingState state = ref.watch(settingViewModelProvider);
+
+    useEffect(() {
+      Future(() => viewModel.getUserProfile());
+      return null;
+    }, []);
+
+    useEffect(() {
+      if (state.errorMsg.isNotEmpty) {
+        Future.microtask(
+          () => ScaffoldMessenger.of(context).showSnackBar(
+            ErrorSnackBar(message: state.errorMsg),
+          ),
+        );
+      }
+      return null;
+    }, [state.errorMsg]);
+
     return DefaultLayout(
       child: SingleChildScrollView(
         child: Column(

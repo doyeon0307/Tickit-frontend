@@ -22,7 +22,10 @@ class TicketModel {
     required this.fields,
   });
 
-  factory TicketModel.fromEntity({required TicketEntity entity}) => TicketModel(
+  factory TicketModel.fromEntity({
+    required TicketEntity entity,
+  }) =>
+      TicketModel(
         id: entity.id,
         title: entity.title,
         location: entity.location,

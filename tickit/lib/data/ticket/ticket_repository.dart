@@ -10,7 +10,7 @@ import 'package:tickit/data/ticket/ticket_remote_data_source.dart';
 
 final ticketRepositoryProvider = Provider(
       (ref) => TicketRepository(
-    dataSource: ref.watch(ticketRemoteDataSourceProvider),
+    dataSource: ref.read(ticketRemoteDataSourceProvider),
   ),
 );
 
