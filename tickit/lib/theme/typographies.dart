@@ -5,9 +5,6 @@ import 'package:flutter/rendering.dart';
 class Typo {
   const Typo._();
 
-  /// EB W800
-  /// SB W600
-  ///  R W400
   static TextStyle pretendardEB40 = const TextStyle(
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w800,
@@ -60,6 +57,12 @@ class Typo {
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w400,
     fontSize: 16.0,
+  );
+
+  static TextStyle pretendardR14 = const TextStyle(
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w400,
+    fontSize: 14.0,
   );
 
   static TextStyle pretendardR12 = const TextStyle(

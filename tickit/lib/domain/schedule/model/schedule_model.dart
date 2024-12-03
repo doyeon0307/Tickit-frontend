@@ -10,7 +10,7 @@ class ScheduleModel {
   final String memo;
   final int number;
   final String seat;
-  final String thumbnail;
+  final bool thumbnail;
   final String time;
   final String title;
 

@@ -17,7 +17,7 @@ ScheduleEntity _$ScheduleEntityFromJson(Map<String, dynamic> json) =>
       memo: json['memo'] as String,
       number: (json['number'] as num).toInt(),
       seat: json['seat'] as String,
-      thumbmail: json['thumbmail'] as String,
+      thumbmail: json['thumbmail'] as bool,
       time: json['time'] as String,
       title: json['title'] as String,
     );

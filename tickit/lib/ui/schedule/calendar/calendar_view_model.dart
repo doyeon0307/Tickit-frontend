@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
@@ -68,15 +69,22 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
 
     switch (result) {
       case SuccessUseCaseResult<List<SchedulePreviewModel>>():
+        final monthKey =
+            '${date.year}-${date.month.toString().padLeft(2, '0')}';
+        final monthData = {monthKey: result.data};
         var updatedSchedules = [...state.schedules];
-        final monthData = {
-          '${date.year}-${date.month.toString().padLeft(2, '0')}': result.data
-        };
+        final existingIndex = updatedSchedules.indexWhere(
+          (schedule) => schedule.containsKey(monthKey),
+        );
 
-        if (date.isBefore(state.today)) {
-          updatedSchedules.insert(0, monthData);
+        if (existingIndex != -1) {
+          updatedSchedules[existingIndex] = monthData;
         } else {
-          updatedSchedules.add(monthData);
+          if (date.isBefore(state.today)) {
+            updatedSchedules.insert(0, monthData);
+          } else {
+            updatedSchedules.add(monthData);
+          }
         }
 
         state = state.copyWith(

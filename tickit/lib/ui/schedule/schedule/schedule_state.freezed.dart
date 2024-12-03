@@ -24,8 +24,9 @@ mixin _$ScheduleState {
   XFile? get image => throw _privateConstructorUsedError;
   String get networkImage => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
-  int get hour => throw _privateConstructorUsedError;
-  int get minute => throw _privateConstructorUsedError;
+  bool get isAM => throw _privateConstructorUsedError;
+  String get hour => throw _privateConstructorUsedError;
+  String get minute => throw _privateConstructorUsedError;
   String get seat => throw _privateConstructorUsedError;
   String get casting => throw _privateConstructorUsedError;
   String get company => throw _privateConstructorUsedError;
@@ -56,8 +57,9 @@ abstract class $ScheduleStateCopyWith<$Res> {
       XFile? image,
       String networkImage,
       String location,
-      int hour,
-      int minute,
+      bool isAM,
+      String hour,
+      String minute,
       String seat,
       String casting,
       String company,
@@ -90,6 +92,7 @@ class _$ScheduleStateCopyWithImpl<$Res, $Val extends ScheduleState>
     Object? image = freezed,
     Object? networkImage = null,
     Object? location = null,
+    Object? isAM = null,
     Object? hour = null,
     Object? minute = null,
     Object? seat = null,
@@ -133,14 +136,18 @@ class _$ScheduleStateCopyWithImpl<$Res, $Val extends ScheduleState>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      isAM: null == isAM
+          ? _value.isAM
+          : isAM // ignore: cast_nullable_to_non_nullable
+              as bool,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       minute: null == minute
           ? _value.minute
           : minute // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       seat: null == seat
           ? _value.seat
           : seat // ignore: cast_nullable_to_non_nullable
@@ -190,8 +197,9 @@ abstract class _$$ScheduleStateImplCopyWith<$Res>
       XFile? image,
       String networkImage,
       String location,
-      int hour,
-      int minute,
+      bool isAM,
+      String hour,
+      String minute,
       String seat,
       String casting,
       String company,
@@ -222,6 +230,7 @@ class __$$ScheduleStateImplCopyWithImpl<$Res>
     Object? image = freezed,
     Object? networkImage = null,
     Object? location = null,
+    Object? isAM = null,
     Object? hour = null,
     Object? minute = null,
     Object? seat = null,
@@ -258,14 +267,18 @@ class __$$ScheduleStateImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
+      isAM: null == isAM
+          ? _value.isAM
+          : isAM // ignore: cast_nullable_to_non_nullable
+              as bool,
       hour: null == hour
           ? _value.hour
           : hour // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       minute: null == minute
           ? _value.minute
           : minute // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       seat: null == seat
           ? _value.seat
           : seat // ignore: cast_nullable_to_non_nullable
@@ -310,8 +323,9 @@ class _$ScheduleStateImpl implements _ScheduleState {
       this.image = null,
       this.networkImage = "",
       this.location = "",
-      this.hour = 0,
-      this.minute = 0,
+      this.isAM = true,
+      this.hour = "",
+      this.minute = "",
       this.seat = "",
       this.casting = "",
       this.company = "",
@@ -346,10 +360,13 @@ class _$ScheduleStateImpl implements _ScheduleState {
   final String location;
   @override
   @JsonKey()
-  final int hour;
+  final bool isAM;
   @override
   @JsonKey()
-  final int minute;
+  final String hour;
+  @override
+  @JsonKey()
+  final String minute;
   @override
   @JsonKey()
   final String seat;
@@ -374,7 +391,7 @@ class _$ScheduleStateImpl implements _ScheduleState {
 
   @override
   String toString() {
-    return 'ScheduleState(mode: $mode, loadingInitView: $loadingInitView, loadingSave: $loadingSave, date: $date, title: $title, image: $image, networkImage: $networkImage, location: $location, hour: $hour, minute: $minute, seat: $seat, casting: $casting, company: $company, link: $link, memo: $memo, errorMsg: $errorMsg, successMsg: $successMsg)';
+    return 'ScheduleState(mode: $mode, loadingInitView: $loadingInitView, loadingSave: $loadingSave, date: $date, title: $title, image: $image, networkImage: $networkImage, location: $location, isAM: $isAM, hour: $hour, minute: $minute, seat: $seat, casting: $casting, company: $company, link: $link, memo: $memo, errorMsg: $errorMsg, successMsg: $successMsg)';
   }
 
   @override
@@ -394,6 +411,7 @@ class _$ScheduleStateImpl implements _ScheduleState {
                 other.networkImage == networkImage) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.isAM, isAM) || other.isAM == isAM) &&
             (identical(other.hour, hour) || other.hour == hour) &&
             (identical(other.minute, minute) || other.minute == minute) &&
             (identical(other.seat, seat) || other.seat == seat) &&
@@ -418,6 +436,7 @@ class _$ScheduleStateImpl implements _ScheduleState {
       image,
       networkImage,
       location,
+      isAM,
       hour,
       minute,
       seat,
@@ -447,8 +466,9 @@ abstract class _ScheduleState implements ScheduleState {
       final XFile? image,
       final String networkImage,
       final String location,
-      final int hour,
-      final int minute,
+      final bool isAM,
+      final String hour,
+      final String minute,
       final String seat,
       final String casting,
       final String company,
@@ -474,9 +494,11 @@ abstract class _ScheduleState implements ScheduleState {
   @override
   String get location;
   @override
-  int get hour;
+  bool get isAM;
   @override
-  int get minute;
+  String get hour;
+  @override
+  String get minute;
   @override
   String get seat;
   @override

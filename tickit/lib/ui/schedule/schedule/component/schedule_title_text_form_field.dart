@@ -5,7 +5,7 @@ import 'package:tickit/ui/common/const/app_colors.dart';
 class ScheduleTitleTextFormField extends StatelessWidget {
   final String hintText;
   final Function(String) onChanged;
-  final String? initialValue;
+  final String initialValue;
   final TextInputType? keyboardType;
   final int? maxLines;
 
@@ -13,7 +13,7 @@ class ScheduleTitleTextFormField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.onChanged,
-    this.initialValue,
+    required this.initialValue,
     this.keyboardType = TextInputType.text,
     this.maxLines,
   });
@@ -42,17 +42,13 @@ class ScheduleTitleTextFormField extends StatelessWidget {
         hintStyle: Typo.pretendardR18.copyWith(
           color: AppColors.secondaryColor.withOpacity(0.5),
         ),
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(4.0),
-          ),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.secondaryColor,
-          ),
-        ),
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        // focusedBorder: UnderlineInputBorder(
+        //   borderSide: BorderSide(
+        //     color: AppColors.secondaryColor,
+        //   ),
+        // ),
       ),
     );
   }

@@ -9,13 +9,18 @@ import 'package:tickit/ui/schedule/schedule/schedule_view.dart';
 class CalendarDateWidget extends StatelessWidget {
   final DateTime date;
   final List<SchedulePreviewData> schedules;
+  final double cellHeight;
+  final VoidCallback refreshCalendar;
   final Widget? firstMarkerWidget;
 
-  const CalendarDateWidget(
-      {super.key,
-      required this.date,
-      required this.schedules,
-      this.firstMarkerWidget});
+  const CalendarDateWidget({
+    super.key,
+    required this.date,
+    required this.schedules,
+    required this.cellHeight,
+    required this.refreshCalendar,
+    this.firstMarkerWidget,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +55,8 @@ class CalendarDateWidget extends StatelessWidget {
       //     ),
       //   ),
       // ),
-      onLongPress: () => pushWithNavBar(
+      onLongPress: () async {
+        final created = await pushWithNavBar(
         context,
         MaterialPageRoute(
           builder: (context) => ScheduleView(
@@ -59,10 +65,15 @@ class CalendarDateWidget extends StatelessWidget {
             id: null,
           ),
         ),
-      ),
+      );
+        if (created != null && created) {
+          refreshCalendar();
+        }
+      },
       child: Container(
         color: Colors.transparent,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
@@ -78,8 +89,10 @@ class CalendarDateWidget extends StatelessWidget {
               ),
             ),
             if (firstMarkerWidget != null)
-              Container(
-                child: firstMarkerWidget,
+              Flexible(
+                child: Container(
+                  child: firstMarkerWidget,
+                ),
               ),
           ],
         ),

@@ -33,21 +33,27 @@ class CalendarView extends HookConsumerWidget {
                   controller: pageController,
                   onPageChanged: (value) =>
                       viewModel.onChangedCalendarPage(value),
-                  itemBuilder: (context, index) {
-                    final monthKey =
-                        '${state.selectedDate.year}-${state.selectedDate.month.toString().padLeft(2, '0')}';
-                    final currentSchedules = state.schedules
-                            .where((schedule) => schedule.containsKey(monthKey))
-                            .map((schedule) => schedule[monthKey] ?? [])
-                            .firstOrNull ??
-                        [];
+            itemBuilder: (context, index) {
+              final date = DateTime(
+                state.today.year,
+                state.today.month + (index - 12),
+                1,
+              );
 
-                    return CustomCalendarWidget(
-                      selectedDate: state.selectedDate,
-                      scheduleModels: currentSchedules,
-                    );
-                  },
-                ),
+              final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
+
+              final currentSchedules = state.schedules
+                  .where((schedule) => schedule.containsKey(monthKey))
+                  .map((schedule) => schedule[monthKey] ?? [])
+                  .firstOrNull ?? [];
+
+              return CustomCalendarWidget(
+                key: ValueKey(monthKey), // 키 추가하여 강제 리빌드 유도
+                selectedDate: date,
+                scheduleModels: currentSchedules,
+                refreshCalendar: () => viewModel.initCalender(),
+              );
+            },                ),
         ),
       ),
     );

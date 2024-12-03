@@ -8,9 +8,14 @@ import 'package:tickit/ui/schedule/calendar/component/calendar_date_widget.dart'
 class CustomCalendarWidget extends StatelessWidget {
   final DateTime selectedDate;
   final List<SchedulePreviewModel> scheduleModels;
+  final VoidCallback refreshCalendar;
 
-  const CustomCalendarWidget(
-      {super.key, required this.selectedDate, required this.scheduleModels});
+  const CustomCalendarWidget({
+    super.key,
+    required this.selectedDate,
+    required this.scheduleModels,
+    required this.refreshCalendar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -135,12 +140,14 @@ class CustomCalendarWidget extends StatelessWidget {
               }
             }
 
-            return CalendarDateWidget(
-              date: date,
-              schedules: schedules,
-              firstMarkerWidget: firstMarkerWidget,
-            );
-          },
+              return CalendarDateWidget(
+                cellHeight: cellHeight,
+                date: date,
+                schedules: schedules,
+                firstMarkerWidget: firstMarkerWidget,
+                refreshCalendar: refreshCalendar,
+              );
+            },
         ),
       ],
     );

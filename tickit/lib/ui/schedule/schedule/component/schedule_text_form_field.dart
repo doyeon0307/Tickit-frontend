@@ -5,15 +5,19 @@ import 'package:tickit/ui/common/const/app_colors.dart';
 class ScheduleTextFormField extends StatelessWidget {
   final String hintText;
   final Function(String) onChanged;
+  final String initialValue;
+  final TextAlign textAlign;
+  final TextInputType keyboardType;
   final int? maxLines;
-  final String? initialValue;
 
   const ScheduleTextFormField({
     super.key,
     required this.hintText,
     required this.onChanged,
+    required this.initialValue,
+    this.textAlign = TextAlign.left,
+    this.keyboardType = TextInputType.text,
     this.maxLines = 1,
-    this.initialValue,
   });
 
   @override
@@ -23,12 +27,12 @@ class ScheduleTextFormField extends StatelessWidget {
       initialValue: initialValue,
       readOnly: false,
       maxLines: maxLines,
-      keyboardType: TextInputType.text,
-      style: Typo.pretendardR16.copyWith(
+      keyboardType: keyboardType,
+      style: Typo.pretendardR14.copyWith(
         color: AppColors.secondaryColor,
       ),
       onChanged: onChanged,
-      textAlign: TextAlign.left,
+      textAlign: textAlign,
       cursorColor: AppColors.textColor.withOpacity(0.6),
       cursorWidth: 1.5,
       cursorRadius: const Radius.circular(4.0),
@@ -36,7 +40,7 @@ class ScheduleTextFormField extends StatelessWidget {
         isDense: true,
         contentPadding: const EdgeInsets.all(8.0),
         hintText: hintText,
-        hintStyle: Typo.pretendardR16.copyWith(
+        hintStyle: Typo.pretendardR12.copyWith(
           color: AppColors.strokeColor,
         ),
         enabledBorder: OutlineInputBorder(
