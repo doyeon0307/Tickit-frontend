@@ -68,7 +68,7 @@ class CustomDialog extends StatelessWidget {
                     TextButton(
                       onPressed: onPressedLeftButton,
                       style: TextButton.styleFrom(
-                        foregroundColor: AppColors.dialogButtonTextColor,
+                        foregroundColor: AppColors.dialogLeftButtonTextColor,
                         backgroundColor: AppColors.dialogLeftButtonColor,
                         textStyle: Typo.pretendardSB18,
                         shape: RoundedRectangleBorder(
@@ -85,7 +85,7 @@ class CustomDialog extends StatelessWidget {
                     TextButton(
                       onPressed: onPressedRightButton,
                       style: TextButton.styleFrom(
-                        foregroundColor: AppColors.dialogLeftButtonColor,
+                        foregroundColor: AppColors.dialogRightButtonTextColor,
                         backgroundColor: AppColors.dialogRightButtonColor,
                         textStyle: Typo.pretendardSB18,
                         shape: RoundedRectangleBorder(

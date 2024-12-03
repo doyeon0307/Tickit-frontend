@@ -6,7 +6,7 @@ import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
-import 'package:tickit/ui/setting/component/setting_divider_widgtet.dart';
+import 'package:tickit/ui/setting/component/setting_divider_widget.dart';
 import 'package:tickit/ui/setting/component/setting_text_widget.dart';
 import 'package:tickit/ui/setting/setting_state.dart';
 import 'package:tickit/ui/setting/setting_view_model.dart';

@@ -42,6 +42,7 @@ class AppService extends StateNotifier<AppState> {
   Future<void> login({
     required AuthTokensEntity tokens,
   }) async {
+    debugPrint("앱 로그인 상태 업데이트를 시도합니다");
     state = state.copyWith(loading: LoadingStatus.loading);
 
     try {
@@ -52,6 +53,7 @@ class AppService extends StateNotifier<AppState> {
         loading: LoadingStatus.success,
         isLoggedIn: true,
       );
+      debugPrint("앱 로그인 완료: accessToken=${tokens.accessToken}, 로그인 상태=${state.isLoggedIn}");
     } catch (e) {
       state = state.copyWith(loading: LoadingStatus.error);
     }

@@ -26,10 +26,22 @@ class Typo {
     fontSize: 22.0,
   );
 
+  static TextStyle pretendardSB20 = const TextStyle(
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w600,
+    fontSize: 20.0,
+  );
+
   static TextStyle pretendardSB18 = const TextStyle(
     fontFamily: "Pretendard",
     fontWeight: FontWeight.w600,
     fontSize: 18.0,
+  );
+
+  static TextStyle pretendardR22 = const TextStyle(
+    fontFamily: "Pretendard",
+    fontWeight: FontWeight.w400,
+    fontSize: 22.0,
   );
 
   static TextStyle pretendardR20 = const TextStyle(
