@@ -11,11 +11,13 @@ abstract class AppColors {
   static Color lightGrayColor = const Color(0xffD9D9D9);
   static Color errorColor = const Color(0xffCB444A);
   static Color successColor = const Color(0xff537F4B);
+  static Color strokeColor = const Color(0xffA6A6A6);
 
   static Color dialogContentColor = const Color(0xff666666);
-  static Color dialogButtonTextColor = const Color(0xff423B34);
+  static Color dialogLeftButtonTextColor = const Color(0xff423B34);
   static Color dialogLeftButtonColor = const Color(0xffDEDAD5);
-  static Color dialogRightButtonColor = const Color(0xff423B34);
+  static Color dialogRightButtonTextColor = const Color(0xffECEAE8);
+  static Color dialogRightButtonColor = const Color(0xffADABA8);
 
   static Color calendarDateColor = const Color(0xff969696);
 }
