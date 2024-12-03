@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/assets.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/view_model/ticket_view_model_provider.dart';
 
 class TicketFieldRowWidget extends ConsumerWidget {

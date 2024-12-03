@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tickit/ui/common/const/assets.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/home/home_view.dart';
 import 'package:tickit/ui/schedule/calendar/calendar_view.dart';
 import 'package:tickit/ui/setting/views/setting_view.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/ticket_view.dart';
 
 class NavBar extends StatefulWidget {

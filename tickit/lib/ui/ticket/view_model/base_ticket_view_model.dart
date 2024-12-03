@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
 abstract class BaseTicketViewModel extends StateNotifier<TicketState> {

@@ -6,6 +6,7 @@ import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/ui/common/component/custom_loading.dart';
 import 'package:tickit/ui/common/component/error_snack_bar.dart';
 import 'package:tickit/ui/common/component/success_snack_bar.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/component/calendar_widget.dart';
 import 'package:tickit/ui/ticket/component/deco_buttons_widget.dart';
 import 'package:tickit/ui/ticket/component/edit_buttons_widget.dart';
@@ -14,7 +15,6 @@ import 'package:tickit/ui/ticket/component/location_widget.dart';
 import 'package:tickit/ui/ticket/component/save_buttons_widget.dart';
 import 'package:tickit/ui/ticket/component/ticket_field_row_widget.dart';
 import 'package:tickit/ui/ticket/component/title_widget.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 import 'package:tickit/ui/ticket/view_model/ticket_view_model_provider.dart';
 
 class TicketView extends HookConsumerWidget {

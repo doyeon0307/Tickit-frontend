@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
 
 class DecoButtonsWidget extends StatelessWidget {
   final TicketMode mode;

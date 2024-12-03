@@ -4,3 +4,9 @@ enum TicketMode {
   edit,
   create,
 }
+
+enum ScheduleMode {
+  none,
+  create,
+  detail
+}

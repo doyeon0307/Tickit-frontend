@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/core/loading_status.dart';
-import 'package:tickit/data/ticket/body/ticket_request_body.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
-
-import 'const/ticket_mode.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 
 part 'ticket_state.freezed.dart';
 

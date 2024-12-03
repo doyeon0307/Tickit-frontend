@@ -5,7 +5,7 @@ import 'package:tickit/domain/ticket/delete_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_detail_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_previews_use_case.dart';
 import 'package:tickit/domain/ticket/model/ticket_model.dart';
-import 'package:tickit/ui/ticket/const/ticket_mode.dart';
+import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 
 class DetailTicketViewModel extends BaseTicketViewModel {
