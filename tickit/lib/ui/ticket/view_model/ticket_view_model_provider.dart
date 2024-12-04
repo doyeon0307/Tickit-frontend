@@ -25,7 +25,6 @@ final ticketViewModelProvider = StateNotifierProvider.family
     return DetailTicketViewModel(
       getTicketDetailUseCase: ref.read(getTicketDetailUseCaseProvider),
       deleteTicketUseCase: ref.read(deleteTicketUseCaseProvider),
-      getTicketPreviewsUseCase: ref.read(getTicketPreviewsUseCaseProvider),
     );
   } else {
     return CreateTicketViewModel(
