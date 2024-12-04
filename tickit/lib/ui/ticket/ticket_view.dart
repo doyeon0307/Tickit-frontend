@@ -105,11 +105,7 @@ class TicketView extends HookConsumerWidget {
                       onChanged: (value) =>
                           viewModel.onChangedTitle(newTitle: value),
                       color: state.foregroundColor,
-                      initialValue: state.mode == TicketMode.create
-                          ? null
-                          : state.title.isEmpty
-                              ? null
-                              : state.title,
+                      initialValue: state.title,
                     ),
                   ),
                   Padding(
@@ -127,11 +123,7 @@ class TicketView extends HookConsumerWidget {
                                 newLocation: value,
                               ),
                               color: state.foregroundColor,
-                              initialValue: state.mode == TicketMode.create
-                                  ? null
-                                  : state.location.isEmpty
-                                      ? null
-                                      : state.location,
+                              initialValue: state.location,
                             ),
                             const SizedBox(
                               width: 8.0,
@@ -186,13 +178,35 @@ class TicketView extends HookConsumerWidget {
                           DecoButtonsWidget(
                             mode: state.mode,
                             onTapAddField: () => viewModel.addField(),
+                            backgroundColor: state.backgroundColor,
+                            foregroundColor: state.foregroundColor,
+                            onBackgroundColorChanged: (newColor) => viewModel.onBackgroundColorChanged(newColor: newColor),
+                            onForegroundColorChanged: (newColor) => viewModel.onForegroundColorChanged(newColor: newColor),
                           ),
                         if (!(state.mode == TicketMode.detail))
                           const SizedBox(height: 16.0),
                         if (!(state.mode == TicketMode.detail))
                           SaveButtonsWidget(
-                            onPressedCancel: () => viewModel.onPressedCancel(),
-                            onPressedSave: () => viewModel.onPressedSave(),
+                            onPressedCancel: () {
+                              if (state.mode==TicketMode.create) {
+                                viewModel.onPressedCancel();
+                              }
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TicketView(mode: mode, id: id,),
+                                ),
+                              );
+                            },
+                            onPressedSave: () {
+                              viewModel.onPressedSave();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TicketView(mode: mode, id: id,),
+                                ),
+                              );
+                            },
                           ),
                         if (state.mode == TicketMode.create)
                           const SizedBox(

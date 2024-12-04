@@ -8,11 +8,19 @@ import 'package:tickit/ui/ticket/component/custom_color_picker_dialog.dart';
 class DecoButtonsWidget extends StatelessWidget {
   final TicketMode mode;
   final VoidCallback onTapAddField;
+  final Color backgroundColor;
+  final Color foregroundColor;
+  final Function(Color) onBackgroundColorChanged;
+  final Function(Color) onForegroundColorChanged;
 
   const DecoButtonsWidget({
     super.key,
     required this.mode,
     required this.onTapAddField,
+    required this.backgroundColor,
+    required this.foregroundColor,
+    required this.onBackgroundColorChanged,
+    required this.onForegroundColorChanged,
   });
 
   @override
@@ -32,9 +40,9 @@ class DecoButtonsWidget extends StatelessWidget {
           onPressed: () => showDialog(
             context: context,
             builder: (context) => CustomColorPickerDialog(
-              mode: mode,
-              isBackground: true,
               title: "배경색을 선택하세요",
+              color: backgroundColor,
+              onColorChanged: onBackgroundColorChanged,
             ),
           ),
           textStyle: Typo.gangwonR16.copyWith(
@@ -46,9 +54,9 @@ class DecoButtonsWidget extends StatelessWidget {
           onPressed: () => showDialog(
             context: context,
             builder: (context) => CustomColorPickerDialog(
-              mode: mode,
-              isBackground: false,
               title: "글자색을 선택하세요",
+              color: foregroundColor,
+              onColorChanged: onForegroundColorChanged,
             ),
           ),
           textStyle: Typo.gangwonR16.copyWith(

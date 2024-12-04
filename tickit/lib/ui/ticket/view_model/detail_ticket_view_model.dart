@@ -36,13 +36,13 @@ class DetailTicketViewModel extends BaseTicketViewModel {
         final data = result.data;
         if (mounted) {
           state = state.copyWith(
-              initLoading: LoadingStatus.success,
-              networkImage: data.image,
-              title: data.title,
-              location: data.location,
-              dateTime: data.datetime,
-              fields: data.fields,
-              fieldCount: data.fields.length,
+            initLoading: LoadingStatus.success,
+            networkImage: data.image,
+            title: data.title,
+            location: data.location,
+            dateTime: data.datetime,
+            fields: data.fields,
+            fieldCount: data.fields.length,
             backgroundColor: Color(int.parse(data.backgroundColor)),
             foregroundColor: Color(int.parse(data.foregroundColor)),
           );
@@ -86,7 +86,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
 
   @override
   void onPressedCancel() {
-    state = state.copyWith(mode: TicketMode.detail);
+    throw UnsupportedError("onPressedCacel");
   }
 
   @override
