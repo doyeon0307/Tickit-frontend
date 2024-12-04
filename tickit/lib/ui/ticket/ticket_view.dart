@@ -42,7 +42,11 @@ class TicketView extends HookConsumerWidget {
 
     useEffect(() {
       if (state.isDeleted) {
-        Future.microtask(() => Navigator.of(context).pop(true));
+        Future.microtask(() {
+          if (context.mounted) {
+            Navigator.of(context).pop(true);
+          }
+        });
       }
       return;
     }, [state.isDeleted]);
@@ -50,16 +54,24 @@ class TicketView extends HookConsumerWidget {
     useEffect(() {
       if (state.errorMsg.isNotEmpty) {
         Future.microtask(
-          () => ScaffoldMessenger.of(context).showSnackBar(
-            ErrorSnackBar(message: state.errorMsg),
-          ),
+          () {
+            if (context.mounted) {
+              return ScaffoldMessenger.of(context).showSnackBar(
+                ErrorSnackBar(message: state.errorMsg),
+              );
+            }
+          },
         );
       }
       if (state.successMsg.isNotEmpty) {
         Future.microtask(
-          () => ScaffoldMessenger.of(context).showSnackBar(
-            SuccessSnackBar(message: state.successMsg),
-          ),
+          () {
+            if (context.mounted) {
+              return ScaffoldMessenger.of(context).showSnackBar(
+                SuccessSnackBar(message: state.successMsg),
+              );
+            }
+          },
         );
       }
       return null;
@@ -148,26 +160,28 @@ class TicketView extends HookConsumerWidget {
                           height: 16.0,
                         ),
                         Column(
-                          children: List.generate(
-                            state.fieldCount,
-                            (index) => TicketFieldRowWidget(
-                              mode: state.mode,
-                              index: index,
-                              color: state.foregroundColor,
-                              subTitleInitialValue:
-                                  state.mode == TicketMode.create
-                                      ? null
-                                      : state.fields[index].subtitle,
-                              contentInitialValue:
-                                  state.mode == TicketMode.create
-                                      ? null
-                                      : state.fields[index].content,
+                          children: List.from(
+                            state.fields.asMap().entries.map(
+                                  (entry) => TicketFieldRowWidget(
+                                key: ValueKey(entry.value.id),  // 고유 ID를 key로 사용
+                                mode: state.mode,
+                                index: entry.key,
+                                color: state.foregroundColor,
+                                subTitleInitialValue:
+                                state.mode == TicketMode.create
+                                    ? null
+                                    : entry.value.subtitle,
+                                contentInitialValue:
+                                state.mode == TicketMode.create
+                                    ? null
+                                    : entry.value.content,
+                                updateFieldTitle: viewModel.updateFieldTitle,
+                                updateFieldContent: viewModel.updateFieldContent,
+                                removeField: viewModel.removeField,
+                              ),
                             ),
                           ),
                         ),
-                        // const SizedBox(
-                        //   height: 100.0,
-                        // ),
                         if (!(state.mode == TicketMode.detail))
                           DecoButtonsWidget(
                             mode: state.mode,
@@ -187,7 +201,7 @@ class TicketView extends HookConsumerWidget {
                         if (state.mode == TicketMode.detail)
                           Center(
                             child: Padding(
-                              padding: EdgeInsets.only(top: 40.0),
+                              padding: const EdgeInsets.only(top: 40.0),
                               child: EditButtonsWidget(
                                 onTapDelete: () {
                                   if (id != null) {
