@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/repository/repository_result.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
+import 'package:tickit/core/util/color_utils.dart';
 import 'package:tickit/data/ticket/body/ticket_request_body.dart';
 import 'package:tickit/data/ticket/entity/ticket_entity.dart';
 import 'package:tickit/data/ticket/ticket_repository.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
-import 'package:tickit/util/color_utils.dart';
 
 final updateTicketUseCaseProvider = Provider.autoDispose(
   (ref) => UpdateTicketUseCase(
