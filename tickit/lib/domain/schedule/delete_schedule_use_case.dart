@@ -3,7 +3,7 @@ import 'package:tickit/core/repository/repository_result.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/schedule/schedule_repository.dart';
 
-final getUserInfoUseCaseProvider = Provider.autoDispose(
+final deleteScheduleUseCaseProvider = Provider.autoDispose(
   (ref) => DeleteScheduleUseCase(
     scheduleRepository: ref.read(scheduleRepositoryProvider),
   ),

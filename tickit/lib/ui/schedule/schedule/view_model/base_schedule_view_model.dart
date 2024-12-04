@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/ui/schedule/schedule/schedule_state.dart';
@@ -6,12 +6,22 @@ import 'package:tickit/ui/schedule/schedule/schedule_state.dart';
 abstract class BaseScheduleViewModel extends StateNotifier<ScheduleState> {
   BaseScheduleViewModel() : super(const ScheduleState());
 
-  // common
+  // detail
+  Future<void> getDetailSchedule({required String id});
+
+  Future<void> onUpdatePressed({required String id});
+
+  Future<void> onDeletePressed({required String id});
+
+  // create
   Future<void> onSavePressed();
 
-  void initView({required DateTime date});
-
   // base
+  void initView({required DateTime date}) {
+    state = state.copyWith(date: date);
+    debugPrint("뷰 초기화 완료: date=${state.date}");
+  }
+
   void onImageTap({required XFile? newImage}) {
     if (!mounted) return;
 

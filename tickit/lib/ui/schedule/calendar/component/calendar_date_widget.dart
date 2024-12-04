@@ -4,6 +4,7 @@ import 'package:tickit/domain/schedule/model/schedule_preview_model.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/mode.dart';
+import 'package:tickit/ui/schedule/calendar/component/calendar_dialog.dart';
 import 'package:tickit/ui/schedule/schedule/schedule_view.dart';
 
 class CalendarDateWidget extends StatelessWidget {
@@ -24,50 +25,39 @@ class CalendarDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+
     return GestureDetector(
-      // onLongPress: () => showModalBottomSheet(
-      //   context: context,
-      //   useSafeArea: false,
-      //   builder: (context) => Container(
-      //     width: double.infinity,
-      //     decoration: const BoxDecoration(
-      //       color: Colors.white,
-      //       borderRadius: BorderRadius.only(
-      //         topLeft: Radius.circular(16.0),
-      //         topRight: Radius.circular(16.0),
-      //       ),
-      //     ),
-      //     padding: const EdgeInsets.symmetric(
-      //       horizontal: 20.0,
-      //       vertical: 32.0,
-      //     ),
-      //     child: Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Text(
-      //           "${date.year}년 ${date.month}월 ${date.day}일",
-      //           style: Typo.pretendardSB18.copyWith(
-      //             color: AppColors.textColor,
-      //           ),
-      //         ),
-      //         const SettingDividerWidgtet(),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      onLongPress: () async {
-        final created = await pushWithNavBar(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScheduleView(
-            mode: ScheduleMode.create,
-            date: date,
-            id: null,
-          ),
-        ),
-      );
-        if (created != null && created) {
-          refreshCalendar();
+      onTap: () async {
+        if (schedules.isEmpty) {
+          final created = await pushWithNavBar(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ScheduleView(
+                mode: ScheduleMode.create,
+                date: date,
+                id: null,
+              ),
+            ),
+          );
+          if (created != null && created) {
+            refreshCalendar();
+          }
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) {
+              final width = screenSize.width * 0.7;
+              final height = screenSize.height * 0.4;
+              return CalendarDialog(
+                width: width,
+                height: height,
+                date: date,
+                refreshCalendar: refreshCalendar,
+                schedules: schedules,
+              );
+            },
+          );
         }
       },
       child: Container(

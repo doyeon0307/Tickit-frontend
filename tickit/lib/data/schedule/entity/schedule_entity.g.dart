@@ -20,6 +20,7 @@ ScheduleEntity _$ScheduleEntityFromJson(Map<String, dynamic> json) =>
       thumbmail: json['thumbmail'] as bool,
       time: json['time'] as String,
       title: json['title'] as String,
+      casting: json['casting'] as String,
     );
 
 Map<String, dynamic> _$ScheduleEntityToJson(ScheduleEntity instance) =>
@@ -36,4 +37,5 @@ Map<String, dynamic> _$ScheduleEntityToJson(ScheduleEntity instance) =>
       'thumbmail': instance.thumbmail,
       'time': instance.time,
       'title': instance.title,
+      'casting': instance.casting,
     };

@@ -20,12 +20,43 @@ class UpdateScheduleUseCase {
 
   Future<UseCaseResult<ScheduleEntity>> call({
     required String id,
-    required ScheduleRequestBody scheduleDTO,
+    required String company,
+    required DateTime date,
+    required String image,
+    required String link,
+    required String location,
+    required String memo,
+    required String seat,
+    required String hour,
+    required String minute,
+    required String title,
+    required bool isAM,
   }) async {
+    final newDate = "${date.year}-${date.month}-${date.day}";
+    late String time;
+
+    if (isAM) {
+      time = "AM-$hour-$minute";
+    } else {
+      time="PM-$hour-$minute";
+    }
+
     final RepositoryResult<ScheduleEntity> repositoryResult =
         await _scheduleRepository.updateSchedule(
       id: id,
-      scheduleDTO: scheduleDTO,
+      scheduleDTO: ScheduleRequestBody(
+        company: company,
+        date: newDate,
+        image: image,
+        link: link,
+        location: location,
+        memo: memo,
+        number: 0,
+        seat: seat,
+        thumbmail: true,
+        time: time,
+        title: title,
+      ),
     );
 
     return switch (repositoryResult) {

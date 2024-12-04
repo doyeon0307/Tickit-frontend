@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';

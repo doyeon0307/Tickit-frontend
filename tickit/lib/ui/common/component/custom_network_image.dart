@@ -16,14 +16,9 @@ class CustomNetworkImage extends StatelessWidget {
       errorBuilder: (context, error, stackTrace) => Container(
         color: Colors.grey[100],
         child: const Center(
-          child: Column(
-            children: [
-              Icon(
-                Icons.warning_rounded,
-                color: Colors.black,
-              ),
-              Text("이미지를 불러올 수 없습니다."),
-            ],
+          child: Icon(
+            Icons.warning_rounded,
+            color: Colors.black,
           ),
         ),
       ),

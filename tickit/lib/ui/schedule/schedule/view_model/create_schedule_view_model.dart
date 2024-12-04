@@ -22,12 +22,6 @@ class CreateScheduleViewModel extends BaseScheduleViewModel {
         _createScheduleUseCase = createScheduleUseCase;
 
   @override
-  void initView({required DateTime date}) {
-    state = state.copyWith(date: date);
-    debugPrint("뷰 초기화 완료: date=${state.date}");
-  }
-
-  @override
   Future<void> onSavePressed() async {
     if (state.date == null ||
         state.title.isEmpty ||
@@ -113,8 +107,9 @@ class CreateScheduleViewModel extends BaseScheduleViewModel {
         case FailureUseCaseResult<ScheduleEntity>():
           if (mounted) {
             state = state.copyWith(
-                loadingSave: LoadingStatus.error,
-                errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              loadingSave: LoadingStatus.error,
+              errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+            );
             debugPrint("티켓 생성 오류: ${result.message}");
             return;
           } else {
@@ -135,5 +130,20 @@ class CreateScheduleViewModel extends BaseScheduleViewModel {
       }
       return;
     }
+  }
+
+  @override
+  Future<void> getDetailSchedule({required String id}) {
+    throw UnsupportedError("getDetailSchedule");
+  }
+
+  @override
+  Future<void> onUpdatePressed({required String id}) {
+    throw UnsupportedError("onUpdatePressed");
+  }
+
+  @override
+  Future<void> onDeletePressed({required String id}) {
+    throw UnsupportedError("onDeletePressed");
   }
 }

@@ -16,6 +16,7 @@ class ScheduleEntity {
   final bool thumbmail;
   final String time;
   final String title;
+  final String casting;
 
   const ScheduleEntity({
     required this.company,
@@ -30,8 +31,9 @@ class ScheduleEntity {
     required this.thumbmail,
     required this.time,
     required this.title,
+    required this.casting,
   });
 
-  factory ScheduleEntity.fromJson(Map<String, dynamic> json)
-  => _$ScheduleEntityFromJson(json);
+  factory ScheduleEntity.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleEntityFromJson(json);
 }

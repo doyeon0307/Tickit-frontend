@@ -33,27 +33,31 @@ class CalendarView extends HookConsumerWidget {
                   controller: pageController,
                   onPageChanged: (value) =>
                       viewModel.onChangedCalendarPage(value),
-            itemBuilder: (context, index) {
-              final date = DateTime(
-                state.today.year,
-                state.today.month + (index - 12),
-                1,
-              );
+                  itemBuilder: (context, index) {
+                    final date = DateTime(
+                      state.today.year,
+                      state.today.month + (index - 12),
+                      1,
+                    );
 
-              final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
+                    final monthKey =
+                        '${date.year}-${date.month.toString().padLeft(2, '0')}';
 
-              final currentSchedules = state.schedules
-                  .where((schedule) => schedule.containsKey(monthKey))
-                  .map((schedule) => schedule[monthKey] ?? [])
-                  .firstOrNull ?? [];
+                    final currentSchedules = state.schedules
+                        .where((schedule) => schedule.containsKey(monthKey))
+                        .map((schedule) => schedule[monthKey] ?? [])
+                        .expand((schedules) => schedules)
+                        .toList() ??
+                        [];
 
-              return CustomCalendarWidget(
-                key: ValueKey(monthKey), // 키 추가하여 강제 리빌드 유도
-                selectedDate: date,
-                scheduleModels: currentSchedules,
-                refreshCalendar: () => viewModel.initCalender(),
-              );
-            },                ),
+                    return CustomCalendarWidget(
+                      key: ValueKey(monthKey),
+                      selectedDate: date,
+                      scheduleModels: currentSchedules,
+                      refreshCalendar: () => viewModel.initCalender(),
+                    );
+                  },
+                ),
         ),
       ),
     );
