@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tickit/core/util/request_body_date_time_format.dart';
 import 'package:tickit/domain/ticket/model/ticket_field_model.dart';
 import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
@@ -19,6 +20,8 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
   Future<void> initDetailView({required String id});
 
   Future<void> onTapDelete({required String id});
+
+  Future<void> onPressedUpdate({required String id});
 
   void onTapEditButton();
 
@@ -55,13 +58,16 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
     required int index,
   }) {
     if (!mounted) return;
-    debugPrint("removeField 호출, 선택된 인덱스=$index, State의 fields 길이=${state.fields.length}");
+    debugPrint(
+        "removeField 호출, 선택된 인덱스=$index, State의 fields 길이=${state.fields.length}");
     if (index < 0 || index >= state.fields.length) return;
 
     final newFields = [...state.fields];
-    debugPrint("삭제 전 fields: ${newFields.map((f) => f.subtitle).toList()}");  // 삭제 전 상태 확인
+    debugPrint(
+        "삭제 전 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 전 상태 확인
     newFields.removeAt(index);
-    debugPrint("삭제 후 fields: ${newFields.map((f) => f.subtitle).toList()}");  // 삭제 후 상태 확인
+    debugPrint(
+        "삭제 후 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 후 상태 확인
 
     state = state.copyWith(
       fields: newFields,
@@ -165,7 +171,8 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
       );
     }
     final dateTime =
-        "${state.date.toString().split(" ")[0]}  ${state.hour}:${state.minute}";
+        "${makeRequestDate(date: state.date!)} ${state.isAm ? "AM" : "PM"}"
+        "${getTimeFormat(time: state.hour.toString())}:${getTimeFormat(time: state.minute.toString())}";
     if (mounted) {
       state = state.copyWith(
         dateTime: dateTime,

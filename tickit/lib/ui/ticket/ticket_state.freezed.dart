@@ -357,7 +357,7 @@ class _$TicketStateImpl implements _TicketState {
       this.dateTime = "날짜를 선택하세요",
       this.date = null,
       this.isAm = true,
-      this.hour = 0,
+      this.hour = 7,
       this.minute = 0,
       this.backgroundColor = Colors.white,
       this.foregroundColor = const Color(0xff141414),

@@ -164,8 +164,9 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
           } else {
             if (mounted) {
               state = state.copyWith(
-                  loadingSave: LoadingStatus.error,
-                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+                loadingSave: LoadingStatus.error,
+                errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+              );
             }
             return;
           }
@@ -176,6 +177,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
           loadingSave: LoadingStatus.error,
           errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
         );
+        debugPrint("티켓 생성 오류 : $e");
       }
       return;
     }

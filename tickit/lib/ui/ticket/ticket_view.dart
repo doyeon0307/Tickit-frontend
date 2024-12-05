@@ -155,23 +155,25 @@ class TicketView extends HookConsumerWidget {
                           children: List.from(
                             state.fields.asMap().entries.map(
                                   (entry) => TicketFieldRowWidget(
-                                key: ValueKey(entry.value.id),  // 고유 ID를 key로 사용
-                                mode: state.mode,
-                                index: entry.key,
-                                color: state.foregroundColor,
-                                subTitleInitialValue:
-                                state.mode == TicketMode.create
-                                    ? null
-                                    : entry.value.subtitle,
-                                contentInitialValue:
-                                state.mode == TicketMode.create
-                                    ? null
-                                    : entry.value.content,
-                                updateFieldTitle: viewModel.updateFieldTitle,
-                                updateFieldContent: viewModel.updateFieldContent,
-                                removeField: viewModel.removeField,
-                              ),
-                            ),
+                                    key: ValueKey(entry.value.id),
+                                    mode: state.mode,
+                                    index: entry.key,
+                                    color: state.foregroundColor,
+                                    subTitleInitialValue:
+                                        state.mode == TicketMode.create
+                                            ? null
+                                            : entry.value.subtitle,
+                                    contentInitialValue:
+                                        state.mode == TicketMode.create
+                                            ? null
+                                            : entry.value.content,
+                                    updateFieldTitle:
+                                        viewModel.updateFieldTitle,
+                                    updateFieldContent:
+                                        viewModel.updateFieldContent,
+                                    removeField: viewModel.removeField,
+                                  ),
+                                ),
                           ),
                         ),
                         if (!(state.mode == TicketMode.detail))
@@ -180,30 +182,43 @@ class TicketView extends HookConsumerWidget {
                             onTapAddField: () => viewModel.addField(),
                             backgroundColor: state.backgroundColor,
                             foregroundColor: state.foregroundColor,
-                            onBackgroundColorChanged: (newColor) => viewModel.onBackgroundColorChanged(newColor: newColor),
-                            onForegroundColorChanged: (newColor) => viewModel.onForegroundColorChanged(newColor: newColor),
+                            onBackgroundColorChanged: (newColor) => viewModel
+                                .onBackgroundColorChanged(newColor: newColor),
+                            onForegroundColorChanged: (newColor) => viewModel
+                                .onForegroundColorChanged(newColor: newColor),
                           ),
                         if (!(state.mode == TicketMode.detail))
                           const SizedBox(height: 16.0),
                         if (!(state.mode == TicketMode.detail))
                           SaveButtonsWidget(
                             onPressedCancel: () {
-                              if (state.mode==TicketMode.create) {
+                              if (state.mode == TicketMode.create) {
                                 viewModel.onPressedCancel();
                               }
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TicketView(mode: mode, id: id,),
+                                  builder: (context) => TicketView(
+                                    mode: mode,
+                                    id: id,
+                                  ),
                                 ),
                               );
                             },
                             onPressedSave: () {
-                              viewModel.onPressedSave();
+                              if (state.mode == TicketMode.create) {
+                                viewModel.onPressedSave();
+                              } else if (state.mode == TicketMode.edit &&
+                                  id != null) {
+                                viewModel.onPressedUpdate(id: id!);
+                              }
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TicketView(mode: mode, id: id,),
+                                  builder: (context) => TicketView(
+                                    mode: mode,
+                                    id: id,
+                                  ),
                                 ),
                               );
                             },
@@ -212,7 +227,7 @@ class TicketView extends HookConsumerWidget {
                           const SizedBox(
                             height: 100.0,
                           ),
-                        if (state.mode == TicketMode.detail)
+                        if (state.mode == TicketMode.detail && id != null)
                           Center(
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40.0),

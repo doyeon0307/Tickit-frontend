@@ -40,6 +40,7 @@ class ScheduleView extends HookConsumerWidget {
 
     final imagePicker = ImagePicker();
 
+
     useEffect(() {
       Future.microtask(
         () => viewModel.initView(date: date),
@@ -384,7 +385,7 @@ class ScheduleView extends HookConsumerWidget {
                               if (mode == ScheduleMode.create) {
                                 await viewModel.onSavePressed();
                               }
-                              if (context.mounted) {
+                              if (state.loadingSave==LoadingStatus.success && context.mounted) {
                                 Navigator.of(context).pop(true);
                               }
                             },
@@ -409,13 +410,13 @@ class ScheduleView extends HookConsumerWidget {
     required String networkImage,
     required XFile? image,
   }) {
-    if (isCreate && image != null) {
+    Widget buildImageWidget(ImageProvider imageProvider) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(4.0),
         child: DecoratedBox(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: FileImage(File(image.path)),
+              image: imageProvider,
               fit: BoxFit.cover,
             ),
           ),
@@ -424,19 +425,19 @@ class ScheduleView extends HookConsumerWidget {
       );
     }
 
-    if (isDetail && networkImage.isNotEmpty) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(4.0),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(networkImage),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Container(),
-        ),
-      );
+    if (isCreate) {
+      if (image != null) {
+        return buildImageWidget(FileImage(File(image.path)));
+      }
+    }
+
+    if (isDetail) {
+      if (image != null) {
+        return buildImageWidget(FileImage(File(image.path)));
+      }
+      if (networkImage.isNotEmpty) {
+        return buildImageWidget(NetworkImage(networkImage));
+      }
     }
 
     return Text(

@@ -8,7 +8,8 @@ class TicketEntity {
   final String title;
   final String location;
   final String image;
-  final String datetime;
+  final String date;
+  final String time;
   final String backgroundColor;
   final String foregroundColor;
   final List<Fields> fields;
@@ -18,7 +19,8 @@ class TicketEntity {
     required this.title,
     required this.location,
     required this.image,
-    required this.datetime,
+    required this.date,
+    required this.time,
     required this.backgroundColor,
     required this.foregroundColor,
     required this.fields,

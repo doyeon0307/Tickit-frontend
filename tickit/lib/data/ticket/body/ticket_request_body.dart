@@ -7,16 +7,18 @@ class TicketRequestBody {
   final String image;
   final String location;
   final String title;
-  final String datetime;
-  String? backgroundColor;
-  String? foregroundColor;
-  List<Field>? fields;
+  final String date;
+  final String time;
+  final String? backgroundColor;
+  final String? foregroundColor;
+  final List<Field>? fields;
 
   TicketRequestBody({
     required this.image,
     required this.location,
     required this.title,
-    required this.datetime,
+    required this.date,
+    required this.time,
     this.backgroundColor,
     this.foregroundColor,
     this.fields,

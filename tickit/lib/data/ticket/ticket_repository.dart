@@ -47,24 +47,9 @@ class TicketRepository extends Repository {
   }
 
   Future<RepositoryResult<String>> makeTicket({
-    required String image,
-    required String location,
-    required String title,
-    required String datetime,
-    String? backgroundColor,
-    String? foregroundColor,
-    List<Field>? fields,
+    required TicketRequestBody ticketDTO,
   }) async {
     try {
-      final ticketDTO = TicketRequestBody(
-        image: image,
-        location: location,
-        title: title,
-        datetime: datetime,
-        backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
-        fields: fields,
-      );
       final resp = await _dataSource.makeTicket(ticketDTO: ticketDTO);
       if (resp.data != null) {
         return SuccessRepositoryResult<String>(data: resp.data!);
@@ -113,24 +98,9 @@ class TicketRepository extends Repository {
 
   Future<RepositoryResult<TicketEntity>> updateTicket({
     required String id,
-    required String image,
-    required String location,
-    required String title,
-    required String datetime,
-    String? backgroundColor,
-    String? foregroundColor,
-    List<Field>? fields,
+    required TicketRequestBody ticketDTO,
   }) async {
     try {
-      final ticketDTO = TicketRequestBody(
-        image: image,
-        location: location,
-        title: title,
-        datetime: datetime,
-        backgroundColor: backgroundColor,
-        foregroundColor: foregroundColor,
-        fields: fields,
-      );
       final resp = await _dataSource.updateTicket(
         id: id,
         ticketDTO: ticketDTO,

@@ -22,7 +22,7 @@ class EditButtonsWidget extends StatelessWidget {
         TextButton(
           style: TextButton.styleFrom(overlayColor: Colors.grey),
           onPressed: () async {
-            final result = await showDialog<bool>(
+            showDialog(
               context: context,
               builder: (context) => CustomDialog(
                 title: "정말 삭제할까요?",
@@ -30,8 +30,8 @@ class EditButtonsWidget extends StatelessWidget {
                 leftButtonLabel: "취소",
                 rightButtonLabel: "삭제",
                 onPressedLeftButton: () => Navigator.of(context).pop(false),
-                onPressedRightButton: () {
-                  onTapDelete();
+                onPressedRightButton: () async {
+                  onTapDelete;
                   Navigator.of(context).pop(true);
                 },
               ),

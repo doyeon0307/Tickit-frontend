@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tickit/core/repository/repository_result.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
+import 'package:tickit/core/util/request_body_date_time_format.dart';
 import 'package:tickit/data/schedule/body/schedule_request_body.dart';
 import 'package:tickit/data/schedule/entity/schedule_entity.dart';
 import 'package:tickit/data/schedule/schedule_repository.dart';
@@ -32,14 +33,8 @@ class UpdateScheduleUseCase {
     required String title,
     required bool isAM,
   }) async {
-    final newDate = "${date.year}-${date.month}-${date.day}";
-    late String time;
-
-    if (isAM) {
-      time = "AM-$hour-$minute";
-    } else {
-      time="PM-$hour-$minute";
-    }
+    final newDate = makeRequestDate(date: date);
+    final time = makeRequestTime(hour: hour, minute: minute, isAM: isAM);
 
     final RepositoryResult<ScheduleEntity> repositoryResult =
         await _scheduleRepository.updateSchedule(

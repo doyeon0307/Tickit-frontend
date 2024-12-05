@@ -2,20 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
-import 'package:tickit/service/network/dio.dart';
 
 final uploadImageToS3UseCaseProvider = Provider.autoDispose(
-      (ref) => UploadImageToS3UseCase(
-    dio: ref.watch(dioProvider),
-  ),
+  (ref) => UploadImageToS3UseCase(),
 );
 
 class UploadImageToS3UseCase {
-  final Dio _dio;
-
-  UploadImageToS3UseCase({
-    required Dio dio,
-  }) : _dio = dio;
+  UploadImageToS3UseCase();
 
   final Dio myDio = Dio();
 
