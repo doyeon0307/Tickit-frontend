@@ -11,31 +11,31 @@ import 'package:tickit/service/network/dio.dart';
 part 'auth_remote_data_source.g.dart';
 
 final authRemoteDataSourceProvider = Provider((ref) => AuthRemoteDataSource(
-      ref.read(dioProvider),
-      baseUrl: "http://$ip/api/auth",
-    ));
+  ref.read(dioProvider),
+  baseUrl: "http://$ip/api/auth",
+));
 
 @RestApi()
 abstract class AuthRemoteDataSource {
   factory AuthRemoteDataSource(Dio dio, {String baseUrl}) =
-      _AuthRemoteDataSource;
+  _AuthRemoteDataSource;
 
   @GET("")
   @Headers({"accessToken": "true"})
   Future<ApiResponse<ProfileEntity>> getProfile();
 
-  // @DELETE("")
-  // @Headers({'accessToken': 'true'})
-  // withdraw();
+  @DELETE("")
+  @Headers({'accessToken': 'true'})
+  Future<ApiResponse<String>> withdraw();
 
   @POST("/kakao/login")
   Future<ApiResponse<AuthTokensEntity>> kakaoLogin({
     @Body() required AuthKakaoTokensRequestBody tokens,
   });
 
-  // @DELETE("")
-  // @Headers({'accessToken': 'true'})
-  // logout();
+  @DELETE("/logout")
+  @Headers({'accessToken': 'true'})
+  Future<ApiResponse<String>> logout();
 
   @POST("/kakao/register")
   Future<ApiResponse<AuthTokensEntity>> kakaoRegister({

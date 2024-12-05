@@ -59,6 +59,43 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
+  Future<ApiResponse<String>> withdraw() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ApiResponse<String>>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<String> _value;
+    try {
+      _value = ApiResponse<String>.fromJson(
+        _result.data!,
+        (json) => json as String,
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApiResponse<AuthTokensEntity>> kakaoLogin(
       {required AuthKakaoTokensRequestBody tokens}) async {
     final _extra = <String, dynamic>{};
@@ -88,6 +125,43 @@ class _AuthRemoteDataSource implements AuthRemoteDataSource {
       _value = ApiResponse<AuthTokensEntity>.fromJson(
         _result.data!,
         (json) => AuthTokensEntity.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ApiResponse<String>> logout() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'accessToken': 'true'};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ApiResponse<String>>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/logout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiResponse<String> _value;
+    try {
+      _value = ApiResponse<String>.fromJson(
+        _result.data!,
+        (json) => json as String,
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

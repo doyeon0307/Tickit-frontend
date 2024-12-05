@@ -39,13 +39,15 @@ class SettingAccountView extends ConsumerWidget {
                     leftButtonLabel: "취소하기",
                     rightButtonLabel: "로그아웃",
                     onPressedLeftButton: () => Navigator.of(context).pop(),
-                    onPressedRightButton: () {
-                      viewModel.logout();
-                      Navigator.of(context).pop(true);
+                    onPressedRightButton: () async {
+                      await viewModel.onLogoutPressed();
+                      if (context.mounted) {
+                        Navigator.of(context).pop(true);
+                      }
                     },
                   ),
                 );
-                if (result != null && result) {
+                if (result != null && result && context.mounted) {
                   pushReplacementWithoutNavBar(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginView()),
@@ -66,16 +68,20 @@ class SettingAccountView extends ConsumerWidget {
                     leftButtonLabel: "취소하기",
                     rightButtonLabel: "탈퇴하기",
                     onPressedLeftButton: () => Navigator.of(context).pop(),
-                    onPressedRightButton: () {
-                      viewModel.logout();
-                      Navigator.of(context).pop(true);
+                    onPressedRightButton: () async {
+                      await viewModel.onWithdrawPressed();
+                      if (context.mounted) {
+                        Navigator.of(context).pop(true);
+                      }
                     },
                   ),
                 );
-                if (result != null && result) {
+                if (result != null && result && context.mounted) {
                   pushReplacementWithoutNavBar(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginView()),
+                    MaterialPageRoute(
+                      builder: (context) => const LoginView(),
+                    ),
                   );
                 }
               },

@@ -25,7 +25,7 @@ class SplashViewModel extends StateNotifier<SplashState> {
 
     await Future.wait([
       _appService.initialize(),
-      Future.delayed(const Duration(seconds: 2)),
+      Future.delayed(const Duration(seconds: 1)),
     ]);
 
     if (mounted) {

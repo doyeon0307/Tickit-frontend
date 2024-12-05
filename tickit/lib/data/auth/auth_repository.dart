@@ -83,4 +83,50 @@ class AuthRepository extends Repository {
       );
     }
   }
+
+  Future<RepositoryResult<String>> withdraw() async {
+    try {
+      final resp = await _authRemoteDataSource.withdraw();
+      if (resp.data != null) {
+        return SuccessRepositoryResult(data: resp.data!);
+      } else {
+        return FailureRepositoryResult(
+          statusCode: resp.code,
+          messages: [resp.message],
+        );
+      }
+    } on DioException catch (e) {
+      final String errorMessage =
+          e.response?.data['message'] as String? ?? "unknownError".tr();
+
+      return FailureRepositoryResult<String>(
+        error: e,
+        messages: [errorMessage],
+        statusCode: e.response?.statusCode,
+      );
+    }
+  }
+
+  Future<RepositoryResult<String>> logout() async {
+    try {
+      final resp = await _authRemoteDataSource.logout();
+      if (resp.data != null) {
+        return SuccessRepositoryResult(data: resp.data!);
+      } else {
+        return FailureRepositoryResult(
+          statusCode: resp.code,
+          messages: [resp.message],
+        );
+      }
+    } on DioException catch (e) {
+      final String errorMessage =
+          e.response?.data['message'] as String? ?? "unknownError".tr();
+
+      return FailureRepositoryResult<String>(
+        error: e,
+        messages: [errorMessage],
+        statusCode: e.response?.statusCode,
+      );
+    }
+  }
 }
