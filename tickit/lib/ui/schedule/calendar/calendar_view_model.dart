@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
+import 'package:tickit/core/util/calendar_date_utils.dart';
 import 'package:tickit/domain/schedule/get_schedule_preview_list_use_case.dart';
 import 'package:tickit/domain/schedule/model/schedule_preview_model.dart';
 import 'package:tickit/ui/schedule/calendar/calendar_state.dart';
-import 'package:tickit/util/date_utils.dart';
 
 final calendarViewModelProvider =
     StateNotifierProvider.autoDispose<CalendarViewModel, CalendarState>(

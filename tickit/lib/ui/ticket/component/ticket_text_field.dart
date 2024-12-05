@@ -27,6 +27,7 @@ class TicketTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       initialValue: initialValue,
       readOnly: readOnly,
       maxLines: null,

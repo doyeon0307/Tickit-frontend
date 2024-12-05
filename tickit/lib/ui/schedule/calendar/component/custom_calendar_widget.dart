@@ -22,7 +22,7 @@ class CustomCalendarWidget extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     final weeksInMonth = _getWeeksInMonth();
 
-    final gridHeight = screenHeight - 240;
+    final gridHeight = screenHeight - 260;
     final cellHeight = gridHeight / weeksInMonth;
 
     final markedDates = <DateTime, Widget>{};

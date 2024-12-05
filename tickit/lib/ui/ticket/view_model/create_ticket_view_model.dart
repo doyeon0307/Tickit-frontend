@@ -5,7 +5,6 @@ import 'package:tickit/domain/s3/get_presigned_url_use_case.dart';
 import 'package:tickit/domain/s3/model/s3_url_model.dart';
 import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
-import 'package:tickit/domain/ticket/get_ticket_previews_use_case.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
@@ -13,17 +12,14 @@ class CreateTicketViewModel extends BaseTicketViewModel {
   final CreateTicketUseCase _createTicketUseCase;
   final GetPresignedUrlUseCase _getPresignedUrlUseCase;
   final UploadImageToS3UseCase _uploadImageToS3UseCase;
-  final GetTicketPreviewsUseCase _getTicketPreviewsUseCase;
 
   CreateTicketViewModel({
     required CreateTicketUseCase createTicketUseCase,
     required GetPresignedUrlUseCase getPresignedUrlUseCase,
     required UploadImageToS3UseCase uploadImageToS3UseCase,
-    required GetTicketPreviewsUseCase getTicketPreviewsUseCase,
   })  : _createTicketUseCase = createTicketUseCase,
         _getPresignedUrlUseCase = getPresignedUrlUseCase,
-        _uploadImageToS3UseCase = uploadImageToS3UseCase,
-        _getTicketPreviewsUseCase = getTicketPreviewsUseCase;
+        _uploadImageToS3UseCase = uploadImageToS3UseCase;
 
   @override
   void initState() {
@@ -94,13 +90,16 @@ class CreateTicketViewModel extends BaseTicketViewModel {
 
       // make ticket
       final makeTicketResult = await _createTicketUseCase(
-        image: imageUrl,
-        title: state.title,
-        datetime: state.dateTime,
+        networkImage: imageUrl,
+        isAM: state.isAm,
+        hour: state.hour.toString(),
         location: state.location,
-        fields: state.fields,
+        minute: state.minute.toString(),
+        date: state.date!,
+        title: state.title,
         foregroundColor: state.foregroundColor.toString(),
         backgroundColor: state.backgroundColor.toString(),
+        fields: state.fields,
       );
       switch (makeTicketResult) {
         case SuccessUseCaseResult<String>():
@@ -134,31 +133,25 @@ class CreateTicketViewModel extends BaseTicketViewModel {
         return;
       }
     }
-
-    initState();
-    try {
-      _getTicketPreviewsUseCase;
-    } catch (e) {
-      debugPrint("티켓 목록 업데이트 실패: $e");
-    }
   }
 
   @override
   Future<void> initDetailView({required String id}) {
-    throw UnimplementedError();
+    throw UnsupportedError("initDetailView");
   }
 
   @override
   Future<void> onTapDelete({required String id}) {
-    throw UnimplementedError();
+    throw UnsupportedError("onTapDelete");
   }
 
   @override
   void onTapEditButton() {
-    throw UnimplementedError();
+    throw UnsupportedError("onTapEditButton");
+  }
+
+  @override
+  Future<void> onPressedUpdate({required String id}) {
+    throw UnsupportedError("onPressedUpdate");
   }
 }
-
-// String colorToString(Color color) {
-//   return '0x${color.value.toRadixString(16).padLeft(8, '0')}';
-// }

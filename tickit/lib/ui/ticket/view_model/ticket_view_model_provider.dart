@@ -4,7 +4,7 @@ import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/delete_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_detail_use_case.dart';
-import 'package:tickit/domain/ticket/get_ticket_previews_use_case.dart';
+import 'package:tickit/domain/ticket/update_ticket_use_case.dart';
 import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/ticket/view_model/base_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/view_model/create_ticket_view_model.dart';
@@ -18,21 +18,21 @@ final ticketViewModelProvider = StateNotifierProvider.family
       createTicketUseCase: ref.read(createTicketUseCaseProvider),
       getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
       uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
-      getTicketPreviewsUseCase: ref.read(getTicketPreviewsUseCaseProvider),
     );
   }
   if (mode == TicketMode.detail) {
     return DetailTicketViewModel(
       getTicketDetailUseCase: ref.read(getTicketDetailUseCaseProvider),
       deleteTicketUseCase: ref.read(deleteTicketUseCaseProvider),
-      getTicketPreviewsUseCase: ref.read(getTicketPreviewsUseCaseProvider),
+      uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
+      getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
+      updateTicketUseCase: ref.read(updateTicketUseCaseProvider),
     );
   } else {
     return CreateTicketViewModel(
       createTicketUseCase: ref.read(createTicketUseCaseProvider),
       getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
       uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
-      getTicketPreviewsUseCase: ref.read(getTicketPreviewsUseCaseProvider),
     );
   }
 });

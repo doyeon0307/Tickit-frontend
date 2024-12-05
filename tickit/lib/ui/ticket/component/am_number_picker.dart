@@ -32,7 +32,8 @@ class TimeNumberPicker extends ConsumerWidget {
       selectedTextStyle: Typo.gangwonR20.copyWith(
         color: AppColors.textColor,
       ),
-      minValue: 0,
+      infiniteLoop: true,
+      minValue: isHour ? 1 : 0,
       maxValue: isHour ? 12 : 50,
       step: isHour ? 1 : 10,
       value: isHour ? state.hour : state.minute,

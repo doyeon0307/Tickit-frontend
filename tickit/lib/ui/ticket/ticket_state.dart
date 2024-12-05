@@ -19,7 +19,7 @@ class TicketState with _$TicketState {
     @Default("날짜를 선택하세요") String dateTime,
     @Default(null) DateTime? date,
     @Default(true) bool isAm,
-    @Default(0) int hour,
+    @Default(7) int hour,
     @Default(0) int minute,
     @Default(Colors.white) Color backgroundColor,
     @Default(Color(0xff141414)) Color foregroundColor,
