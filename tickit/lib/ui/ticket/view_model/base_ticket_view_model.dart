@@ -14,7 +14,7 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
 
   void onPressedCancel();
 
-  Future<void> onPressedSave();
+  Future<bool> onPressedSave();
 
   // detail
   Future<void> initDetailView({required String id});
@@ -168,7 +168,7 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
       );
     }
     final dateTime = "${makeRequestDate(date: state.date!)} ${state.isAm ? "AM" : "PM"}"
-        "${getTimeFormat(time: state.hour.toString())}:${getTimeFormat(time: state.minute.toString())}";
+        " ${getTimeFormat(time: state.hour.toString())}:${getTimeFormat(time: state.minute.toString())}";
     if (mounted) {
       state = state.copyWith(
         dateTime: dateTime,

@@ -36,8 +36,26 @@ class CreateTicketViewModel extends BaseTicketViewModel {
   }
 
   @override
-  Future<void> onPressedSave() async {
-    if (state.image == null || state.dateTime == "날짜를 선택하세요" || state.date == null) return;
+  Future<bool> onPressedSave() async {
+    if (state.image == null) {
+      state = state.copyWith(errorMsg: "사진을 등록해주세요.");
+      return false;
+    }
+
+    if (state.title.isEmpty) {
+      state = state.copyWith(errorMsg: "제목을 입력해주세요.");
+      return false;
+    }
+
+    if (state.dateTime == "날짜를 선택하세요" || state.date == null) {
+      state = state.copyWith(errorMsg: "일시를 선택해주세요.");
+      return false;
+    }
+
+    if (state.location.isEmpty) {
+      state = state.copyWith(errorMsg: "장소를 입력해주세요.");
+      return false;
+    }
 
     try {
       state = state.copyWith(
@@ -54,14 +72,12 @@ class CreateTicketViewModel extends BaseTicketViewModel {
         case SuccessUseCaseResult<S3UrlModel>():
           urlData = getUrlResult.data;
         case FailureUseCaseResult<S3UrlModel>():
-          if (mounted) {
-            state = state.copyWith(
-              makeTicketLoading: LoadingStatus.error,
-              errorMsg: "unknownError".tr(),
-            );
-            debugPrint("url 요청 오류: ${getUrlResult.message}");
-            return;
-          }
+          state = state.copyWith(
+            makeTicketLoading: LoadingStatus.error,
+            errorMsg: "unknownError".tr(),
+          );
+          debugPrint("url 요청 오류: ${getUrlResult.message}");
+          return false;
       }
 
       // upload image
@@ -74,15 +90,10 @@ class CreateTicketViewModel extends BaseTicketViewModel {
       switch (imageUploadResult) {
         case SuccessUseCaseResult<void>():
           imageUrl = urlData.imageUrl;
-          if (mounted) {
-            state = state.copyWith();
-          }
         case FailureUseCaseResult<void>():
-          if (mounted) {
-            state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
-            debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
-            return;
-          }
+          state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
+          debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
+          return false;
       }
 
       // make ticket
@@ -98,31 +109,23 @@ class CreateTicketViewModel extends BaseTicketViewModel {
         backgroundColor: state.backgroundColor.toString(),
         fields: state.fields,
       );
+
       switch (makeTicketResult) {
         case SuccessUseCaseResult<String>():
-          if (mounted) {
-            state = state.copyWith(
-              makeTicketLoading: LoadingStatus.success,
-              successMsg: "티켓이 만들어졌어요! 만들어진 티켓은 홈 화면에서 확인할 수 있어요.",
-            );
-          }
+          state = state.copyWith(
+            makeTicketLoading: LoadingStatus.success,
+            successMsg: "티켓이 만들어졌어요! 만들어진 티켓은 홈 화면에서 확인할 수 있어요.",
+          );
+          debugPrint("스낵바를 보여줘!!!!!");
+          return true;
         case FailureUseCaseResult<String>():
-          if (mounted) {
-            state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
-            debugPrint("티켓 생성 오류: ${makeTicketResult.message}");
-            return;
-          } else {
-            if (mounted) {
-              state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
-            }
-            return;
-          }
+          state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
+          debugPrint("티켓 생성 오류: ${makeTicketResult.message}");
+          return false;
       }
     } catch (e) {
-      if (mounted) {
-        state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
-        return;
-      }
+      state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
+      return false;
     }
   }
 

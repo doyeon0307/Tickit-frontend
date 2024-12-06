@@ -184,21 +184,39 @@ class TicketView extends HookConsumerWidget {
                                 ),
                               );
                             },
-                            onPressedSave: () {
+                            onPressedSave: () async {
                               if (state.mode == TicketMode.create) {
-                                viewModel.onPressedSave();
+                                final result = await viewModel.onPressedSave();
+
+                                if (result) {
+                                  await Future.delayed(const Duration(milliseconds: 100));
+                                  viewModel.initState();
+                                  if (context.mounted) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TicketView(
+                                          mode: mode,
+                                          id: id,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                }
                               } else if (state.mode == TicketMode.edit && id != null) {
-                                viewModel.onPressedUpdate(id: id!);
+                                await viewModel.onPressedUpdate(id: id!);
+                                if (context.mounted) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TicketView(
+                                        mode: mode,
+                                        id: id,
+                                      ),
+                                    ),
+                                  );
+                                }
                               }
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TicketView(
-                                    mode: mode,
-                                    id: id,
-                                  ),
-                                ),
-                              );
                             },
                           ),
                         if (state.mode == TicketMode.create)

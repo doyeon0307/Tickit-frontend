@@ -223,7 +223,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
   }
 
   @override
-  Future<void> onPressedSave() {
+  Future<bool> onPressedSave() {
     throw UnsupportedError("onPressedSave");
   }
 

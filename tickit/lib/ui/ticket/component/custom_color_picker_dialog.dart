@@ -67,7 +67,7 @@ class _CustomColorPickerDialogState extends ConsumerState<CustomColorPickerDialo
               height: 460.0,
               child: BlockPicker(
                 pickerColor: widget.color,
-                onColorChanged: (value) => widget.onColorChanged,
+                onColorChanged: widget.onColorChanged,
               ),
             )
           : SizedBox(
