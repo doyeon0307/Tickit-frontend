@@ -34,7 +34,7 @@ class LocationWidget extends StatelessWidget {
         IntrinsicWidth(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 5 / 12,
+              maxWidth: MediaQuery.of(context).size.width / 3,
             ),
             child: TicketTextField(
               readOnly: isDetail,
