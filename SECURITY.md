@@ -22,12 +22,11 @@ Send your report to: dodo03@khu.ac.kr
 ### What to include
 
 Please include the following information in your report:
-- Type of issue (e.g., buffer overflow, SQL injection, cross-site scripting, etc.)
-- Full paths of source file(s) related to the manifestation of the issue
+- Type of issue (e.g., authentication bypass, data exposure, cross-site scripting, etc.)
+- Full paths of source file(s) related to the issue
 - The location of the affected source code (tag/branch/commit or direct URL)
 - Any special configuration required to reproduce the issue
 - Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
 - Impact of the issue, including how an attacker might exploit it
 
 ### Response Process
@@ -43,7 +42,7 @@ We do not currently offer a bug bounty program.
 
 ## Third-Party Packages
 
-Tickit uses third-party packages. While we regularly update our dependencies to patch known vulnerabilities, we encourage users to report vulnerabilities they find in our dependencies.
+Tickit uses third-party Flutter packages. While we regularly update our dependencies to patch known vulnerabilities, we encourage users to report vulnerabilities they find in our dependencies.
 
 ## Public Disclosure
 
