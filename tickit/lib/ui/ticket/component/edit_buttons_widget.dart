@@ -4,7 +4,7 @@ import 'package:tickit/ui/common/component/custom_dialog.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
 class EditButtonsWidget extends StatelessWidget {
-  final VoidCallback onTapDelete;
+  final Future<void> Function() onTapDelete;
   final VoidCallback onTapSaveAsImage;
   final VoidCallback onTapEdit;
 
@@ -21,7 +21,7 @@ class EditButtonsWidget extends StatelessWidget {
       children: [
         TextButton(
           style: TextButton.styleFrom(overlayColor: Colors.grey),
-          onPressed: () async {
+          onPressed: () {
             showDialog(
               context: context,
               builder: (context) => CustomDialog(
@@ -31,8 +31,11 @@ class EditButtonsWidget extends StatelessWidget {
                 rightButtonLabel: "삭제",
                 onPressedLeftButton: () => Navigator.of(context).pop(false),
                 onPressedRightButton: () async {
-                  onTapDelete;
-                  Navigator.of(context).pop(true);
+                  onTapDelete();
+                  await Future.delayed(const Duration(milliseconds: 100));
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                  }
                 },
               ),
             );

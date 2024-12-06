@@ -95,16 +95,14 @@ class DetailTicketViewModel extends BaseTicketViewModel {
           );
         }
       case FailureUseCaseResult<String>():
-        if (mounted) {
-          state = state.copyWith(errorMsg: "티켓 삭제에 실패했습니다. 다시 시도해주세요.");
-        }
+        state = state.copyWith(errorMsg: "티켓 삭제에 실패했습니다. 다시 시도해주세요.");
         return;
     }
   }
 
   @override
   void onPressedCancel() {
-    throw UnsupportedError("onPressedCacel");
+    throw UnsupportedError("onPressedCancel");
   }
 
   @override

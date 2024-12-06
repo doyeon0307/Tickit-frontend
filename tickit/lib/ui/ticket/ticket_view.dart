@@ -228,11 +228,7 @@ class TicketView extends HookConsumerWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40.0),
                               child: EditButtonsWidget(
-                                onTapDelete: () {
-                                  if (id != null) {
-                                    viewModel.onTapDelete(id: id!);
-                                  }
-                                },
+                                onTapDelete: () => viewModel.onTapDelete(id: id!),
                                 onTapSaveAsImage: () {},
                                 onTapEdit: () => viewModel.onTapEditButton(),
                               ),

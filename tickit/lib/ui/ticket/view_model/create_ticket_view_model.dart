@@ -116,7 +116,6 @@ class CreateTicketViewModel extends BaseTicketViewModel {
             makeTicketLoading: LoadingStatus.success,
             successMsg: "티켓이 만들어졌어요! 만들어진 티켓은 홈 화면에서 확인할 수 있어요.",
           );
-          debugPrint("스낵바를 보여줘!!!!!");
           return true;
         case FailureUseCaseResult<String>():
           state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "unknownError".tr());
