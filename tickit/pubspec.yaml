@@ -13,9 +13,69 @@ dependencies:
 
 
   cupertino_icons: ^1.0.6
+  persistent_bottom_nav_bar_v2: ^5.3.1
+  flutter_svg: ^2.0.10+1
+  vertical_card_pager: ^1.6.2
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  image_picker: ^1.1.2
+  flutter_colorpicker: ^1.1.0
+  calendar_date_picker2: ^1.1.7
+  numberpicker: ^2.1.2
+
+  dio: ^5.7.0
+  kakao_flutter_sdk_user: ^1.9.6
+  flutter_secure_storage: ^4.2.1
+  flutter_riverpod: ^2.6.1
+  retrofit: ^4.4.1
+  retrofit_generator: ^8.2.1
+  easy_localization: ^3.0.7
+  intl: ^0.19.0
+  lottie: ^3.1.3
+  hooks_riverpod: ^2.6.1
+  flutter_hooks: ^0.20.5
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.11
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/l10n/
+    - assets/icon/
+    - assets/image/
+    - assets/deco/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/Pretendard-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Pretendard-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Pretendard-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Pretendard-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Pretendard-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Pretendard-Black.ttf
+          weight: 900
+
+    - family: Gangwon
+      fonts:
+        - asset: assets/fonts/Gangwon-Edu-All.ttf
