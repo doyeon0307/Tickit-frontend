@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/loading_status.dart';
@@ -34,13 +33,13 @@ class _SplashViewState extends ConsumerState<SplashView> {
       (previous, next) {
         if (next.loginCheckLoading == LoadingStatus.success) {
           if (next.isLoggedIn) {
-            Navigator.of(context).push(
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const NavBar(),
               ),
             );
           } else {
-            Navigator.of(context).push(
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const LoginView(),
               ),

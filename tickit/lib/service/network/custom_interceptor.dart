@@ -16,7 +16,8 @@ class CustomInterceptor extends Interceptor {
   @override
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
-    debugPrint("[REQ] ${options.uri}");
+    // debugPrint("[REQ] ${options.uri}");
+    debugPrint("[REQ]");
     debugPrint("\t\tbody: ${options.data}");
     debugPrint("\t\theader: ${options.headers}");
 
@@ -51,7 +52,6 @@ class CustomInterceptor extends Interceptor {
 
     try {
       if (isStatus401 && !isPathRefresh) {
-        debugPrint("[TOKEN] 토큰 갱신 시작 - ${err.requestOptions.path}");
         final refreshToken = await storage.read(key: REFRESH_TOKEN_KEY);
 
         if (refreshToken == null) {
@@ -79,10 +79,7 @@ class CustomInterceptor extends Interceptor {
         final options = err.requestOptions;
         options.headers['Authorization'] = 'Bearer $newAccessToken';
 
-        debugPrint("[TOKEN] 원래 요청 재시도 - ${options.path}");
         final response = await dio.fetch(options);
-
-        debugPrint("[TOKEN] 재요청 완료");
         handler.resolve(response);
       } else {
         handler.reject(err);

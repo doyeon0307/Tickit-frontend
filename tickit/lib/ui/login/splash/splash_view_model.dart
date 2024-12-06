@@ -22,10 +22,8 @@ class SplashViewModel extends StateNotifier<SplashState> {
     debugPrint("로그인 상태를 확인합니다");
     state = state.copyWith(loginCheckLoading: LoadingStatus.loading);
 
-    await Future.wait([
-      _appService.initialize(),
-      Future.delayed(const Duration(seconds: 1)),
-    ]);
+    await _appService.initialize();
+    await Future.delayed(const Duration(seconds: 1));
 
     if (mounted) {
       state = state.copyWith(
