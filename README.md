@@ -1,6 +1,13 @@
 # Tickit!
 Let me introduce my app.
-<br><br><br>
+<br><br>
+
+### Getting Started
+This app requires server integration. Since you'll need API keys and server configurations to run it, please contact us if you'd like to try out the app:
+- Email: dodo03@khu.ac.kr
+
+---
+
 ### MVP
 ![image](https://github.com/user-attachments/assets/69095abd-957a-4a04-8d6a-7b8e39c20e86)
 
