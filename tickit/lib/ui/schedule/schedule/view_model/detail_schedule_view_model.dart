@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
@@ -60,7 +61,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
         if (mounted) {
           state = state.copyWith(
             loadingSave: LoadingStatus.error,
-            errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+            errorMsg: "unknownError".tr(),
           );
           debugPrint("일정 불러오기 오류: ${result.message}");
           return;
@@ -116,7 +117,10 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
             }
           case FailureUseCaseResult<void>():
             if (mounted) {
-              state = state.copyWith(loadingSave: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              state = state.copyWith(
+                loadingSave: LoadingStatus.error,
+                errorMsg: "unknownError".tr(),
+              );
               debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
               return;
             }
@@ -151,7 +155,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
           if (mounted) {
             state = state.copyWith(
               loadingSave: LoadingStatus.error,
-              errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+              errorMsg: "unknownError".tr(),
             );
             debugPrint("티켓 생성 오류: ${result.message}");
             return;
@@ -159,7 +163,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
             if (mounted) {
               state = state.copyWith(
                 loadingSave: LoadingStatus.error,
-                errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+                errorMsg: "unknownError".tr(),
               );
             }
             return;
@@ -169,7 +173,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
       if (mounted) {
         state = state.copyWith(
           loadingSave: LoadingStatus.error,
-          errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+          errorMsg: "unknownError".tr(),
         );
         debugPrint("티켓 생성 오류 : $e");
       }
@@ -197,7 +201,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
         if (mounted) {
           state = state.copyWith(
             loadingSave: LoadingStatus.error,
-            errorMsg: "오류가 발생했어요. 다시 시도해주세요.",
+            errorMsg: "unknownError".tr(),
           );
         }
     }

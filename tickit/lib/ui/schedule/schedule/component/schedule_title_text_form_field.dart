@@ -44,11 +44,6 @@ class ScheduleTitleTextFormField extends StatelessWidget {
         ),
         enabledBorder: InputBorder.none,
         focusedBorder: InputBorder.none,
-        // focusedBorder: UnderlineInputBorder(
-        //   borderSide: BorderSide(
-        //     color: AppColors.secondaryColor,
-        //   ),
-        // ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,6 +16,7 @@ import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
 import 'package:tickit/ui/schedule/schedule/component/row_form_widget.dart';
+import 'package:tickit/ui/schedule/schedule/component/schedule_image_box_widget.dart';
 import 'package:tickit/ui/schedule/schedule/component/schedule_text_button_widget.dart';
 import 'package:tickit/ui/schedule/schedule/component/schedule_text_form_field.dart';
 import 'package:tickit/ui/schedule/schedule/component/schedule_title_text_form_field.dart';
@@ -54,26 +56,22 @@ class ScheduleView extends HookConsumerWidget {
 
     useEffect(() {
       if (state.errorMsg.isNotEmpty) {
-        Future.microtask(
-          () {
-            if (context.mounted) {
-              return ScaffoldMessenger.of(context).showSnackBar(
-                ErrorSnackBar(message: state.errorMsg),
-              );
-            }
-          },
-        );
+        Future.microtask(() {
+          if (context.mounted) {
+            return ScaffoldMessenger.of(context).showSnackBar(
+              ErrorSnackBar(message: state.errorMsg),
+            );
+          }
+        });
       }
       if (state.successMsg.isNotEmpty) {
-        Future.microtask(
-          () {
-            if (context.mounted) {
-              return ScaffoldMessenger.of(context).showSnackBar(
-                SuccessSnackBar(message: state.successMsg),
-              );
-            }
-          },
-        );
+        Future.microtask(() {
+          if (context.mounted) {
+            return ScaffoldMessenger.of(context).showSnackBar(
+              SuccessSnackBar(message: state.successMsg),
+            );
+          }
+        });
       }
       return null;
     }, [state.errorMsg, state.successMsg]);
@@ -110,7 +108,7 @@ class ScheduleView extends HookConsumerWidget {
                       ),
                       IntrinsicWidth(
                         child: ScheduleTitleTextFormField(
-                          hintText: "제목을 입력하세요",
+                          hintText: "titleHint".tr(),
                           onChanged: (value) => viewModel.onTitleChanged(
                             value: value,
                           ),
@@ -132,21 +130,10 @@ class ScheduleView extends HookConsumerWidget {
                                   XFile? newImage = await imagePicker.pickImage(source: ImageSource.gallery);
                                   viewModel.onImageTap(newImage: newImage);
                                 },
-                                child: Container(
-                                  height: 144.0,
-                                  width: 120.0,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      border: Border.all(
-                                        color: (state.image == null && state.networkImage.isEmpty) ? AppColors.strokeColor.withOpacity(0.8) : Colors.transparent,
-                                      )),
-                                  alignment: Alignment.center,
-                                  child: _buildImageContent(
-                                    isDetail: mode == ScheduleMode.detail,
-                                    isCreate: mode == ScheduleMode.create,
-                                    image: state.image,
-                                    networkImage: state.networkImage,
-                                  ),
+                                child: ScheduleImageBoxWidget(
+                                  image: state.image,
+                                  networkImage: state.networkImage,
+                                  mode: mode,
                                 ),
                               ),
                             ),
@@ -161,7 +148,7 @@ class ScheduleView extends HookConsumerWidget {
                                     icon: Assets.scheduleLocation,
                                     widget: Expanded(
                                       child: ScheduleTextFormField(
-                                        hintText: "장소",
+                                        hintText: "locationHint".tr(),
                                         onChanged: (value) => viewModel.onLocationChanged(
                                           value: value,
                                         ),
@@ -232,7 +219,7 @@ class ScheduleView extends HookConsumerWidget {
                                     icon: Assets.seat,
                                     widget: Expanded(
                                       child: ScheduleTextFormField(
-                                        hintText: "좌석",
+                                        hintText: "seatHint".tr(),
                                         onChanged: (value) => viewModel.onSeatChanged(
                                           value: value,
                                         ),
@@ -253,7 +240,7 @@ class ScheduleView extends HookConsumerWidget {
                         icon: Assets.casting,
                         widget: Expanded(
                           child: ScheduleTextFormField(
-                            hintText: "출연진",
+                            hintText: "castingHint".tr(),
                             onChanged: (value) => viewModel.onCastingChanged(
                               value: value,
                             ),
@@ -268,7 +255,7 @@ class ScheduleView extends HookConsumerWidget {
                         icon: Assets.company,
                         widget: Expanded(
                           child: ScheduleTextFormField(
-                            hintText: "함께 하는 사람",
+                            hintText: "companyHint".tr(),
                             onChanged: (value) => viewModel.onCompanyChanged(
                               value: value,
                             ),
@@ -283,7 +270,7 @@ class ScheduleView extends HookConsumerWidget {
                         icon: Assets.link,
                         widget: Expanded(
                           child: ScheduleTextFormField(
-                            hintText: "링크",
+                            hintText: "linkHint".tr(),
                             onChanged: (value) => viewModel.onLinkChanged(
                               value: value,
                             ),
@@ -298,7 +285,7 @@ class ScheduleView extends HookConsumerWidget {
                         icon: Assets.memo,
                         widget: Expanded(
                           child: ScheduleTextFormField(
-                            hintText: "메모",
+                            hintText: "memoHint".tr(),
                             onChanged: (value) => viewModel.onMemoChanged(
                               value: value,
                             ),
@@ -375,50 +362,6 @@ class ScheduleView extends HookConsumerWidget {
               child: CustomLoading(),
             ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildImageContent({
-    required bool isCreate,
-    required bool isDetail,
-    required String networkImage,
-    required XFile? image,
-  }) {
-    Widget buildImageWidget(ImageProvider imageProvider) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(4.0),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: imageProvider,
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: Container(),
-        ),
-      );
-    }
-
-    if (isCreate) {
-      if (image != null) {
-        return buildImageWidget(FileImage(File(image.path)));
-      }
-    }
-
-    if (isDetail) {
-      if (image != null) {
-        return buildImageWidget(FileImage(File(image.path)));
-      }
-      if (networkImage.isNotEmpty) {
-        return buildImageWidget(NetworkImage(networkImage));
-      }
-    }
-
-    return Text(
-      "사진 추가하기",
-      style: Typo.pretendardR12.copyWith(
-        color: AppColors.strokeColor,
       ),
     );
   }

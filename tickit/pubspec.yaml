@@ -49,6 +49,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/l10n/
     - assets/icon/
     - assets/image/
     - assets/deco/

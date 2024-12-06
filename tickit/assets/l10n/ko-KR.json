@@ -1,0 +1,12 @@
+{
+  "unknownError": "오류가 발생했어요. 다시 시도해주세요.",
+  "imageError": "이미지를 로드할 수 없습니다. 다시 시도해주세요.",
+  "titleHint": "제목을 입력하세요",
+  "locationHint": "장소",
+  "seatHint": "좌석",
+  "castingHint": "출연진",
+  "companyHint": "함께 하는 사람",
+  "linkHint": "링크",
+  "memoHint": "메모",
+  "deleteMessage": "정말 삭제할까요?"
+}

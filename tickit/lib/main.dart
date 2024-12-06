@@ -18,7 +18,7 @@ Future<void> main() async {
     EasyLocalization(
       fallbackLocale: const Locale("ko", "KR"),
       supportedLocales: const [Locale("ko", "KR")],
-      path: "l10n",
+      path: "assets/l10n",
       child: const ProviderScope(
         child: MyApp(),
       ),
@@ -32,6 +32,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'Tickit',
       theme: ThemeData(
