@@ -38,8 +38,6 @@ class AppService extends StateNotifier<AppState> {
       final accessToken = await _storage.read(key: ACCESS_TOKEN_KEY);
       final refreshToken = await _storage.read(key: REFRESH_TOKEN_KEY);
 
-      debugPrint("기존 토큰 : accessToken = $accessToken, refreshToken = $refreshToken");
-
       if (accessToken != null && refreshToken != null) {
         try {
           debugPrint("토큰 갱신 시도");
@@ -51,8 +49,6 @@ class AppService extends StateNotifier<AppState> {
 
           final newAccessToken = result.data["data"]["accessToken"];
           final newRefreshToken = result.data["data"]["refreshToken"];
-
-          debugPrint("newAccessToken: $newAccessToken");
 
           await Future.wait([
             _storage.write(key: ACCESS_TOKEN_KEY, value: newAccessToken),
@@ -105,9 +101,7 @@ class AppService extends StateNotifier<AppState> {
         loading: LoadingStatus.success,
         isLoggedIn: true,
       );
-      debugPrint(
-        "앱 로그인 완료: accessToken=${tokens.accessToken}, refreshToken=${tokens.refreshToken}",
-      );
+      debugPrint("앱 로그인 완료");
     } catch (e) {
       state = state.copyWith(
         loading: LoadingStatus.error,

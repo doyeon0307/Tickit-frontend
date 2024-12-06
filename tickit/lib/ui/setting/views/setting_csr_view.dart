@@ -3,7 +3,7 @@ import 'package:tickit/core/util/url_launcher_encoder.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
-import 'package:tickit/ui/setting/component/setting_divider_widget.dart';
+import 'package:tickit/ui/common/component/setting_divider_widget.dart';
 import 'package:tickit/ui/setting/component/setting_text_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,7 +27,7 @@ class SettingCsrView extends StatelessWidget {
               description: "사용방법을 설명하는 사이트로 연결됩니다.",
               onTap: () {},
             ),
-            const SettingDividerWidget(),
+            const CustomDivider(),
             SettingTextWidget(
               title: "버그 신고",
               description: "불편을 드려 죄송합니다. 신고해주시면 빠르게 해결해드리겠습니다.",
@@ -47,7 +47,7 @@ class SettingCsrView extends StatelessWidget {
                 launchUrl(emailLaunchUri);
               },
             ),
-            const SettingDividerWidget(),
+            const CustomDivider(),
             SettingTextWidget(
               title: "고객의 소리",
               description: "고객님의 의견은 서비스 개선에 큰 도움이 됩니다.",

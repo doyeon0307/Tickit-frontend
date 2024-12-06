@@ -19,7 +19,7 @@ import 'package:tickit/ui/schedule/schedule/component/schedule_text_button_widge
 import 'package:tickit/ui/schedule/schedule/component/schedule_text_form_field.dart';
 import 'package:tickit/ui/schedule/schedule/component/schedule_title_text_form_field.dart';
 import 'package:tickit/ui/schedule/schedule/view_model/schedule_view_model_provider.dart';
-import 'package:tickit/ui/setting/component/setting_divider_widget.dart';
+import 'package:tickit/ui/common/component/setting_divider_widget.dart';
 
 class ScheduleView extends HookConsumerWidget {
   final ScheduleMode mode;
@@ -113,7 +113,7 @@ class ScheduleView extends HookConsumerWidget {
                           initialValue: state.title,
                         ),
                       ),
-                      const SettingDividerWidget(),
+                      const CustomDivider(),
                       const SizedBox(
                         height: 16.0,
                       ),

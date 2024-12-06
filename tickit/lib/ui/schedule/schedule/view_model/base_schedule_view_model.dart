@@ -19,7 +19,6 @@ abstract class BaseScheduleViewModel extends StateNotifier<ScheduleState> {
   // base
   void initView({required DateTime date}) {
     state = state.copyWith(date: date);
-    debugPrint("뷰 초기화 완료: date=${state.date}");
   }
 
   void onImageTap({required XFile? newImage}) {

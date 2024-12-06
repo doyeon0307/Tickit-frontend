@@ -39,7 +39,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
       debugPrint("카카오톡 앱으로 로그인합니다");
       try {
         OAuthToken resp = await UserApi.instance.loginWithKakaoTalk();
-        debugPrint('카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+        debugPrint("카카오톡으로 로그인 성공");
         kakaoLogin(
           accessToken: resp.accessToken,
           idToken: resp.idToken ?? "",
@@ -53,7 +53,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
         }
         try {
           final resp = await UserApi.instance.loginWithKakaoAccount();
-          debugPrint('카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+          debugPrint("카카오톡으로 로그인 성공");
           kakaoLogin(
             accessToken: resp.accessToken,
             idToken: resp.idToken ?? "",

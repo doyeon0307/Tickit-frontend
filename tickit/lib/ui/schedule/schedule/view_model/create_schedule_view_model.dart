@@ -38,7 +38,6 @@ class CreateScheduleViewModel extends BaseScheduleViewModel {
       );
 
       String imageUrl = state.networkImage;
-      debugPrint("이미지 URL: $imageUrl");
       if (state.image != null) {
         final getUrlResult = await _getPresignedUrlUseCase();
         late final S3UrlModel urlData;
