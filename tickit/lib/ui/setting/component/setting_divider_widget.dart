@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
-class SettingDividerWidgtet extends StatelessWidget {
-  const SettingDividerWidgtet({super.key});
+class SettingDividerWidget extends StatelessWidget {
+  const SettingDividerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

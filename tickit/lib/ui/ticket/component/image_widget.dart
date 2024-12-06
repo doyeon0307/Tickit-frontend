@@ -30,8 +30,7 @@ class ImageWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if (!isDetail) {
-          XFile? newImage =
-              await imagePicker.pickImage(source: ImageSource.gallery);
+          XFile? newImage = await imagePicker.pickImage(source: ImageSource.gallery);
           onTapImageBox(newImage);
         }
       },

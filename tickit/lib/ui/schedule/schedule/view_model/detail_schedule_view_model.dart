@@ -36,8 +36,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
       loadingInitView: LoadingStatus.loading,
       errorMsg: "",
     );
-    final UseCaseResult<ScheduleModel> result =
-        await _getScheduleDetailUseCase(id: id);
+    final UseCaseResult<ScheduleModel> result = await _getScheduleDetailUseCase(id: id);
     switch (result) {
       case SuccessUseCaseResult<ScheduleModel>():
         if (mounted) {
@@ -71,10 +70,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
 
   @override
   Future<void> onUpdatePressed({required String id}) async {
-    if (state.date == null ||
-        state.title.isEmpty ||
-        state.hour.isEmpty ||
-        state.minute.isEmpty) {
+    if (state.date == null || state.title.isEmpty || state.hour.isEmpty || state.minute.isEmpty) {
       state = state.copyWith(
         errorMsg: "제목과 시간은 필수로 입력해주세요.",
       );
@@ -120,9 +116,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
             }
           case FailureUseCaseResult<void>():
             if (mounted) {
-              state = state.copyWith(
-                  loadingSave: LoadingStatus.error,
-                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              state = state.copyWith(loadingSave: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
               debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
               return;
             }

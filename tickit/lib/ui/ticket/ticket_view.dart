@@ -53,26 +53,22 @@ class TicketView extends HookConsumerWidget {
 
     useEffect(() {
       if (state.errorMsg.isNotEmpty) {
-        Future.microtask(
-          () {
-            if (context.mounted) {
-              return ScaffoldMessenger.of(context).showSnackBar(
-                ErrorSnackBar(message: state.errorMsg),
-              );
-            }
-          },
-        );
+        Future.microtask(() {
+          if (context.mounted) {
+            return ScaffoldMessenger.of(context).showSnackBar(
+              ErrorSnackBar(message: state.errorMsg),
+            );
+          }
+        });
       }
       if (state.successMsg.isNotEmpty) {
-        Future.microtask(
-          () {
-            if (context.mounted) {
-              return ScaffoldMessenger.of(context).showSnackBar(
-                SuccessSnackBar(message: state.successMsg),
-              );
-            }
-          },
-        );
+        Future.microtask(() {
+          if (context.mounted) {
+            return ScaffoldMessenger.of(context).showSnackBar(
+              SuccessSnackBar(message: state.successMsg),
+            );
+          }
+        });
       }
       return null;
     }, [state.errorMsg, state.successMsg]);
@@ -102,8 +98,7 @@ class TicketView extends HookConsumerWidget {
                     ),
                     child: TitleWidget(
                       isDetail: state.mode == TicketMode.detail,
-                      onChanged: (value) =>
-                          viewModel.onChangedTitle(newTitle: value),
+                      onChanged: (value) => viewModel.onChangedTitle(newTitle: value),
                       color: state.foregroundColor,
                       initialValue: state.title,
                     ),
@@ -132,16 +127,11 @@ class TicketView extends HookConsumerWidget {
                               absorbing: state.mode == TicketMode.detail,
                               child: CalendarWidget(
                                 mode: state.mode,
-                                onDateChanged: (value) =>
-                                    viewModel.onChangedDate(newDate: value),
-                                onPressedAmButton: () =>
-                                    viewModel.onTapAmButton(),
-                                onChangedMinute: (value) =>
-                                    viewModel.onChangedMinute(newMinute: value),
-                                onPressedCheckButton: () =>
-                                    viewModel.onPressedDateTimeCheck(),
-                                onChangedHour: (value) =>
-                                    viewModel.onChangedHour(newHour: value),
+                                onDateChanged: (value) => viewModel.onChangedDate(newDate: value),
+                                onPressedAmButton: () => viewModel.onTapAmButton(),
+                                onChangedMinute: (value) => viewModel.onChangedMinute(newMinute: value),
+                                onPressedCheckButton: () => viewModel.onPressedDateTimeCheck(),
+                                onChangedHour: (value) => viewModel.onChangedHour(newHour: value),
                                 dateTime: state.dateTime,
                                 color: state.foregroundColor,
                               ),
@@ -159,18 +149,10 @@ class TicketView extends HookConsumerWidget {
                                     mode: state.mode,
                                     index: entry.key,
                                     color: state.foregroundColor,
-                                    subTitleInitialValue:
-                                        state.mode == TicketMode.create
-                                            ? null
-                                            : entry.value.subtitle,
-                                    contentInitialValue:
-                                        state.mode == TicketMode.create
-                                            ? null
-                                            : entry.value.content,
-                                    updateFieldTitle:
-                                        viewModel.updateFieldTitle,
-                                    updateFieldContent:
-                                        viewModel.updateFieldContent,
+                                    subTitleInitialValue: state.mode == TicketMode.create ? null : entry.value.subtitle,
+                                    contentInitialValue: state.mode == TicketMode.create ? null : entry.value.content,
+                                    updateFieldTitle: viewModel.updateFieldTitle,
+                                    updateFieldContent: viewModel.updateFieldContent,
                                     removeField: viewModel.removeField,
                                   ),
                                 ),
@@ -182,13 +164,10 @@ class TicketView extends HookConsumerWidget {
                             onTapAddField: () => viewModel.addField(),
                             backgroundColor: state.backgroundColor,
                             foregroundColor: state.foregroundColor,
-                            onBackgroundColorChanged: (newColor) => viewModel
-                                .onBackgroundColorChanged(newColor: newColor),
-                            onForegroundColorChanged: (newColor) => viewModel
-                                .onForegroundColorChanged(newColor: newColor),
+                            onBackgroundColorChanged: (newColor) => viewModel.onBackgroundColorChanged(newColor: newColor),
+                            onForegroundColorChanged: (newColor) => viewModel.onForegroundColorChanged(newColor: newColor),
                           ),
-                        if (!(state.mode == TicketMode.detail))
-                          const SizedBox(height: 16.0),
+                        if (!(state.mode == TicketMode.detail)) const SizedBox(height: 16.0),
                         if (!(state.mode == TicketMode.detail))
                           SaveButtonsWidget(
                             onPressedCancel: () {
@@ -208,8 +187,7 @@ class TicketView extends HookConsumerWidget {
                             onPressedSave: () {
                               if (state.mode == TicketMode.create) {
                                 viewModel.onPressedSave();
-                              } else if (state.mode == TicketMode.edit &&
-                                  id != null) {
+                              } else if (state.mode == TicketMode.edit && id != null) {
                                 viewModel.onPressedUpdate(id: id!);
                               }
                               Navigator.pushReplacement(
@@ -258,8 +236,7 @@ class TicketView extends HookConsumerWidget {
                 icon: const Icon(Icons.arrow_back_ios),
               ),
             ),
-          if (state.makeTicketLoading == LoadingStatus.loading ||
-              state.initLoading == LoadingStatus.loading)
+          if (state.makeTicketLoading == LoadingStatus.loading || state.initLoading == LoadingStatus.loading)
             const Center(
               child: CustomLoading(),
             ),

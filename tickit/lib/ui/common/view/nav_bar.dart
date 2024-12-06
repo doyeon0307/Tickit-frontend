@@ -28,7 +28,6 @@ class _NavBarState extends State<NavBar> {
         PersistentTabConfig(
           screen: const CalendarView(),
           item: itemConfig(iconPath: Assets.calendar),
-
         ),
         PersistentTabConfig(
           screen: const SettingView(),

@@ -55,7 +55,7 @@ class SettingAccountView extends ConsumerWidget {
                 }
               },
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "회원 탈퇴",
               description: "소중한 기록과..추억이...모두 사라져요......",

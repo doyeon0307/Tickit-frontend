@@ -38,7 +38,7 @@ class LocationWidget extends StatelessWidget {
             ),
             child: TicketTextField(
               readOnly: isDetail,
-              initialValue:initialValue,
+              initialValue: initialValue,
               onChanged: onChanged,
               fontSize: 18.0,
               hintText: "장소를 입력하세요",

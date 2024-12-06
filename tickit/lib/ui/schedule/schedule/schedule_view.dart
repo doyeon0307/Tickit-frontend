@@ -40,7 +40,6 @@ class ScheduleView extends HookConsumerWidget {
 
     final imagePicker = ImagePicker();
 
-
     useEffect(() {
       Future.microtask(
         () => viewModel.initView(date: date),
@@ -118,7 +117,7 @@ class ScheduleView extends HookConsumerWidget {
                           initialValue: state.title,
                         ),
                       ),
-                      const SettingDividerWidgtet(),
+                      const SettingDividerWidget(),
                       const SizedBox(
                         height: 16.0,
                       ),
@@ -130,21 +129,16 @@ class ScheduleView extends HookConsumerWidget {
                               icon: Assets.image,
                               widget: GestureDetector(
                                 onTap: () async {
-                                  XFile? newImage = await imagePicker.pickImage(
-                                      source: ImageSource.gallery);
+                                  XFile? newImage = await imagePicker.pickImage(source: ImageSource.gallery);
                                   viewModel.onImageTap(newImage: newImage);
-                                  },
+                                },
                                 child: Container(
                                   height: 144.0,
                                   width: 120.0,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(4.0),
                                       border: Border.all(
-                                        color: (state.image == null &&
-                                                state.networkImage.isEmpty)
-                                            ? AppColors.strokeColor
-                                                .withOpacity(0.8)
-                                            : Colors.transparent,
+                                        color: (state.image == null && state.networkImage.isEmpty) ? AppColors.strokeColor.withOpacity(0.8) : Colors.transparent,
                                       )),
                                   alignment: Alignment.center,
                                   child: _buildImageContent(
@@ -161,16 +155,14 @@ class ScheduleView extends HookConsumerWidget {
                             child: SizedBox(
                               height: 144.0,
                               child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   RowFormWidget(
                                     icon: Assets.scheduleLocation,
                                     widget: Expanded(
                                       child: ScheduleTextFormField(
                                         hintText: "장소",
-                                        onChanged: (value) =>
-                                            viewModel.onLocationChanged(
+                                        onChanged: (value) => viewModel.onLocationChanged(
                                           value: value,
                                         ),
                                         initialValue: state.location,
@@ -188,20 +180,15 @@ class ScheduleView extends HookConsumerWidget {
                                             ),
                                             style: TextButton.styleFrom(
                                               minimumSize: Size.zero,
-                                              padding:
-                                                  const EdgeInsets.symmetric(
+                                              padding: const EdgeInsets.symmetric(
                                                 horizontal: 8.0,
                                               ),
-                                              tapTargetSize:
-                                                  MaterialTapTargetSize
-                                                      .shrinkWrap,
-                                              overlayColor:
-                                                  AppColors.secondaryColor,
+                                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                              overlayColor: AppColors.secondaryColor,
                                             ),
                                             child: Text(
                                               state.isAM ? "AM" : "PM",
-                                              style:
-                                                  Typo.pretendardR14.copyWith(
+                                              style: Typo.pretendardR14.copyWith(
                                                 color: AppColors.secondaryColor,
                                               ),
                                             ),
@@ -209,14 +196,12 @@ class ScheduleView extends HookConsumerWidget {
                                           Expanded(
                                             child: ScheduleTextFormField(
                                               hintText: "HH",
-                                              onChanged: (value) =>
-                                                  viewModel.onHourChanged(
+                                              onChanged: (value) => viewModel.onHourChanged(
                                                 value: value,
                                               ),
                                               initialValue: state.hour,
                                               textAlign: TextAlign.center,
-                                              keyboardType:
-                                                  TextInputType.number,
+                                              keyboardType: TextInputType.number,
                                             ),
                                           ),
                                           Padding(
@@ -225,23 +210,18 @@ class ScheduleView extends HookConsumerWidget {
                                             ),
                                             child: Text(
                                               ":",
-                                              style: Typo.pretendardR16
-                                                  .copyWith(
-                                                      color: AppColors
-                                                          .strokeColor),
+                                              style: Typo.pretendardR16.copyWith(color: AppColors.strokeColor),
                                             ),
                                           ),
                                           Expanded(
                                             child: ScheduleTextFormField(
                                               hintText: "MM",
-                                              onChanged: (value) =>
-                                                  viewModel.onMinuteChanged(
+                                              onChanged: (value) => viewModel.onMinuteChanged(
                                                 value: value,
                                               ),
                                               initialValue: state.minute,
                                               textAlign: TextAlign.center,
-                                              keyboardType:
-                                                  TextInputType.number,
+                                              keyboardType: TextInputType.number,
                                             ),
                                           ),
                                         ],
@@ -253,8 +233,7 @@ class ScheduleView extends HookConsumerWidget {
                                     widget: Expanded(
                                       child: ScheduleTextFormField(
                                         hintText: "좌석",
-                                        onChanged: (value) =>
-                                            viewModel.onSeatChanged(
+                                        onChanged: (value) => viewModel.onSeatChanged(
                                           value: value,
                                         ),
                                         initialValue: state.seat,
@@ -335,8 +314,7 @@ class ScheduleView extends HookConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ScheduleTextButtonWidget(
-                            label:
-                                mode == ScheduleMode.create ? "최소하기" : "삭제하기",
+                            label: mode == ScheduleMode.create ? "최소하기" : "삭제하기",
                             backgroundColor: AppColors.errorColor,
                             onPressed: () async {
                               if (mode == ScheduleMode.create) {
@@ -351,8 +329,7 @@ class ScheduleView extends HookConsumerWidget {
                                       content: "삭제한 일정은 되돌릴 수 없습니다",
                                       leftButtonLabel: "취소",
                                       rightButtonLabel: "삭제",
-                                      onPressedLeftButton: () =>
-                                          Navigator.of(context).pop(),
+                                      onPressedLeftButton: () => Navigator.of(context).pop(),
                                       onPressedRightButton: () async {
                                         await viewModel.onDeletePressed(
                                           id: id!,
@@ -364,9 +341,7 @@ class ScheduleView extends HookConsumerWidget {
                                     );
                                   },
                                 );
-                                if (deleted != null &&
-                                    deleted &&
-                                    context.mounted) {
+                                if (deleted != null && deleted && context.mounted) {
                                   Navigator.of(context).pop(true);
                                 }
                               }
@@ -385,7 +360,7 @@ class ScheduleView extends HookConsumerWidget {
                               if (mode == ScheduleMode.create) {
                                 await viewModel.onSavePressed();
                               }
-                              if (state.loadingSave==LoadingStatus.success && context.mounted) {
+                              if (state.loadingSave == LoadingStatus.success && context.mounted) {
                                 Navigator.of(context).pop(true);
                               }
                             },

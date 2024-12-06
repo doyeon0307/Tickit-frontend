@@ -8,8 +8,7 @@ import 'package:tickit/domain/setting/model/profile_model.dart';
 import 'package:tickit/service/app/app_service.dart';
 import 'package:tickit/ui/setting/setting_state.dart';
 
-final settingViewModelProvider =
-    StateNotifierProvider.autoDispose<SettingViewModel, SettingState>(
+final settingViewModelProvider = StateNotifierProvider.autoDispose<SettingViewModel, SettingState>(
   (ref) => SettingViewModel(
     getUserInfoUseCase: ref.read(getUserInfoUseCaseProvider),
     appService: ref.watch(appServiceProvider.notifier),

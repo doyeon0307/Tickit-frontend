@@ -87,7 +87,7 @@ class CalendarDialog extends StatelessWidget {
                   ),
                 ],
               ),
-              const SettingDividerWidgtet(),
+              const SettingDividerWidget(),
               SizedBox(
                 height: height - 60.0,
                 child: ListView.builder(

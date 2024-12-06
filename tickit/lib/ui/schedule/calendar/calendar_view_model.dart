@@ -6,11 +6,9 @@ import 'package:tickit/domain/schedule/get_schedule_preview_list_use_case.dart';
 import 'package:tickit/domain/schedule/model/schedule_preview_model.dart';
 import 'package:tickit/ui/schedule/calendar/calendar_state.dart';
 
-final calendarViewModelProvider =
-    StateNotifierProvider.autoDispose<CalendarViewModel, CalendarState>(
+final calendarViewModelProvider = StateNotifierProvider.autoDispose<CalendarViewModel, CalendarState>(
   (ref) => CalendarViewModel(
-    getSchedulePreviewListUseCase:
-        ref.read(getSchedulePreviewListUseCaseProvider),
+    getSchedulePreviewListUseCase: ref.read(getSchedulePreviewListUseCaseProvider),
   ),
 );
 
@@ -44,8 +42,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
       currentIndex: index,
     );
 
-    if (!state.schedules.any((schedule) => schedule.containsKey(
-        '${newDate.year}-${newDate.month.toString().padLeft(2, '0')}'))) {
+    if (!state.schedules.any((schedule) => schedule.containsKey('${newDate.year}-${newDate.month.toString().padLeft(2, '0')}'))) {
       getSchedules(date: newDate);
     }
   }
@@ -68,8 +65,7 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
 
     switch (result) {
       case SuccessUseCaseResult<List<SchedulePreviewModel>>():
-        final monthKey =
-            '${date.year}-${date.month.toString().padLeft(2, '0')}';
+        final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
         final monthData = {monthKey: result.data};
         var updatedSchedules = [...state.schedules];
         final existingIndex = updatedSchedules.indexWhere(

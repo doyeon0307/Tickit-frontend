@@ -13,5 +13,5 @@ class SettingState with _$SettingState {
     @Default(true) bool ticketAlarm,
     @Default("") String errorMsg,
     @Default("") String successMsg,
-  })= _SettingState;
+  }) = _SettingState;
 }

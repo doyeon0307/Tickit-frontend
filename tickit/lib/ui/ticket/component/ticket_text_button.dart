@@ -26,8 +26,7 @@ class TicketTextButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        fixedSize:
-            (width != null && height != null) ? Size(width!, height!) : null,
+        fixedSize: (width != null && height != null) ? Size(width!, height!) : null,
         textStyle: textStyle ?? const TextStyle(fontSize: 16.0),
         foregroundColor: foregroundColor ?? AppColors.textColor,
         backgroundColor: backgroundColor ?? AppColors.fillColor,

@@ -39,8 +39,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
       debugPrint("카카오톡 앱으로 로그인합니다");
       try {
         OAuthToken resp = await UserApi.instance.loginWithKakaoTalk();
-        debugPrint(
-            '카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+        debugPrint('카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
         kakaoLogin(
           accessToken: resp.accessToken,
           idToken: resp.idToken ?? "",
@@ -54,8 +53,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
         }
         try {
           final resp = await UserApi.instance.loginWithKakaoAccount();
-          debugPrint(
-              '카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+          debugPrint('카카오톡으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
           kakaoLogin(
             accessToken: resp.accessToken,
             idToken: resp.idToken ?? "",
@@ -69,8 +67,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
       debugPrint("카카오 계정으로 로그인합니다");
       try {
         final resp = await UserApi.instance.loginWithKakaoAccount();
-        debugPrint(
-            '카카오 계정으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
+        debugPrint('카카오 계정으로 로그인 성공:\n \taccess: ${resp.accessToken},\n \trefresh: ${resp.refreshToken},\n \tid: ${resp.idToken}');
         kakaoLogin(
           accessToken: resp.accessToken,
           idToken: resp.idToken ?? "",
@@ -91,8 +88,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
     state = state.copyWith(loginLoading: LoadingStatus.loading);
 
     debugPrint("카카오 토큰으로 앱 로그인을 시도합니다");
-    final UseCaseResult<AuthTokensEntity> loginResult =
-        await _kakaoLoginUseCase(
+    final UseCaseResult<AuthTokensEntity> loginResult = await _kakaoLoginUseCase(
       accessToken: accessToken,
       idToken: idToken,
       refreshToken: refreshToken,
@@ -116,8 +112,7 @@ class LoginViewModel extends StateNotifier<LoginState> {
 
           if (!mounted) return;
 
-          final UseCaseResult<AuthTokensEntity> registerResult =
-              await _kakaoRegisterUseCase(
+          final UseCaseResult<AuthTokensEntity> registerResult = await _kakaoRegisterUseCase(
             accessToken: accessToken,
             idToken: idToken,
             refreshToken: refreshToken,

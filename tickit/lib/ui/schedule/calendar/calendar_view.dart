@@ -31,8 +31,7 @@ class CalendarView extends HookConsumerWidget {
               ? const Center(child: CustomLoading())
               : PageView.builder(
                   controller: pageController,
-                  onPageChanged: (value) =>
-                      viewModel.onChangedCalendarPage(value),
+                  onPageChanged: (value) => viewModel.onChangedCalendarPage(value),
                   itemBuilder: (context, index) {
                     final date = DateTime(
                       state.today.year,
@@ -40,15 +39,10 @@ class CalendarView extends HookConsumerWidget {
                       1,
                     );
 
-                    final monthKey =
-                        '${date.year}-${date.month.toString().padLeft(2, '0')}';
+                    final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
 
-                    final currentSchedules = state.schedules
-                        .where((schedule) => schedule.containsKey(monthKey))
-                        .map((schedule) => schedule[monthKey] ?? [])
-                        .expand((schedules) => schedules)
-                        .toList() ??
-                        [];
+                    final currentSchedules =
+                        state.schedules.where((schedule) => schedule.containsKey(monthKey)).map((schedule) => schedule[monthKey] ?? []).expand((schedules) => schedules).toList();
 
                     return CustomCalendarWidget(
                       key: ValueKey(monthKey),

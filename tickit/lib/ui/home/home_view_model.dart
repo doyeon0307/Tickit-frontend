@@ -6,8 +6,7 @@ import 'package:tickit/data/ticket/entity/ticket_preview_entity.dart';
 import 'package:tickit/domain/ticket/get_ticket_previews_use_case.dart';
 import 'package:tickit/ui/home/home_state.dart';
 
-final homeViewModelProvider =
-    StateNotifierProvider.autoDispose<HomeViewModel, HomeState>(
+final homeViewModelProvider = StateNotifierProvider.autoDispose<HomeViewModel, HomeState>(
   (ref) => HomeViewModel(
     getTicketPreviewsUseCase: ref.read(getTicketPreviewsUseCaseProvider),
   ),

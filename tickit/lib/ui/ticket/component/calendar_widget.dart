@@ -63,8 +63,7 @@ class CalendarWidget extends StatelessWidget {
               color: AppColors.textColor,
             ),
             padding: const EdgeInsets.all(0.0),
-            foregroundColor:
-                dateTime == "날짜를 선택하세요" ? Theme.of(context).hintColor : color,
+            foregroundColor: dateTime == "날짜를 선택하세요" ? Theme.of(context).hintColor : color,
           ),
           child: Text(dateTime),
         ),

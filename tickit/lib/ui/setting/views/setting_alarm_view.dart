@@ -14,8 +14,7 @@ class SettingAlarmView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SettingViewModel viewModel =
-        ref.read(settingViewModelProvider.notifier);
+    final SettingViewModel viewModel = ref.read(settingViewModelProvider.notifier);
     final SettingState state = ref.watch(settingViewModelProvider);
 
     return DefaultLayout(
@@ -39,7 +38,7 @@ class SettingAlarmView extends ConsumerWidget {
                 ),
               ),
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "티켓 생성 알림",
               description: "완료된 일정을 티켓으로 만들 수 있도록 알림을 보내드려요",

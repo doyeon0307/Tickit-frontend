@@ -11,8 +11,7 @@ import 'package:tickit/ui/ticket/view_model/create_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/view_model/detail_ticket_view_model.dart';
 import 'package:tickit/ui/ticket/ticket_state.dart';
 
-final ticketViewModelProvider = StateNotifierProvider.family
-    .autoDispose<BaseTicketViewModel, TicketState, TicketMode>((ref, mode) {
+final ticketViewModelProvider = StateNotifierProvider.family.autoDispose<BaseTicketViewModel, TicketState, TicketMode>((ref, mode) {
   if (mode == TicketMode.create) {
     return CreateTicketViewModel(
       createTicketUseCase: ref.read(createTicketUseCaseProvider),

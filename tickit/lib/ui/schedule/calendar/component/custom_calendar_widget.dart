@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tickit/core/util/calendar_date_utils.dart';
 import 'package:tickit/domain/schedule/model/schedule_preview_model.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/component/custom_network_image.dart';
@@ -20,7 +21,7 @@ class CustomCalendarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final weeksInMonth = _getWeeksInMonth();
+    final weeksInMonth = getWeeksInMonth(date: selectedDate);
 
     final gridHeight = screenHeight - 260;
     final cellHeight = gridHeight / weeksInMonth;
@@ -92,19 +93,16 @@ class CustomCalendarWidget extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
-            childAspectRatio:
-                MediaQuery.of(context).size.width / 7 / cellHeight,
+            childAspectRatio: MediaQuery.of(context).size.width / 7 / cellHeight,
           ),
-          itemCount: _getDaysInMonth(),
+          itemCount: getDaysInMonth(date: selectedDate),
           itemBuilder: (context, index) {
-            final date = _getDateFromIndex(index);
-            final dateStr =
-                '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-            final schedules = scheduleModels
-                .expand((model) => model.markedDates.entries)
-                .where((entry) => entry.key == dateStr)
-                .map((entry) => entry.value)
-                .toList();
+            final date = getDateFromIndex(
+              date: selectedDate,
+              index: index,
+            );
+            final dateStr = '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+            final schedules = scheduleModels.expand((model) => model.markedDates.entries).where((entry) => entry.key == dateStr).map((entry) => entry.value).toList();
 
             if (date.month != selectedDate.month) {
               return const SizedBox.shrink();
@@ -140,37 +138,16 @@ class CustomCalendarWidget extends StatelessWidget {
               }
             }
 
-              return CalendarDateWidget(
-                cellHeight: cellHeight,
-                date: date,
-                schedules: schedules,
-                firstMarkerWidget: firstMarkerWidget,
-                refreshCalendar: refreshCalendar,
-              );
-            },
+            return CalendarDateWidget(
+              cellHeight: cellHeight,
+              date: date,
+              schedules: schedules,
+              firstMarkerWidget: firstMarkerWidget,
+              refreshCalendar: refreshCalendar,
+            );
+          },
         ),
       ],
     );
-  }
-
-  int _getWeeksInMonth() {
-    final firstDay = DateTime(selectedDate.year, selectedDate.month, 1);
-    final lastDay = DateTime(selectedDate.year, selectedDate.month + 1, 0);
-
-    final firstDayOffset = firstDay.weekday - 1;
-    final totalDays = firstDayOffset + lastDay.day;
-
-    return (totalDays / 7).ceil();
-  }
-
-  int _getDaysInMonth() {
-    final weeksInMonth = _getWeeksInMonth();
-    return weeksInMonth * 7;
-  }
-
-  DateTime _getDateFromIndex(int index) {
-    final firstDay = DateTime(selectedDate.year, selectedDate.month, 1);
-    final diff = index - (firstDay.weekday - 1);
-    return DateTime(selectedDate.year, selectedDate.month, diff);
   }
 }

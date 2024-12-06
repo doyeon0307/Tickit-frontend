@@ -25,13 +25,13 @@ class SettingCsrView extends StatelessWidget {
               description: "사용방법을 설명하는 사이트로 연결됩니다.",
               onTap: () {},
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "버그 신고",
               description: "불편을 드려 죄송합니다. 신고해주시면 빠르게 해결해드리겠습니다.",
               onTap: () {},
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "고객의 소리",
               description: "고객님의 의견은 서비스 개선에 큰 도움이 됩니다.",

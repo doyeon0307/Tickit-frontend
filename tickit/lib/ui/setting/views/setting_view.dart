@@ -19,8 +19,7 @@ class SettingView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final SettingViewModel viewModel =
-        ref.read(settingViewModelProvider.notifier);
+    final SettingViewModel viewModel = ref.read(settingViewModelProvider.notifier);
     final SettingState state = ref.watch(settingViewModelProvider);
 
     useEffect(() {
@@ -31,9 +30,13 @@ class SettingView extends HookConsumerWidget {
     useEffect(() {
       if (state.errorMsg.isNotEmpty) {
         Future.microtask(
-          () => ScaffoldMessenger.of(context).showSnackBar(
+          () {
+            if(context.mounted) {
+              return ScaffoldMessenger.of(context).showSnackBar(
             ErrorSnackBar(message: state.errorMsg),
-          ),
+          );
+            }
+          },
         );
       }
       return null;
@@ -51,7 +54,7 @@ class SettingView extends HookConsumerWidget {
                 style: Typo.pretendardR20.copyWith(color: AppColors.textColor),
               ),
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "다크 모드",
               description: "다크 모드를 켜고 끌 수 있어요",
@@ -61,13 +64,13 @@ class SettingView extends HookConsumerWidget {
                 onChanged: (value) => viewModel.onTapDarkMode(value: value),
               ),
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "광고제거",
               description: "평생 광고없이 이용할 수 있어요",
               onTap: () {},
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "알림설정",
               description: "일정 및 티켓 생성",
@@ -78,7 +81,7 @@ class SettingView extends HookConsumerWidget {
                 ),
               ),
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "고객센터",
               description: "도움말 및 신고",
@@ -89,7 +92,7 @@ class SettingView extends HookConsumerWidget {
                 ),
               ),
             ),
-            const SettingDividerWidgtet(),
+            const SettingDividerWidget(),
             SettingTextWidget(
               title: "계정관리",
               description: "로그아웃 및 탈퇴",

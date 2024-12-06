@@ -4,8 +4,7 @@ import 'package:tickit/core/loading_status.dart';
 import 'package:tickit/service/app/app_service.dart';
 import 'package:tickit/ui/login/splash/splash_state.dart';
 
-final splashViewModelProvider =
-    StateNotifierProvider.autoDispose<SplashViewModel, SplashState>(
+final splashViewModelProvider = StateNotifierProvider.autoDispose<SplashViewModel, SplashState>(
   (ref) => SplashViewModel(
     appService: ref.read(appServiceProvider.notifier),
   ),

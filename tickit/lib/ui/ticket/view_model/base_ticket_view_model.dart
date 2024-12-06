@@ -58,16 +58,13 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
     required int index,
   }) {
     if (!mounted) return;
-    debugPrint(
-        "removeField 호출, 선택된 인덱스=$index, State의 fields 길이=${state.fields.length}");
+    debugPrint("removeField 호출, 선택된 인덱스=$index, State의 fields 길이=${state.fields.length}");
     if (index < 0 || index >= state.fields.length) return;
 
     final newFields = [...state.fields];
-    debugPrint(
-        "삭제 전 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 전 상태 확인
+    debugPrint("삭제 전 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 전 상태 확인
     newFields.removeAt(index);
-    debugPrint(
-        "삭제 후 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 후 상태 확인
+    debugPrint("삭제 후 fields: ${newFields.map((f) => f.subtitle).toList()}"); // 삭제 후 상태 확인
 
     state = state.copyWith(
       fields: newFields,
@@ -170,8 +167,7 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
         date: state.date ?? DateTime.now(),
       );
     }
-    final dateTime =
-        "${makeRequestDate(date: state.date!)} ${state.isAm ? "AM" : "PM"}"
+    final dateTime = "${makeRequestDate(date: state.date!)} ${state.isAm ? "AM" : "PM"}"
         "${getTimeFormat(time: state.hour.toString())}:${getTimeFormat(time: state.minute.toString())}";
     if (mounted) {
       state = state.copyWith(

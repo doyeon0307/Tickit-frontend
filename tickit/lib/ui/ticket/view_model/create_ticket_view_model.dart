@@ -36,9 +36,7 @@ class CreateTicketViewModel extends BaseTicketViewModel {
 
   @override
   Future<void> onPressedSave() async {
-    if (state.image == null ||
-        state.dateTime == "날짜를 선택하세요" ||
-        state.date == null) return;
+    if (state.image == null || state.dateTime == "날짜를 선택하세요" || state.date == null) return;
 
     try {
       state = state.copyWith(
@@ -80,9 +78,7 @@ class CreateTicketViewModel extends BaseTicketViewModel {
           }
         case FailureUseCaseResult<void>():
           if (mounted) {
-            state = state.copyWith(
-                makeTicketLoading: LoadingStatus.error,
-                errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+            state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
             debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
             return;
           }
@@ -111,25 +107,19 @@ class CreateTicketViewModel extends BaseTicketViewModel {
           }
         case FailureUseCaseResult<String>():
           if (mounted) {
-            state = state.copyWith(
-                makeTicketLoading: LoadingStatus.error,
-                errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+            state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
             debugPrint("티켓 생성 오류: ${makeTicketResult.message}");
             return;
           } else {
             if (mounted) {
-              state = state.copyWith(
-                  makeTicketLoading: LoadingStatus.error,
-                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
             }
             return;
           }
       }
     } catch (e) {
       if (mounted) {
-        state = state.copyWith(
-            makeTicketLoading: LoadingStatus.error,
-            errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+        state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
         return;
       }
     }

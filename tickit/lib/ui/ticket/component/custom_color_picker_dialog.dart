@@ -20,12 +20,10 @@ class CustomColorPickerDialog extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<CustomColorPickerDialog> createState() =>
-      _CustomColorPickerDialogState();
+  ConsumerState<CustomColorPickerDialog> createState() => _CustomColorPickerDialogState();
 }
 
-class _CustomColorPickerDialogState
-    extends ConsumerState<CustomColorPickerDialog> {
+class _CustomColorPickerDialogState extends ConsumerState<CustomColorPickerDialog> {
   bool isBlockMode = false;
 
   @override

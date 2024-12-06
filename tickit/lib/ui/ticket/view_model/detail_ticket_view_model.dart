@@ -42,8 +42,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
         mode: TicketMode.detail,
       );
     }
-    final UseCaseResult<TicketModel> result =
-        await _getTicketDetailUseCase(id: id);
+    final UseCaseResult<TicketModel> result = await _getTicketDetailUseCase(id: id);
 
     switch (result) {
       case SuccessUseCaseResult<TicketModel>():
@@ -163,9 +162,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
             }
           case FailureUseCaseResult<void>():
             if (mounted) {
-              state = state.copyWith(
-                  makeTicketLoading: LoadingStatus.error,
-                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
               debugPrint("s3 이미지 업로드 오류: ${imageUploadResult.message}");
               return;
             }
@@ -205,9 +202,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
             return;
           } else {
             if (mounted) {
-              state = state.copyWith(
-                  makeTicketLoading: LoadingStatus.error,
-                  errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
+              state = state.copyWith(makeTicketLoading: LoadingStatus.error, errorMsg: "오류가 발생했어요. 다시 시도해주세요.");
             }
             return;
           }
