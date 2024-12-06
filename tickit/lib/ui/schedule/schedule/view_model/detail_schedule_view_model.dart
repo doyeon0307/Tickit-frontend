@@ -84,7 +84,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
         successMsg: "",
       );
 
-      String imageUrl = "";
+      String imageUrl = state.networkImage;
       if (state.image != null) {
         final getUrlResult = await _getPresignedUrlUseCase();
         late final S3UrlModel urlData;

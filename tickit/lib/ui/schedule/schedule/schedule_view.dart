@@ -343,12 +343,15 @@ class ScheduleView extends HookConsumerWidget {
                             onPressed: () async {
                               if (mode == ScheduleMode.detail && id != null) {
                                 await viewModel.onUpdatePressed(id: id!);
+                                if (context.mounted) {
+                                  Navigator.of(context).pop(true);
+                                }
                               }
                               if (mode == ScheduleMode.create) {
                                 await viewModel.onSavePressed();
-                              }
-                              if (state.loadingSave == LoadingStatus.success && context.mounted) {
-                                Navigator.of(context).pop(true);
+                                if (context.mounted) {
+                                  Navigator.of(context).pop(true);
+                                }
                               }
                             },
                           ),
