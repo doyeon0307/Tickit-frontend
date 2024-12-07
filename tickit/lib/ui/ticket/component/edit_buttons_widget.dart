@@ -7,12 +7,13 @@ class EditButtonsWidget extends StatelessWidget {
   final Future<void> Function() onTapDelete;
   final VoidCallback onTapSaveAsImage;
   final VoidCallback onTapEdit;
+  final Color color;
 
   const EditButtonsWidget({
     super.key,
     required this.onTapDelete,
     required this.onTapSaveAsImage,
-    required this.onTapEdit,
+    required this.onTapEdit, required this.color,
   });
 
   @override
@@ -43,7 +44,7 @@ class EditButtonsWidget extends StatelessWidget {
           child: Text(
             "삭제하기",
             style: Typo.gangwonR16.copyWith(
-              color: AppColors.textColor,
+              color: color,
             ),
           ),
         ),
@@ -53,7 +54,7 @@ class EditButtonsWidget extends StatelessWidget {
           child: Text(
             "사진으로 저장하기",
             style: Typo.gangwonR16.copyWith(
-              color: AppColors.textColor,
+              color: color,
             ),
           ),
         ),
@@ -63,7 +64,7 @@ class EditButtonsWidget extends StatelessWidget {
           child: Text(
             "수정하기",
             style: Typo.gangwonR16.copyWith(
-              color: AppColors.textColor,
+              color: color,
             ),
           ),
         )

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 
-class TicketTextField extends StatelessWidget {
+class FieldTextFormField extends StatelessWidget {
   final double fontSize;
   final String hintText;
   final TextInputType keyboardType;
   final TextAlign textAlign;
   final Color? color;
-  final Function(String?)? onChanged;
+  final Function(String)? onChanged;
   final bool readOnly;
   final String? initialValue;
 
-  const TicketTextField({
+  const FieldTextFormField({
     super.key,
     this.fontSize = 16.0,
     required this.hintText,
@@ -36,7 +36,7 @@ class TicketTextField extends StatelessWidget {
         fontSize: fontSize,
         color: color ?? AppColors.textColor,
       ),
-      onSaved: onChanged,
+      onChanged: onChanged,
       textAlign: textAlign,
       cursorColor: AppColors.textColor.withOpacity(0.6),
       cursorWidth: 1.5,
@@ -48,10 +48,10 @@ class TicketTextField extends StatelessWidget {
         focusedBorder: readOnly
             ? InputBorder.none
             : UnderlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.textColor,
-                ),
-              ),
+          borderSide: BorderSide(
+            color: AppColors.textColor,
+          ),
+        ),
       ),
     );
   }

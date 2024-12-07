@@ -16,6 +16,12 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
 
   Future<bool> onPressedSave();
 
+  Future<void> onTapGetSchedule();
+
+  void onTapSchedule(int index);
+
+  Future<void> onSelectSchedule();
+
   // detail
   Future<void> initDetailView({required String id});
 
@@ -78,7 +84,6 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
 
     final newFields = [...state.fields];
     newFields[index] = newFields[index].copyWith(subtitle: text);
-
     state = state.copyWith(fields: newFields);
   }
 

@@ -13,6 +13,7 @@ import 'package:tickit/ui/ticket/component/edit_buttons_widget.dart';
 import 'package:tickit/ui/ticket/component/image_widget.dart';
 import 'package:tickit/ui/ticket/component/location_widget.dart';
 import 'package:tickit/ui/ticket/component/save_buttons_widget.dart';
+import 'package:tickit/ui/ticket/component/schedule_list_dialog.dart';
 import 'package:tickit/ui/ticket/component/ticket_field_row_widget.dart';
 import 'package:tickit/ui/ticket/component/title_widget.dart';
 import 'package:tickit/ui/ticket/view_model/ticket_view_model_provider.dart';
@@ -83,6 +84,7 @@ class TicketView extends HookConsumerWidget {
               child: Column(
                 children: [
                   ImageWidget(
+                    key: ValueKey(state.networkImage),
                     isDetail: state.mode == TicketMode.detail,
                     isCreate: state.mode == TicketMode.create,
                     isEdit: state.mode == TicketMode.edit,
@@ -97,6 +99,7 @@ class TicketView extends HookConsumerWidget {
                       vertical: 16.0,
                     ),
                     child: TitleWidget(
+                      key: ValueKey(state.title),
                       isDetail: state.mode == TicketMode.detail,
                       onChanged: (value) => viewModel.onChangedTitle(newTitle: value),
                       color: state.foregroundColor,
@@ -113,9 +116,10 @@ class TicketView extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             LocationWidget(
+                              key: ValueKey(state.location),
                               isDetail: state.mode == TicketMode.detail,
                               onChanged: (value) => viewModel.onChangedLocation(
-                                newLocation: value,
+                                newLocation: value!,
                               ),
                               color: state.foregroundColor,
                               initialValue: state.location,
@@ -166,6 +170,21 @@ class TicketView extends HookConsumerWidget {
                             foregroundColor: state.foregroundColor,
                             onBackgroundColorChanged: (newColor) => viewModel.onBackgroundColorChanged(newColor: newColor),
                             onForegroundColorChanged: (newColor) => viewModel.onForegroundColorChanged(newColor: newColor),
+                            onTapGetSchedule: () async {
+                              await viewModel.onTapGetSchedule();
+                              if (context.mounted) {
+                                showDialog(
+                                  context: context,
+                                  builder: (dialogContext) => ScheduleListDialog(
+                                    schedules: state.schedules,
+                                    onTapSchedule: viewModel.onTapSchedule,
+                                    onSelectSchedule: () {
+                                      viewModel.onSelectSchedule();
+                                      Navigator.pop(dialogContext);
+                                    },
+                                  ),                                );
+                              }
+                            },
                           ),
                         if (!(state.mode == TicketMode.detail)) const SizedBox(height: 16.0),
                         if (!(state.mode == TicketMode.detail))
@@ -228,6 +247,7 @@ class TicketView extends HookConsumerWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(top: 40.0),
                               child: EditButtonsWidget(
+                                color: state.foregroundColor,
                                 onTapDelete: () => viewModel.onTapDelete(id: id!),
                                 onTapSaveAsImage: () {},
                                 onTapEdit: () => viewModel.onTapEditButton(),
