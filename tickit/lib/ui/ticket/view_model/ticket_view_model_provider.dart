@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/domain/s3/get_presigned_url_use_case.dart';
 import 'package:tickit/domain/s3/upload_image_to_s3_use_case.dart';
+import 'package:tickit/domain/schedule/get_schedule_detail_use_case.dart';
+import 'package:tickit/domain/schedule/get_schedule_for_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/create_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/delete_ticket_use_case.dart';
 import 'package:tickit/domain/ticket/get_ticket_detail_use_case.dart';
@@ -17,6 +19,8 @@ final ticketViewModelProvider = StateNotifierProvider.family.autoDispose<BaseTic
       createTicketUseCase: ref.read(createTicketUseCaseProvider),
       getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
       uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
+      getScheduleForTicketUseCase: ref.read(getScheduleForTicketUseCaseProvider),
+      getScheduleDetailUseCase: ref.read(getScheduleDetailUseCaseProvider),
     );
   }
   if (mode == TicketMode.detail) {
@@ -32,6 +36,8 @@ final ticketViewModelProvider = StateNotifierProvider.family.autoDispose<BaseTic
       createTicketUseCase: ref.read(createTicketUseCaseProvider),
       getPresignedUrlUseCase: ref.read(getPresignedUrlUseCaseProvider),
       uploadImageToS3UseCase: ref.read(uploadImageToS3UseCaseProvider),
+      getScheduleForTicketUseCase: ref.read(getScheduleForTicketUseCaseProvider),
+      getScheduleDetailUseCase: ref.read(getScheduleDetailUseCaseProvider),
     );
   }
 });

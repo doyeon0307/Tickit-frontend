@@ -229,4 +229,19 @@ class DetailTicketViewModel extends BaseTicketViewModel {
   void initState() {
     throw UnimplementedError("initState");
   }
+  
+  @override
+  Future<void> onTapGetSchedule() {
+    throw UnsupportedError("onTapGetSchedule");
+  }
+  
+  @override
+  void onTapSchedule(int index) {
+    throw UnsupportedError("onTapSchedule");
+  }
+  
+  @override
+  Future<void> onSelectSchedule() {
+    throw UnsupportedError("onSelectSchedule");
+  }
 }

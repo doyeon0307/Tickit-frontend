@@ -5,7 +5,7 @@ import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
 
 class LocationWidget extends StatelessWidget {
   final bool isDetail;
-  final Function(String) onChanged;
+  final Function(String?) onChanged;
   final Color color;
   final String? initialValue;
 

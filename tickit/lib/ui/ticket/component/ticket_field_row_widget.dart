@@ -4,14 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/assets.dart';
 import 'package:tickit/ui/common/const/mode.dart';
-import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
+import 'package:tickit/ui/ticket/component/field_text_form_field.dart';
 
 class TicketFieldRowWidget extends ConsumerWidget {
   final TicketMode mode;
   final int index;
   final Color color;
-  final Function updateFieldTitle;
-  final Function updateFieldContent;
+  final void Function({required int index, required String text}) updateFieldTitle;
+  final void Function({required int index, required String text}) updateFieldContent;
   final Function removeField;
   final String? subTitleInitialValue;
   final String? contentInitialValue;
@@ -39,7 +39,7 @@ class TicketFieldRowWidget extends ConsumerWidget {
             maxWidth: MediaQuery.of(context).size.width / 3,
           ),
           child: IntrinsicWidth(
-            child: TicketTextField(
+            child: FieldTextFormField(
               hintText: "소제목",
               onChanged: (value) => updateFieldTitle(
                 index: index,
@@ -61,7 +61,7 @@ class TicketFieldRowWidget extends ConsumerWidget {
           ),
         ),
         Expanded(
-          child: TicketTextField(
+          child: FieldTextFormField(
             hintText: "내용을 입력하세요",
             onChanged: (value) => updateFieldContent(
               index: index,

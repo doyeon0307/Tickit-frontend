@@ -6,7 +6,7 @@ import 'package:tickit/ui/ticket/component/ticket_text_field.dart';
 
 class TitleWidget extends ConsumerWidget {
   final bool isDetail;
-  final Function(String) onChanged;
+  final Function(String?) onChanged;
   final Color color;
   final String? initialValue;
 

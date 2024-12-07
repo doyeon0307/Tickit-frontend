@@ -27,3 +27,11 @@ String makeRequestDate({required DateTime date}) {
   final day = getTimeFormat(time: date.day.toString());
   return "$year-$month-$day";
 }
+
+DateTime makeStringToDateTime({required String dateStr}) {
+  final parts = dateStr.split('-');
+  final year = int.parse(parts[0]);
+  final month = int.parse(parts[1]);
+  final day = int.parse(parts[2]);
+  return DateTime(year, month, day);
+}

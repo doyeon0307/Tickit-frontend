@@ -30,6 +30,9 @@ mixin _$TicketState {
   Color get backgroundColor => throw _privateConstructorUsedError;
   Color get foregroundColor => throw _privateConstructorUsedError;
   List<TicketFieldModel> get fields => throw _privateConstructorUsedError;
+  List<ScheduleForTicketModel> get schedules =>
+      throw _privateConstructorUsedError;
+  int get scheduleIndex => throw _privateConstructorUsedError;
   String get networkImage => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   int get fieldCount => throw _privateConstructorUsedError;
@@ -65,6 +68,8 @@ abstract class $TicketStateCopyWith<$Res> {
       Color backgroundColor,
       Color foregroundColor,
       List<TicketFieldModel> fields,
+      List<ScheduleForTicketModel> schedules,
+      int scheduleIndex,
       String networkImage,
       int maxCount,
       int fieldCount,
@@ -102,6 +107,8 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
     Object? backgroundColor = null,
     Object? foregroundColor = null,
     Object? fields = null,
+    Object? schedules = null,
+    Object? scheduleIndex = null,
     Object? networkImage = null,
     Object? maxCount = null,
     Object? fieldCount = null,
@@ -166,6 +173,14 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.fields
           : fields // ignore: cast_nullable_to_non_nullable
               as List<TicketFieldModel>,
+      schedules: null == schedules
+          ? _value.schedules
+          : schedules // ignore: cast_nullable_to_non_nullable
+              as List<ScheduleForTicketModel>,
+      scheduleIndex: null == scheduleIndex
+          ? _value.scheduleIndex
+          : scheduleIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       networkImage: null == networkImage
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
@@ -217,6 +232,8 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       Color backgroundColor,
       Color foregroundColor,
       List<TicketFieldModel> fields,
+      List<ScheduleForTicketModel> schedules,
+      int scheduleIndex,
       String networkImage,
       int maxCount,
       int fieldCount,
@@ -252,6 +269,8 @@ class __$$TicketStateImplCopyWithImpl<$Res>
     Object? backgroundColor = null,
     Object? foregroundColor = null,
     Object? fields = null,
+    Object? schedules = null,
+    Object? scheduleIndex = null,
     Object? networkImage = null,
     Object? maxCount = null,
     Object? fieldCount = null,
@@ -316,6 +335,14 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value._fields
           : fields // ignore: cast_nullable_to_non_nullable
               as List<TicketFieldModel>,
+      schedules: null == schedules
+          ? _value._schedules
+          : schedules // ignore: cast_nullable_to_non_nullable
+              as List<ScheduleForTicketModel>,
+      scheduleIndex: null == scheduleIndex
+          ? _value.scheduleIndex
+          : scheduleIndex // ignore: cast_nullable_to_non_nullable
+              as int,
       networkImage: null == networkImage
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
@@ -362,13 +389,16 @@ class _$TicketStateImpl implements _TicketState {
       this.backgroundColor = Colors.white,
       this.foregroundColor = const Color(0xff141414),
       final List<TicketFieldModel> fields = const [],
+      final List<ScheduleForTicketModel> schedules = const [],
+      this.scheduleIndex = 0,
       this.networkImage = "",
       this.maxCount = 10,
       this.fieldCount = 0,
       this.errorMsg = "",
       this.successMsg = "",
       this.isDeleted = false})
-      : _fields = fields;
+      : _fields = fields,
+        _schedules = schedules;
 
   @override
   @JsonKey()
@@ -418,6 +448,18 @@ class _$TicketStateImpl implements _TicketState {
     return EqualUnmodifiableListView(_fields);
   }
 
+  final List<ScheduleForTicketModel> _schedules;
+  @override
+  @JsonKey()
+  List<ScheduleForTicketModel> get schedules {
+    if (_schedules is EqualUnmodifiableListView) return _schedules;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_schedules);
+  }
+
+  @override
+  @JsonKey()
+  final int scheduleIndex;
   @override
   @JsonKey()
   final String networkImage;
@@ -439,7 +481,7 @@ class _$TicketStateImpl implements _TicketState {
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, mode: $mode, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
+    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, mode: $mode, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, schedules: $schedules, scheduleIndex: $scheduleIndex, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
   }
 
   @override
@@ -467,6 +509,10 @@ class _$TicketStateImpl implements _TicketState {
             (identical(other.foregroundColor, foregroundColor) ||
                 other.foregroundColor == foregroundColor) &&
             const DeepCollectionEquality().equals(other._fields, _fields) &&
+            const DeepCollectionEquality()
+                .equals(other._schedules, _schedules) &&
+            (identical(other.scheduleIndex, scheduleIndex) ||
+                other.scheduleIndex == scheduleIndex) &&
             (identical(other.networkImage, networkImage) ||
                 other.networkImage == networkImage) &&
             (identical(other.maxCount, maxCount) ||
@@ -498,6 +544,8 @@ class _$TicketStateImpl implements _TicketState {
         backgroundColor,
         foregroundColor,
         const DeepCollectionEquality().hash(_fields),
+        const DeepCollectionEquality().hash(_schedules),
+        scheduleIndex,
         networkImage,
         maxCount,
         fieldCount,
@@ -531,6 +579,8 @@ abstract class _TicketState implements TicketState {
       final Color backgroundColor,
       final Color foregroundColor,
       final List<TicketFieldModel> fields,
+      final List<ScheduleForTicketModel> schedules,
+      final int scheduleIndex,
       final String networkImage,
       final int maxCount,
       final int fieldCount,
@@ -566,6 +616,10 @@ abstract class _TicketState implements TicketState {
   Color get foregroundColor;
   @override
   List<TicketFieldModel> get fields;
+  @override
+  List<ScheduleForTicketModel> get schedules;
+  @override
+  int get scheduleIndex;
   @override
   String get networkImage;
   @override

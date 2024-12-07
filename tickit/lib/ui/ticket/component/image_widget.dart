@@ -71,8 +71,8 @@ Widget _buildImageContent({
     );
   }
 
-  // 2. Detail/Edit 모드에서 네트워크 이미지가 있을 때
-  if ((isDetail || isEdit) && networkImage.isNotEmpty) {
+  // 2. 네트워크 이미지가 있을 때 (모든 모드에서)
+  if (networkImage.isNotEmpty) {
     return DecoratedBox(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -84,7 +84,7 @@ Widget _buildImageContent({
     );
   }
 
-  // 3. 이미지가 없을 때 텍스트 표시
+  // 3. 이미지가 없을 때 텍스트 표시 (Create/Edit 모드에서만)
   if (isCreate || isEdit) {
     return Text(
       "클릭해서 사진 추가하기",
