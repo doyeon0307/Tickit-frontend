@@ -113,17 +113,13 @@ abstract class BaseTicketViewModel extends StateNotifier<TicketState> {
   void onChangedTitle({
     required newTitle,
   }) {
-    if (mounted) {
-      state = state.copyWith(title: newTitle);
-    }
+    state = state.copyWith(title: newTitle);
   }
 
   void onChangedLocation({
     required String newLocation,
   }) {
-    if (mounted) {
-      state = state.copyWith(location: newLocation);
-    }
+    state = state.copyWith(location: newLocation);
   }
 
   void onTapAmButton() {
