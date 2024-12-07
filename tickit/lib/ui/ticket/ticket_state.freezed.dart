@@ -34,6 +34,7 @@ mixin _$TicketState {
       throw _privateConstructorUsedError;
   int get scheduleIndex => throw _privateConstructorUsedError;
   String get networkImage => throw _privateConstructorUsedError;
+  int get getSchedule => throw _privateConstructorUsedError;
   int get maxCount => throw _privateConstructorUsedError;
   int get fieldCount => throw _privateConstructorUsedError;
   String get errorMsg => throw _privateConstructorUsedError;
@@ -71,6 +72,7 @@ abstract class $TicketStateCopyWith<$Res> {
       List<ScheduleForTicketModel> schedules,
       int scheduleIndex,
       String networkImage,
+      int getSchedule,
       int maxCount,
       int fieldCount,
       String errorMsg,
@@ -110,6 +112,7 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
     Object? schedules = null,
     Object? scheduleIndex = null,
     Object? networkImage = null,
+    Object? getSchedule = null,
     Object? maxCount = null,
     Object? fieldCount = null,
     Object? errorMsg = null,
@@ -185,6 +188,10 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
               as String,
+      getSchedule: null == getSchedule
+          ? _value.getSchedule
+          : getSchedule // ignore: cast_nullable_to_non_nullable
+              as int,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -235,6 +242,7 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       List<ScheduleForTicketModel> schedules,
       int scheduleIndex,
       String networkImage,
+      int getSchedule,
       int maxCount,
       int fieldCount,
       String errorMsg,
@@ -272,6 +280,7 @@ class __$$TicketStateImplCopyWithImpl<$Res>
     Object? schedules = null,
     Object? scheduleIndex = null,
     Object? networkImage = null,
+    Object? getSchedule = null,
     Object? maxCount = null,
     Object? fieldCount = null,
     Object? errorMsg = null,
@@ -347,6 +356,10 @@ class __$$TicketStateImplCopyWithImpl<$Res>
           ? _value.networkImage
           : networkImage // ignore: cast_nullable_to_non_nullable
               as String,
+      getSchedule: null == getSchedule
+          ? _value.getSchedule
+          : getSchedule // ignore: cast_nullable_to_non_nullable
+              as int,
       maxCount: null == maxCount
           ? _value.maxCount
           : maxCount // ignore: cast_nullable_to_non_nullable
@@ -390,8 +403,9 @@ class _$TicketStateImpl implements _TicketState {
       this.foregroundColor = const Color(0xff141414),
       final List<TicketFieldModel> fields = const [],
       final List<ScheduleForTicketModel> schedules = const [],
-      this.scheduleIndex = 0,
+      this.scheduleIndex = -1,
       this.networkImage = "",
+      this.getSchedule = 0,
       this.maxCount = 10,
       this.fieldCount = 0,
       this.errorMsg = "",
@@ -465,6 +479,9 @@ class _$TicketStateImpl implements _TicketState {
   final String networkImage;
   @override
   @JsonKey()
+  final int getSchedule;
+  @override
+  @JsonKey()
   final int maxCount;
   @override
   @JsonKey()
@@ -481,7 +498,7 @@ class _$TicketStateImpl implements _TicketState {
 
   @override
   String toString() {
-    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, mode: $mode, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, schedules: $schedules, scheduleIndex: $scheduleIndex, networkImage: $networkImage, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
+    return 'TicketState(initLoading: $initLoading, makeTicketLoading: $makeTicketLoading, mode: $mode, image: $image, title: $title, location: $location, dateTime: $dateTime, date: $date, isAm: $isAm, hour: $hour, minute: $minute, backgroundColor: $backgroundColor, foregroundColor: $foregroundColor, fields: $fields, schedules: $schedules, scheduleIndex: $scheduleIndex, networkImage: $networkImage, getSchedule: $getSchedule, maxCount: $maxCount, fieldCount: $fieldCount, errorMsg: $errorMsg, successMsg: $successMsg, isDeleted: $isDeleted)';
   }
 
   @override
@@ -515,6 +532,8 @@ class _$TicketStateImpl implements _TicketState {
                 other.scheduleIndex == scheduleIndex) &&
             (identical(other.networkImage, networkImage) ||
                 other.networkImage == networkImage) &&
+            (identical(other.getSchedule, getSchedule) ||
+                other.getSchedule == getSchedule) &&
             (identical(other.maxCount, maxCount) ||
                 other.maxCount == maxCount) &&
             (identical(other.fieldCount, fieldCount) ||
@@ -547,6 +566,7 @@ class _$TicketStateImpl implements _TicketState {
         const DeepCollectionEquality().hash(_schedules),
         scheduleIndex,
         networkImage,
+        getSchedule,
         maxCount,
         fieldCount,
         errorMsg,
@@ -582,6 +602,7 @@ abstract class _TicketState implements TicketState {
       final List<ScheduleForTicketModel> schedules,
       final int scheduleIndex,
       final String networkImage,
+      final int getSchedule,
       final int maxCount,
       final int fieldCount,
       final String errorMsg,
@@ -622,6 +643,8 @@ abstract class _TicketState implements TicketState {
   int get scheduleIndex;
   @override
   String get networkImage;
+  @override
+  int get getSchedule;
   @override
   int get maxCount;
   @override

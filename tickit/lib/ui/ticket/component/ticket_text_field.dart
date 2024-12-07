@@ -8,7 +8,7 @@ class TicketTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final TextAlign textAlign;
   final Color? color;
-  final Function(String?)? onChanged;
+  final Function(String)? onChanged;
   final bool readOnly;
   final String? initialValue;
 
@@ -36,7 +36,7 @@ class TicketTextField extends StatelessWidget {
         fontSize: fontSize,
         color: color ?? AppColors.textColor,
       ),
-      onSaved: onChanged,
+      onChanged: onChanged,
       textAlign: textAlign,
       cursorColor: AppColors.textColor.withOpacity(0.6),
       cursorWidth: 1.5,

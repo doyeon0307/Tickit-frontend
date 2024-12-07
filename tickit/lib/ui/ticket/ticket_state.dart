@@ -28,6 +28,7 @@ class TicketState with _$TicketState {
     @Default([]) List<ScheduleForTicketModel> schedules,
     @Default(-1) int scheduleIndex,
     @Default("") String networkImage,
+    @Default(0) int getSchedule,
     @Default(10) int maxCount,
     @Default(0) int fieldCount,
     @Default("") String errorMsg,

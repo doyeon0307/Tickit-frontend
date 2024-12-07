@@ -84,7 +84,7 @@ class TicketView extends HookConsumerWidget {
               child: Column(
                 children: [
                   ImageWidget(
-                    key: ValueKey(state.networkImage),
+                    key: ValueKey(state.getSchedule),
                     isDetail: state.mode == TicketMode.detail,
                     isCreate: state.mode == TicketMode.create,
                     isEdit: state.mode == TicketMode.edit,
@@ -99,7 +99,7 @@ class TicketView extends HookConsumerWidget {
                       vertical: 16.0,
                     ),
                     child: TitleWidget(
-                      key: ValueKey(state.title),
+                      key: ValueKey(state.getSchedule),
                       isDetail: state.mode == TicketMode.detail,
                       onChanged: (value) => viewModel.onChangedTitle(newTitle: value),
                       color: state.foregroundColor,
@@ -116,7 +116,7 @@ class TicketView extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             LocationWidget(
-                              key: ValueKey(state.location),
+                              key: ValueKey(state.getSchedule),
                               isDetail: state.mode == TicketMode.detail,
                               onChanged: (value) => viewModel.onChangedLocation(
                                 newLocation: value!,

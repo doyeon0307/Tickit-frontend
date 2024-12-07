@@ -79,6 +79,7 @@ class CreateTicketViewModel extends BaseTicketViewModel {
           hour: int.parse(result.data.hour),
           minute: int.parse(result.data.minute),
           networkImage: result.data.networkImage,
+          getSchedule: state.getSchedule + 1,
         );
       case FailureUseCaseResult():
         return;

@@ -52,28 +52,31 @@ class ScheduleListDialog extends StatelessWidget {
                         child: ListView.separated(
                           itemBuilder: (context, index) {
                             final schedule = schedules[index];
-                            return GestureDetector(
-                              onTap: () => onTapSchedule(index),
-                              child: SizedBox(
-                                height: 48,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      schedule.date,
-                                      style: Typo.gangwonR16.copyWith(
-                                        color: AppColors.textColor,
+                            return Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () => onTapSchedule(index),
+                                child: SizedBox(
+                                  height: 48,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        schedule.date,
+                                        style: Typo.gangwonR16.copyWith(
+                                          color: AppColors.textColor,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 16.0,
-                                    ),
-                                    Text(
-                                      schedule.title,
-                                      style: Typo.gangwonR16.copyWith(
-                                        color: AppColors.textColor,
+                                      const SizedBox(
+                                        width: 16.0,
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        schedule.title,
+                                        style: Typo.gangwonR16.copyWith(
+                                          color: AppColors.textColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );
