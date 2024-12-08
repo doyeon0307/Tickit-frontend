@@ -3,7 +3,7 @@ import 'package:tickit/core/util/url_launcher_encoder.dart';
 import 'package:tickit/theme/typographies.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/layout/default_layout.dart';
-import 'package:tickit/ui/common/component/setting_divider_widget.dart';
+import 'package:tickit/ui/common/component/custom_divider.dart';
 import 'package:tickit/ui/setting/component/setting_text_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 

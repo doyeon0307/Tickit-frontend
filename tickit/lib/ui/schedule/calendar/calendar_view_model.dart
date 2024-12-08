@@ -30,10 +30,11 @@ class CalendarViewModel extends StateNotifier<CalendarState> {
   void onChangedCalendarPage(int index) {
     if (!mounted) return;
 
-    final isNextMonth = index > state.currentIndex;
+    final monthDiff = index - state.currentIndex;
+
     final newDate = DateTime(
       state.selectedDate.year,
-      state.selectedDate.month + (isNextMonth ? 1 : -1),
+      state.selectedDate.month + monthDiff,
       1,
     );
 

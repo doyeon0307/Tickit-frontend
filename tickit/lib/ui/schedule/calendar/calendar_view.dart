@@ -27,31 +27,31 @@ class CalendarView extends HookConsumerWidget {
         backgroundColor: AppColors.backgroundColor,
         body: Padding(
           padding: const EdgeInsets.only(top: 24.0),
-          child: state.loadingCalendar == LoadingStatus.loading
-              ? const Center(child: CustomLoading())
-              : PageView.builder(
-                  controller: pageController,
-                  onPageChanged: (value) => viewModel.onChangedCalendarPage(value),
-                  itemBuilder: (context, index) {
-                    final date = DateTime(
-                      state.today.year,
-                      state.today.month + (index - 12),
-                      1,
-                    );
+          child: PageView.builder(
+            controller: pageController,
+            onPageChanged: (value) => viewModel.onChangedCalendarPage(value),
+            itemBuilder: (context, index) {
+              final date = DateTime(
+                state.today.year,
+                state.today.month + (index - 12),
+                1,
+              );
 
-                    final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
+              final monthKey = '${date.year}-${date.month.toString().padLeft(2, '0')}';
 
-                    final currentSchedules =
-                        state.schedules.where((schedule) => schedule.containsKey(monthKey)).map((schedule) => schedule[monthKey] ?? []).expand((schedules) => schedules).toList();
+              final currentSchedules =
+                  state.schedules.where((schedule) => schedule.containsKey(monthKey)).map((schedule) => schedule[monthKey] ?? []).expand((schedules) => schedules).toList();
 
-                    return CustomCalendarWidget(
+              return state.loadingCalendar == LoadingStatus.loading
+                  ? const Center(child: CustomLoading())
+                  : CustomCalendarWidget(
                       key: ValueKey(monthKey),
                       selectedDate: date,
                       scheduleModels: currentSchedules,
                       refreshCalendar: () => viewModel.initCalender(),
                     );
-                  },
-                ),
+            },
+          ),
         ),
       ),
     );
