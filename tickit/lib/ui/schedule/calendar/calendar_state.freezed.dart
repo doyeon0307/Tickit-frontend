@@ -183,7 +183,7 @@ class _$CalendarStateImpl implements _CalendarState {
       final List<Map<String, List<SchedulePreviewModel>>> schedules = const [],
       required this.selectedDate,
       required this.today,
-      this.currentIndex = 0,
+      this.currentIndex = 12,
       this.errorMsg = "",
       this.successMsg = ""})
       : _schedules = schedules;

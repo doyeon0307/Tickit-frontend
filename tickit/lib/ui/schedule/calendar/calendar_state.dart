@@ -11,7 +11,7 @@ class CalendarState with _$CalendarState {
     @Default([]) List<Map<String, List<SchedulePreviewModel>>> schedules,
     required DateTime selectedDate,
     required DateTime today,
-    @Default(0) int currentIndex,
+    @Default(12) int currentIndex,
     @Default("") String errorMsg,
     @Default("") String successMsg,
   }) = _CalendarState;

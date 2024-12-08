@@ -6,7 +6,7 @@ import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/common/const/mode.dart';
 import 'package:tickit/ui/schedule/calendar/component/calendar_dialog_card_widget.dart';
 import 'package:tickit/ui/schedule/schedule/schedule_view.dart';
-import 'package:tickit/ui/common/component/setting_divider_widget.dart';
+import 'package:tickit/ui/common/component/custom_divider.dart';
 
 class CalendarDialog extends StatelessWidget {
   final double width;

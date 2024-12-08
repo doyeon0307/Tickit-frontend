@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tickit/core/repository/repository_result.dart';
 import 'package:tickit/core/use_case/use_case_result.dart';
 import 'package:tickit/data/s3/entity/s3_presigned_url_entity.dart';
-import 'package:tickit/data/s3/entity/s3_repository.dart';
+import 'package:tickit/data/s3/s3_repository.dart';
 import 'package:tickit/domain/s3/model/s3_url_model.dart';
 
 final getPresignedUrlUseCaseProvider = Provider.autoDispose(

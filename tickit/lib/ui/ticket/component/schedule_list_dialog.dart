@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tickit/domain/schedule/model/schedule_for_ticket_model.dart';
 import 'package:tickit/theme/typographies.dart';
-import 'package:tickit/ui/common/component/setting_divider_widget.dart';
+import 'package:tickit/ui/common/component/custom_divider.dart';
 import 'package:tickit/ui/common/const/app_colors.dart';
 import 'package:tickit/ui/ticket/component/ticket_text_button.dart';
 
