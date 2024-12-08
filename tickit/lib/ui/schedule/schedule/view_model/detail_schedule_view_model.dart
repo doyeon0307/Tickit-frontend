@@ -148,7 +148,7 @@ class DetailScheduleViewModel extends BaseScheduleViewModel {
           if (mounted) {
             state = state.copyWith(
               loadingSave: LoadingStatus.success,
-              successMsg: "티켓이 수정되었어요.",
+              successMsg: "일정이 수정되었어요.",
             );
           }
         case FailureUseCaseResult<ScheduleEntity>():

@@ -188,7 +188,7 @@ class DetailTicketViewModel extends BaseTicketViewModel {
           if (mounted) {
             state = state.copyWith(
               makeTicketLoading: LoadingStatus.success,
-              successMsg: "일정이 수정되었어요.",
+              successMsg: "티켓이 수정되었어요.",
             );
           }
         case FailureUseCaseResult<TicketEntity>():

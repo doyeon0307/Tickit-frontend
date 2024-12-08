@@ -97,7 +97,7 @@ class SettingViewModel extends StateNotifier<SettingState> {
         if (mounted) {
           state = state.copyWith(
             loadingStatus: LoadingStatus.error,
-            errorMsg: "로그아웃에 실패했어요.",
+            // errorMsg: "로그아웃에 실패했어요.",
           );
         }
     }
